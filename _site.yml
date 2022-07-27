@@ -10,4 +10,5 @@ output:
     toc_depth: 2
     toc_float: true
     number_sections: true
+    css: styles.css
 output_dir: "."

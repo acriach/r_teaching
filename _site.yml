@@ -1,0 +1,12 @@
+name: "R and RStudio"
+navbar:
+  title: "R and Rstudio"
+  left:
+    - text: "Learning R"
+      href: index.html
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    number_sections: true

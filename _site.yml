@@ -10,3 +10,4 @@ output:
     toc_depth: 2
     toc_float: true
     number_sections: true
+output_dir: "_site"

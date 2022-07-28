@@ -8,6 +8,8 @@ navbar:
       href: Get_started.html
     - text: "Rproj"
       href: Setting_up_a_project.html
+    - text: "ggplot"
+      href: ggplot.html
 output:
   html_document:
     toc: true

@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Setting_up_a_project.Rmd</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">R and Rstudio</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Learning R</a>
+</li>
+<li>
+  <a href="Get_started.html">Get started</a>
+</li>
+<li>
+  <a href="Setting_up_a_project.html">Rproj</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Setting_up_a_project.Rmd</h1>
+
+</div>
+
+
+<p><img src="images/cracked_setwd.png" title="A cartoon of a cracked glass cube looking frustrated with casts on its arm and leg, with bandaids on it, containing “setwd”, looks on at a metal riveted cube labeled “R Proj” holding a skateboard looking sympathetic, and a smaller cube with a helmet on labeled “here” doing a trick on a skateboard." alt="A cartoon of a cracked glass cube looking frustrated with casts on its arm and leg, with bandaids on it, containing “setwd”, looks on at a metal riveted cube labeled “R Proj” holding a skateboard looking sympathetic, and a smaller cube with a helmet on labeled “here” doing a trick on a skateboard."  /></p>
+<p>Artwork by <span class="citation">@allison_horst</span></p>
+<p><br></p>
+<div id="creating-a-new-project-in-r" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Creating a new Project
+in R</h1>
+<blockquote>
+<p><strong>Challenge 1</strong></p>
+<ol style="list-style-type: decimal">
+<li>Click the “File” menu button, then “New Project”.</li>
+<li>Click “New Directory”.</li>
+<li>Click “New Project”.</li>
+<li>Type in the name of the directory to store your project,
+e.g. “my_project”.</li>
+<li>Click the “Create Project” button</li>
+</ol>
+</blockquote>
+<p>The simplest way to open an RStudio project once it has been created
+is to click through your file system to get to the directory where it
+was saved and double click on the <code>.Rproj</code> file. This will
+open RStudio and start your R session in the same directory as the
+<code>.Rproj</code> file. All your data, plots and scripts will now be
+relative to the project directory. RStudio projects have the added
+benefit of allowing you to open multiple projects at the same time each
+open to its own project directory. This allows you to keep multiple
+projects open without them interfering with each other.</p>
+<p><br></p>
+<div id="best-practices-for-project-organization" class="section level2"
+number="1.1">
+<h2><span class="header-section-number">1.1</span> Best practices for
+project organization</h2>
+<p>In the bottom left pane in RStudio, click the “Files” tab. To
+organise your project you could create folders called <code>data</code>,
+<code>scripts</code>, <code>results</code>, <code>docs</code> by
+clicking the folder icon with the green plus sign.</p>
+<p><br></p>
+<div id="use-a-script" class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Use a script</h3>
+<p>One of the more effective ways to work with R is to start by writing
+the code you want to run directly in an .R script, and then running the
+selected lines (either using the keyboard shortcuts in RStudio or
+clicking the “Run” button) in the interactive R console.</p>
+<p>Open a script (click the white square with the cross in green below
+File). Save the script in your R project folder (click “File”, then
+“Save as” and browse to the <code>script</code> folder in your
+project)</p>
+<p><br></p>
+</div>
+<div id="save-the-data-in-the-data-folder" class="section level3"
+number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Save the data in
+the data folder</h3>
+<p><img src="images/lter_penguins.png" title="Three cartoon penguines with chinstrap, gentoo and adelie written above them." alt="Three cartoon penguines with chinstrap, gentoo and adelie written above them."  /></p>
+<blockquote>
+<p><strong>Challenge 2</strong> Download the palmer penguins data from
+<a
+href="https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder_data.csv">here</a>.</p>
+<ol style="list-style-type: decimal">
+<li>Download the file (CTRL + S, right mouse click -&gt; “Save as”, or
+File -&gt; “Save page as”)</li>
+<li>Make sure it’s saved under the name
+<code>penguins_data.csv</code></li>
+<li>Save the file in the <code>data</code> folder within your
+project.</li>
+</ol>
+<p>We will load and inspect these data later.</p>
+</blockquote>
+</div>
+</div>
+<div id="reading-help-files" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Reading Help
+files</h2>
+<p>R, and every package, provide help files for functions. This will
+load up a help page in RStudio:</p>
+<pre class="r"><code>?function_name
+help(function_name)</code></pre>
+<p>Each help page is broken down into sections (Description, Usage,
+Arguments etc). The last section Examples is very useful. The command
+below will bring up the help for the function <code>log</code>.</p>
+<pre class="r"><code>?log</code></pre>
+<p><br></p>
+<div class="darkorchidbox">
+<div class="center">
+<p><strong>Tip: Help files</strong></p>
+</div>
+<p>One of the most daunting aspects of R is the large number of
+functions available. It would be prohibitive, if not impossible to
+remember the correct usage for every function you use. Luckily, the help
+files mean you don’t have to!</p>
+</div>
+<p><br></p>
+<div id="when-your-code-doesnt-work-seek-help-from-your-peers"
+class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> When your code
+doesn’t work: seek help from your peers</h3>
+<p>If you’re having trouble using a function, 9 times out of 10, the
+answers you are seeking have already been answered on <a
+href="http://stackoverflow.com/">Stack Overflow</a>.</p>
+<p><br></p>
+</div>
+<div id="other-resources" class="section level3" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Other
+Resources</h3>
+<ul>
+<li><a href="http://www.statmethods.net/">Quick R</a></li>
+<li><a href="http://www.rstudio.com/resources/cheatsheets/">RStudio
+cheat sheets</a></li>
+<li><a href="http://www.cookbook-r.com/">Cookbook for R</a></li>
+</ul>
+<p><br></p>
+<p><br></p>
+</div>
+</div>
+<div id="reading-in-data" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Reading in data</h2>
+<p>We have already saved a csv data file in our data folder (you can do
+the same when you work with other datasets).</p>
+<p>We can load this into R via the following:</p>
+<pre class="r"><code>penguins &lt;- read.csv(file = &quot;data/penguins.csv&quot;)</code></pre>
+<p>Here we used the function <code>read.csv</code> but there are lots of
+different functions for reading in different types of files. For example
+<code>read_excel</code> in the readxl package.</p>
+<p>Tip: Reading in data problems</p>
+<div class="darkorchidbox">
+<div class="center">
+<p><strong>Tip: Problems reading in data</strong></p>
+</div>
+<p>If your spreadsheet won’t read in check:<br />
+1. You are using the correct function for the type of file for example
+<code>read.csv</code> for csv files<br />
+2. You have included the suffix after the name of the file 3. The name
+of the file is spelled correctly<br />
+4. The file exists in the folder you are directing R to. For example in
+our case we would click on the folder name data under the files tab at
+the bottom right of Rstudio.<br />
+5. Look at an example on the internet to ensure you have included all
+the necessary arguments. <code>read.csv</code> only needs
+<code>file =</code> but other functions may need other arguments.</p>
+</div>
+<p><br></p>
+<p>Once data is in R, you can view it by clicking on it’s name under the
+Environment window.</p>
+<p>In R, datasets are called data frames (df) or tibbles.</p>
+<p>We can begin exploring our data frame right away, pulling out columns
+by specifying them using the <code>$</code> operator:</p>
+<pre class="r"><code>penguins$species</code></pre>
+<pre><code>##   [1] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##   [7] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [13] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [19] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [25] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [31] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [37] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [43] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [49] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [55] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [61] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [67] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [73] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [79] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [85] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [91] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [97] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [103] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [109] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [115] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [121] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [127] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [133] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [139] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [145] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [151] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [157] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [163] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [169] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [175] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [181] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [187] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [193] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [199] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [205] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [211] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [217] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [223] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [229] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [235] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [241] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [247] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [253] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [259] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [265] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [271] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [277] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [283] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [289] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [295] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [301] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [307] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [313] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [319] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [325] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [331] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [337] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [343] &quot;Chinstrap&quot; &quot;Chinstrap&quot;</code></pre>
+<pre class="r"><code>penguins$bill_length_mm</code></pre>
+<pre><code>##   [1] 39.1 39.5 40.3   NA 36.7 39.3 38.9 39.2 34.1 42.0 37.8 37.8 41.1 38.6 34.6
+##  [16] 36.6 38.7 42.5 34.4 46.0 37.8 37.7 35.9 38.2 38.8 35.3 40.6 40.5 37.9 40.5
+##  [31] 39.5 37.2 39.5 40.9 36.4 39.2 38.8 42.2 37.6 39.8 36.5 40.8 36.0 44.1 37.0
+##  [46] 39.6 41.1 37.5 36.0 42.3 39.6 40.1 35.0 42.0 34.5 41.4 39.0 40.6 36.5 37.6
+##  [61] 35.7 41.3 37.6 41.1 36.4 41.6 35.5 41.1 35.9 41.8 33.5 39.7 39.6 45.8 35.5
+##  [76] 42.8 40.9 37.2 36.2 42.1 34.6 42.9 36.7 35.1 37.3 41.3 36.3 36.9 38.3 38.9
+##  [91] 35.7 41.1 34.0 39.6 36.2 40.8 38.1 40.3 33.1 43.2 35.0 41.0 37.7 37.8 37.9
+## [106] 39.7 38.6 38.2 38.1 43.2 38.1 45.6 39.7 42.2 39.6 42.7 38.6 37.3 35.7 41.1
+## [121] 36.2 37.7 40.2 41.4 35.2 40.6 38.8 41.5 39.0 44.1 38.5 43.1 36.8 37.5 38.1
+## [136] 41.1 35.6 40.2 37.0 39.7 40.2 40.6 32.1 40.7 37.3 39.0 39.2 36.6 36.0 37.8
+## [151] 36.0 41.5 46.1 50.0 48.7 50.0 47.6 46.5 45.4 46.7 43.3 46.8 40.9 49.0 45.5
+## [166] 48.4 45.8 49.3 42.0 49.2 46.2 48.7 50.2 45.1 46.5 46.3 42.9 46.1 44.5 47.8
+## [181] 48.2 50.0 47.3 42.8 45.1 59.6 49.1 48.4 42.6 44.4 44.0 48.7 42.7 49.6 45.3
+## [196] 49.6 50.5 43.6 45.5 50.5 44.9 45.2 46.6 48.5 45.1 50.1 46.5 45.0 43.8 45.5
+## [211] 43.2 50.4 45.3 46.2 45.7 54.3 45.8 49.8 46.2 49.5 43.5 50.7 47.7 46.4 48.2
+## [226] 46.5 46.4 48.6 47.5 51.1 45.2 45.2 49.1 52.5 47.4 50.0 44.9 50.8 43.4 51.3
+## [241] 47.5 52.1 47.5 52.2 45.5 49.5 44.5 50.8 49.4 46.9 48.4 51.1 48.5 55.9 47.2
+## [256] 49.1 47.3 46.8 41.7 53.4 43.3 48.1 50.5 49.8 43.5 51.5 46.2 55.1 44.5 48.8
+## [271] 47.2   NA 46.8 50.4 45.2 49.9 46.5 50.0 51.3 45.4 52.7 45.2 46.1 51.3 46.0
+## [286] 51.3 46.6 51.7 47.0 52.0 45.9 50.5 50.3 58.0 46.4 49.2 42.4 48.5 43.2 50.6
+## [301] 46.7 52.0 50.5 49.5 46.4 52.8 40.9 54.2 42.5 51.0 49.7 47.5 47.6 52.0 46.9
+## [316] 53.5 49.0 46.2 50.9 45.5 50.9 50.8 50.1 49.0 51.5 49.8 48.1 51.4 45.7 50.7
+## [331] 42.5 52.2 45.2 49.3 50.2 45.6 51.9 46.8 45.7 55.8 43.5 49.6 50.8 50.2</code></pre>
+<p><br></p>
+<p>Passing the <code>penguins</code> data frame through the structure
+function <code>str</code> will show you the type of data for each
+variable.</p>
+<pre class="r"><code>str(penguins)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    344 obs. of  8 variables:
+##  $ species          : chr  &quot;Adelie&quot; &quot;Adelie&quot; &quot;Adelie&quot; &quot;Adelie&quot; ...
+##  $ island           : chr  &quot;Torgersen&quot; &quot;Torgersen&quot; &quot;Torgersen&quot; &quot;Torgersen&quot; ...
+##  $ bill_length_mm   : num  39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...
+##  $ bill_depth_mm    : num  18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...
+##  $ flipper_length_mm: int  181 186 195 NA 193 190 181 195 193 190 ...
+##  $ body_mass_g      : int  3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
+##  $ sex              : chr  &quot;male&quot; &quot;female&quot; &quot;female&quot; NA ...
+##  $ year             : int  2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...</code></pre>
+<p>Species is <code>chr</code> which is short for character which R will
+treat as a factor (discrete data). Bill_length_mm is <code>num</code>
+which stands for numeric. <code>int</code> means integer. Both
+<code>num</code> and <code>int</code> variables are treated as
+continuous (scale) data by R.</p>
+<p>We can calculate the mean of bill length.</p>
+<pre class="r"><code>mean(penguins$bill_length_mm, na.rm = TRUE)</code></pre>
+<pre><code>## [1] 43.92193</code></pre>
+<p>But we can’t use the mean function on a factor.</p>
+<pre class="r"><code>mean(penguins$sepecies, na.rm = TRUE)</code></pre>
+<pre><code>## Warning in mean.default(penguins$sepecies, na.rm = TRUE): argument is not
+## numeric or logical: returning NA</code></pre>
+<pre><code>## [1] NA</code></pre>
+<div class="darkorchidbox">
+<div class="center">
+<p><strong>Tip: When functions won’t work</strong></p>
+</div>
+<p>Sometimes R errors are caused by R treating a variable as a factor
+when you know it’s a number. Checking what R is “thinking” with
+<code>str</code> can help.</p>
+</div>
+<p><br></p>
+<p><br></p>
+</div>
+<div id="indexing-square-brackets" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Indexing (square
+brackets)</h2>
+<p>The <code>$</code> operator will specify a variable in a data frame.
+You can also use indexing.</p>
+<blockquote>
+<p><strong>Challenge 3</strong></p>
+<p>There are several subtly different ways to call variables,
+observations and elements from data.frames using indexing:</p>
+<ul>
+<li><code>penguins[1]</code></li>
+<li><code>penguins[1, 1]</code></li>
+<li><code>penguins[, 1]</code></li>
+<li><code>penguins[1, ]</code></li>
+</ul>
+<p>Try out these examples and explain what is returned by each one.</p>
+</blockquote>
+<details>
+<summary>
+<strong>Solution to Challenge 3</strong>
+</summary>
+<pre class="r"><code>penguins[1]</code></pre>
+<pre><code>##       species
+## 1      Adelie
+## 2      Adelie
+## 3      Adelie
+## 4      Adelie
+## 5      Adelie
+## 6      Adelie
+## 7      Adelie
+## 8      Adelie
+## 9      Adelie
+## 10     Adelie
+## 11     Adelie
+## 12     Adelie
+## 13     Adelie
+## 14     Adelie
+## 15     Adelie
+## 16     Adelie
+## 17     Adelie
+## 18     Adelie
+## 19     Adelie
+## 20     Adelie
+## 21     Adelie
+## 22     Adelie
+## 23     Adelie
+## 24     Adelie
+## 25     Adelie
+## 26     Adelie
+## 27     Adelie
+## 28     Adelie
+## 29     Adelie
+## 30     Adelie
+## 31     Adelie
+## 32     Adelie
+## 33     Adelie
+## 34     Adelie
+## 35     Adelie
+## 36     Adelie
+## 37     Adelie
+## 38     Adelie
+## 39     Adelie
+## 40     Adelie
+## 41     Adelie
+## 42     Adelie
+## 43     Adelie
+## 44     Adelie
+## 45     Adelie
+## 46     Adelie
+## 47     Adelie
+## 48     Adelie
+## 49     Adelie
+## 50     Adelie
+## 51     Adelie
+## 52     Adelie
+## 53     Adelie
+## 54     Adelie
+## 55     Adelie
+## 56     Adelie
+## 57     Adelie
+## 58     Adelie
+## 59     Adelie
+## 60     Adelie
+## 61     Adelie
+## 62     Adelie
+## 63     Adelie
+## 64     Adelie
+## 65     Adelie
+## 66     Adelie
+## 67     Adelie
+## 68     Adelie
+## 69     Adelie
+## 70     Adelie
+## 71     Adelie
+## 72     Adelie
+## 73     Adelie
+## 74     Adelie
+## 75     Adelie
+## 76     Adelie
+## 77     Adelie
+## 78     Adelie
+## 79     Adelie
+## 80     Adelie
+## 81     Adelie
+## 82     Adelie
+## 83     Adelie
+## 84     Adelie
+## 85     Adelie
+## 86     Adelie
+## 87     Adelie
+## 88     Adelie
+## 89     Adelie
+## 90     Adelie
+## 91     Adelie
+## 92     Adelie
+## 93     Adelie
+## 94     Adelie
+## 95     Adelie
+## 96     Adelie
+## 97     Adelie
+## 98     Adelie
+## 99     Adelie
+## 100    Adelie
+## 101    Adelie
+## 102    Adelie
+## 103    Adelie
+## 104    Adelie
+## 105    Adelie
+## 106    Adelie
+## 107    Adelie
+## 108    Adelie
+## 109    Adelie
+## 110    Adelie
+## 111    Adelie
+## 112    Adelie
+## 113    Adelie
+## 114    Adelie
+## 115    Adelie
+## 116    Adelie
+## 117    Adelie
+## 118    Adelie
+## 119    Adelie
+## 120    Adelie
+## 121    Adelie
+## 122    Adelie
+## 123    Adelie
+## 124    Adelie
+## 125    Adelie
+## 126    Adelie
+## 127    Adelie
+## 128    Adelie
+## 129    Adelie
+## 130    Adelie
+## 131    Adelie
+## 132    Adelie
+## 133    Adelie
+## 134    Adelie
+## 135    Adelie
+## 136    Adelie
+## 137    Adelie
+## 138    Adelie
+## 139    Adelie
+## 140    Adelie
+## 141    Adelie
+## 142    Adelie
+## 143    Adelie
+## 144    Adelie
+## 145    Adelie
+## 146    Adelie
+## 147    Adelie
+## 148    Adelie
+## 149    Adelie
+## 150    Adelie
+## 151    Adelie
+## 152    Adelie
+## 153    Gentoo
+## 154    Gentoo
+## 155    Gentoo
+## 156    Gentoo
+## 157    Gentoo
+## 158    Gentoo
+## 159    Gentoo
+## 160    Gentoo
+## 161    Gentoo
+## 162    Gentoo
+## 163    Gentoo
+## 164    Gentoo
+## 165    Gentoo
+## 166    Gentoo
+## 167    Gentoo
+## 168    Gentoo
+## 169    Gentoo
+## 170    Gentoo
+## 171    Gentoo
+## 172    Gentoo
+## 173    Gentoo
+## 174    Gentoo
+## 175    Gentoo
+## 176    Gentoo
+## 177    Gentoo
+## 178    Gentoo
+## 179    Gentoo
+## 180    Gentoo
+## 181    Gentoo
+## 182    Gentoo
+## 183    Gentoo
+## 184    Gentoo
+## 185    Gentoo
+## 186    Gentoo
+## 187    Gentoo
+## 188    Gentoo
+## 189    Gentoo
+## 190    Gentoo
+## 191    Gentoo
+## 192    Gentoo
+## 193    Gentoo
+## 194    Gentoo
+## 195    Gentoo
+## 196    Gentoo
+## 197    Gentoo
+## 198    Gentoo
+## 199    Gentoo
+## 200    Gentoo
+## 201    Gentoo
+## 202    Gentoo
+## 203    Gentoo
+## 204    Gentoo
+## 205    Gentoo
+## 206    Gentoo
+## 207    Gentoo
+## 208    Gentoo
+## 209    Gentoo
+## 210    Gentoo
+## 211    Gentoo
+## 212    Gentoo
+## 213    Gentoo
+## 214    Gentoo
+## 215    Gentoo
+## 216    Gentoo
+## 217    Gentoo
+## 218    Gentoo
+## 219    Gentoo
+## 220    Gentoo
+## 221    Gentoo
+## 222    Gentoo
+## 223    Gentoo
+## 224    Gentoo
+## 225    Gentoo
+## 226    Gentoo
+## 227    Gentoo
+## 228    Gentoo
+## 229    Gentoo
+## 230    Gentoo
+## 231    Gentoo
+## 232    Gentoo
+## 233    Gentoo
+## 234    Gentoo
+## 235    Gentoo
+## 236    Gentoo
+## 237    Gentoo
+## 238    Gentoo
+## 239    Gentoo
+## 240    Gentoo
+## 241    Gentoo
+## 242    Gentoo
+## 243    Gentoo
+## 244    Gentoo
+## 245    Gentoo
+## 246    Gentoo
+## 247    Gentoo
+## 248    Gentoo
+## 249    Gentoo
+## 250    Gentoo
+## 251    Gentoo
+## 252    Gentoo
+## 253    Gentoo
+## 254    Gentoo
+## 255    Gentoo
+## 256    Gentoo
+## 257    Gentoo
+## 258    Gentoo
+## 259    Gentoo
+## 260    Gentoo
+## 261    Gentoo
+## 262    Gentoo
+## 263    Gentoo
+## 264    Gentoo
+## 265    Gentoo
+## 266    Gentoo
+## 267    Gentoo
+## 268    Gentoo
+## 269    Gentoo
+## 270    Gentoo
+## 271    Gentoo
+## 272    Gentoo
+## 273    Gentoo
+## 274    Gentoo
+## 275    Gentoo
+## 276    Gentoo
+## 277 Chinstrap
+## 278 Chinstrap
+## 279 Chinstrap
+## 280 Chinstrap
+## 281 Chinstrap
+## 282 Chinstrap
+## 283 Chinstrap
+## 284 Chinstrap
+## 285 Chinstrap
+## 286 Chinstrap
+## 287 Chinstrap
+## 288 Chinstrap
+## 289 Chinstrap
+## 290 Chinstrap
+## 291 Chinstrap
+## 292 Chinstrap
+## 293 Chinstrap
+## 294 Chinstrap
+## 295 Chinstrap
+## 296 Chinstrap
+## 297 Chinstrap
+## 298 Chinstrap
+## 299 Chinstrap
+## 300 Chinstrap
+## 301 Chinstrap
+## 302 Chinstrap
+## 303 Chinstrap
+## 304 Chinstrap
+## 305 Chinstrap
+## 306 Chinstrap
+## 307 Chinstrap
+## 308 Chinstrap
+## 309 Chinstrap
+## 310 Chinstrap
+## 311 Chinstrap
+## 312 Chinstrap
+## 313 Chinstrap
+## 314 Chinstrap
+## 315 Chinstrap
+## 316 Chinstrap
+## 317 Chinstrap
+## 318 Chinstrap
+## 319 Chinstrap
+## 320 Chinstrap
+## 321 Chinstrap
+## 322 Chinstrap
+## 323 Chinstrap
+## 324 Chinstrap
+## 325 Chinstrap
+## 326 Chinstrap
+## 327 Chinstrap
+## 328 Chinstrap
+## 329 Chinstrap
+## 330 Chinstrap
+## 331 Chinstrap
+## 332 Chinstrap
+## 333 Chinstrap
+## 334 Chinstrap
+## 335 Chinstrap
+## 336 Chinstrap
+## 337 Chinstrap
+## 338 Chinstrap
+## 339 Chinstrap
+## 340 Chinstrap
+## 341 Chinstrap
+## 342 Chinstrap
+## 343 Chinstrap
+## 344 Chinstrap</code></pre>
+<p>Calls the data in column 1.</p>
+<pre class="r"><code>penguins[1, 1]</code></pre>
+<pre><code>## [1] &quot;Adelie&quot;</code></pre>
+<p>Calls the information that is in the first row, first column.</p>
+<pre class="r"><code>penguins[, 1]</code></pre>
+<pre><code>##   [1] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##   [7] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [13] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [19] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [25] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [31] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [37] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [43] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [49] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [55] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [61] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [67] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [73] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [79] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [85] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [91] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [97] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [103] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [109] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [115] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [121] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [127] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [133] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [139] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [145] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [151] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [157] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [163] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [169] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [175] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [181] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [187] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [193] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [199] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [205] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [211] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [217] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [223] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [229] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [235] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [241] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [247] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [253] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [259] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [265] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [271] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [277] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [283] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [289] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [295] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [301] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [307] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [313] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [319] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [325] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [331] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [337] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [343] &quot;Chinstrap&quot; &quot;Chinstrap&quot;</code></pre>
+<p>Also, calls the first column.</p>
+<pre class="r"><code>penguins[1, ]</code></pre>
+<pre><code>##   species    island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+## 1  Adelie Torgersen           39.1          18.7               181        3750
+##    sex year
+## 1 male 2007</code></pre>
+Calls the first row.
+</details>
+<p><br></p>
+<p>Adapted from <a
+href="https://swcarpentry.github.io/r-novice-gapminder/">R for
+Reproducible Scientific Analysis</a> licensed <a
+href="https://creativecommons.org/licenses/by/4.0/">CC_BY 4.0</a> by <a
+href="https://carpentries.org/">The Carpentries</a></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

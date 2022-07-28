@@ -1,0 +1,246 @@
+---
+title: "Setting_up_a_project.Rmd"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, fig.alt="A cartoon of a cracked glass cube looking frustrated with casts on its arm and leg, with bandaids on it, containing “setwd”, looks on at a metal riveted cube labeled “R Proj” holding a skateboard looking sympathetic, and a smaller cube with a helmet on labeled “here” doing a trick on a skateboard."}
+knitr::include_graphics("./images/cracked_setwd.png")
+```
+
+Artwork by @allison_horst
+
+<br>
+
+# Creating a new Project in R
+
+
+> **Challenge 1**
+>
+> 1. Click the "File" menu button, then "New Project".
+> 2. Click "New Directory".
+> 3. Click "New Project".
+> 4. Type in the name of the directory to store your project, e.g. "my_project".
+> 5. Click the "Create Project" button
+
+The simplest way to open an RStudio project once it has been created is to click
+through your file system to get to the directory where it was saved and double
+click on the `.Rproj` file. This will open RStudio and start your R session in the
+same directory as the `.Rproj` file. All your data, plots and scripts will now be
+relative to the project directory. RStudio projects have the added benefit of
+allowing you to open multiple projects at the same time each open to its own
+project directory. This allows you to keep multiple projects open without them
+interfering with each other.
+
+<br>
+
+## Best practices for project organization
+
+In the bottom left pane in RStudio, click the "Files" tab. To organise your project you could create folders called `data`, `scripts`, `results`, `docs` by clicking the folder icon with the green plus sign.
+
+<br>
+
+### Use a script
+
+One of the more effective ways to work with R is to start by writing the code you want to run directly in an .R script, and then running the selected lines (either using the keyboard shortcuts in RStudio or clicking the "Run" button) in the interactive R console.
+
+Open a script (click the white square with the cross in green below File). Save the script in your R project folder (click "File", then "Save as" and browse to the `script` folder in your project)
+
+<br>
+
+### Save the data in the data folder
+
+```{r, echo=FALSE, fig.alt="Three cartoon penguines with chinstrap, gentoo and adelie written above them."}
+knitr::include_graphics("./images/lter_penguins.png")
+```
+
+> **Challenge 2**
+> Download the palmer penguins data from [here](https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder_data.csv).
+>
+> 1. Download the file (CTRL + S, right mouse click -> "Save as", or File -> "Save page as")
+> 2. Make sure it's saved under the name `penguins_data.csv`
+> 3. Save the file in the `data` folder within your project.
+>
+> We will load and inspect these data later.
+
+## Reading Help files
+
+R, and every package, provide help files for functions. This will load up a help page in RStudio:
+
+```{r, eval=FALSE}
+?function_name
+help(function_name)
+```
+
+Each help page is broken down into sections (Description, Usage, Arguments etc). The last section Examples is very useful.
+The command below will bring up the help for the function `log`.
+
+```{r, eval=FALSE}
+?log
+```
+
+<br>
+
+:::: {.darkorchidbox data-latex=""}
+::: {.center data-latex=""}
+**Tip: Help files**
+:::
+
+One of the most daunting aspects of R is the large number of functions available. It would be prohibitive, if not impossible to remember the correct usage for every function you use. Luckily, the help files mean you don't have to!  
+
+::::
+
+<br>
+
+
+### When your code doesn't work: seek help from your peers
+
+If you're having trouble using a function, 9 times out of 10,
+the answers you are seeking have already been answered on
+[Stack Overflow](http://stackoverflow.com/).
+
+<br>
+
+### Other Resources
+
+* [Quick R](http://www.statmethods.net/)
+* [RStudio cheat sheets](http://www.rstudio.com/resources/cheatsheets/)
+* [Cookbook for R](http://www.cookbook-r.com/)
+
+
+<br>
+
+
+<br>
+
+## Reading in data
+
+
+We have already saved a csv data file in our data folder (you can do the same when you work with other datasets).
+
+We can load this into R via the following:
+
+```{r}
+penguins <- read.csv(file = "data/penguins.csv")
+```
+
+Here we used the function `read.csv` but there are lots of different functions for reading in different types of files. For example `read_excel` in the readxl package. 
+
+Tip: Reading in data problems
+
+
+:::: {.darkorchidbox data-latex=""}
+::: {.center data-latex=""}
+**Tip: Problems reading in data**
+:::
+
+If your spreadsheet won't read in check:  
+1. You are using the correct function for the type of file for example `read.csv` for csv files  
+2. You have included the suffix after the name of the file
+3. The name of the file is spelled correctly  
+4. The file exists in the folder you are directing R to. For example in our case we would click on the folder name data under the files tab at the bottom right of Rstudio.  
+5. Look at an example on the internet to ensure you have included all the necessary arguments. `read.csv` only needs `file =` but other functions may need other arguments.  
+
+::::
+
+
+<br>
+
+
+Once data is in R, you can view it by clicking on it's name under the Environment window.  
+
+In R, datasets are called data frames (df) or tibbles.  
+
+We can begin exploring our data frame right away, pulling out columns by specifying
+them using the `$` operator:
+
+```{r}
+penguins$species
+penguins$bill_length_mm
+```
+
+
+<br>
+
+Passing the `penguins` data frame through the structure function `str` will show you the type of data for each variable.
+
+```{r}
+str(penguins)
+```
+
+
+Species is `chr` which is short for character which R will treat as a factor (discrete data). Bill_length_mm is `num` which stands for numeric. `int` means integer. Both `num` and `int` variables are treated as continuous (scale) data by R.
+
+We can calculate the mean of bill length.
+```{r}
+mean(penguins$bill_length_mm, na.rm = TRUE)
+```
+
+But we can't use the mean function on a factor.
+```{r, warning=TRUE}
+mean(penguins$sepecies, na.rm = TRUE)
+```
+
+:::: {.darkorchidbox data-latex=""}
+::: {.center data-latex=""}
+**Tip: When functions won't work**
+:::
+
+Sometimes R errors are caused by R treating a variable as a factor when you know it's a number. Checking what R is "thinking" with `str` can help.
+
+::::
+
+
+<br>
+
+<br>
+
+## Indexing (square brackets)
+
+The `$` operator will specify a variable in a data frame. You can also use indexing.
+
+> **Challenge 3**
+>
+> There are several subtly different ways to call variables, observations and
+> elements from data.frames using indexing:
+>
+> - `penguins[1]`
+> - `penguins[1, 1]`
+> - `penguins[, 1]`
+> - `penguins[1, ]`
+>
+> Try out these examples and explain what is returned by each one.
+
+<details>
+  <summary>**Solution to Challenge 3**</summary>
+
+```{r, eval=TRUE, echo=TRUE}
+penguins[1]
+```
+
+Calls the data in column 1.
+
+```{r, eval=TRUE, echo=TRUE}
+penguins[1, 1]
+```
+Calls the information that is in the first row, first column. 
+
+```{r, eval=TRUE, echo=TRUE}
+penguins[, 1]
+```
+
+Also, calls the first column.
+
+```{r, eval=TRUE, echo=TRUE}
+penguins[1, ]
+```
+
+Calls the first row.
+</details>
+
+
+<br>
+
+Adapted from [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/) licensed [CC_BY 4.0](https://creativecommons.org/licenses/by/4.0/) by [The Carpentries](https://carpentries.org/)

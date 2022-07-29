@@ -334,6 +334,9 @@ div.tocify {
 <li>
   <a href="ggplot.html">ggplot</a>
 </li>
+<li>
+  <a href="dplyr.html">dplyr</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -543,7 +546,8 @@ session.</p>
 <p><code>ls</code> will list all of the variables and functions stored
 in the global environment (your working R session):</p>
 <pre class="r"><code>ls()</code></pre>
-<pre><code>## [1] &quot;x&quot; &quot;y&quot;</code></pre>
+<pre><code>## [1] &quot;gentoo_island_flipper_yr&quot; &quot;penguins&quot;                
+## [3] &quot;x&quot;                        &quot;y&quot;</code></pre>
 <p>Note here that we didn’t give any arguments to <code>ls</code>, but
 we still needed to give the parentheses to tell R to call the
 function.</p>
@@ -581,7 +585,7 @@ instead of listing objects.</p>
 ##     }
 ##     else all.names
 ## }
-## &lt;bytecode: 0x000002156450f468&gt;
+## &lt;bytecode: 0x0000019e843604a8&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>What going on here? Like everything in R, <code>ls</code> is the name
 of an object, and entering the name of an object by itself prints the

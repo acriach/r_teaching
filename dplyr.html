@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>dplyr</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">R and Rstudio</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Learning R</a>
+</li>
+<li>
+  <a href="Get_started.html">Get started</a>
+</li>
+<li>
+  <a href="Setting_up_a_project.html">Rproj</a>
+</li>
+<li>
+  <a href="ggplot.html">ggplot</a>
+</li>
+<li>
+  <a href="dplyr.html">dplyr</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">dplyr</h1>
+
+</div>
+
+
+<p><br></p>
+<p><strong>Set up</strong></p>
+<p>We will use the palmer penguin data so open your save Rproj in
+Rstudio by clicking <strong>File</strong> menu then <strong>Open
+project</strong> and look for your <strong>.Rproj</strong> file. Click
+the <strong>Files</strong> tab in bottom right pane, click the
+<strong>data</strong> folder and check the penguins.csv is in there.
+Then read it in.</p>
+<pre class="r"><code>penguins &lt;- read.csv(file = &quot;data/penguins.csv&quot;)</code></pre>
+<p><br></p>
+<div id="data-wrangling" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Data wrangling</h1>
+<p><img src="images/dplyr_wrangling.png" title="Cartoon of a fuzzy monster with a cowboy hat and lasso, riding another fuzzy monster labeled “dplyr”, lassoing a group of angry / unruly looking creatures labeled “data”." alt="Cartoon of a fuzzy monster with a cowboy hat and lasso, riding another fuzzy monster labeled “dplyr”, lassoing a group of angry / unruly looking creatures labeled “data”."  />
+Artwork by <span class="citation">@allison_horst</span></p>
+<p>Cleaning or wrangling data means many things to many researchers: we
+often select certain observations (rows) or variables (columns), we
+often group the data by a certain variable(s), or we even calculate
+summary statistics. We can do these operations using the normal base R
+operations:</p>
+<pre class="r"><code>mean(penguins[penguins$species == &quot;Adelie&quot;, &quot;body_mass_g&quot;], na.rm = TRUE)
+mean(penguins[penguins$species == &quot;Gentoo&quot;, &quot;body_mass_g&quot;], na.rm = TRUE)
+mean(penguins[penguins$species == &quot;Chinstrap&quot;, &quot;body_mass_g&quot;])</code></pre>
+<p>But this isn’t very <em>nice</em> because there is a fair bit of
+repetition. Repeating yourself will cost you time, both now and later,
+and potentially introduce some nasty bugs.</p>
+<p><br></p>
+<div id="the-dplyr-package" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> The
+<code>dplyr</code> package</h2>
+<p><img src="images/dplyr_logo.png" title="A hexagon with dplyr written in it and three colourful plyers on a space background" alt="A hexagon with dplyr written in it and three colourful plyers on a space background"  /></p>
+<p>Luckily, the <a
+href="https://cran.r-project.org/package=dplyr"><code>dplyr</code></a>
+package provides a number of very useful functions for manipulating
+dataframes in a way that will reduce the above repetition, reduce the
+probability of making errors, and probably even save you some typing. As
+an added bonus, you might even find the <code>dplyr</code> grammar
+easier to understand.</p>
+<p>Here we’re going to cover 5 of the most commonly used functions as
+well as using pipes (<code>%&gt;%</code>) to combine them.</p>
+<ol style="list-style-type: decimal">
+<li><code>select()</code></li>
+<li><code>filter()</code></li>
+<li><code>group_by()</code></li>
+<li><code>summarize()</code></li>
+<li><code>mutate()</code></li>
+</ol>
+<p>If you have have not installed this package earlier, please do
+so:</p>
+<pre class="r"><code>install.packages(&#39;dplyr&#39;)</code></pre>
+<p>Now let’s load the package:</p>
+<pre class="r"><code>library(&quot;dplyr&quot;)</code></pre>
+<p><br></p>
+</div>
+<div id="select" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> select()</h2>
+<p><img src="images/dplyr-fig1.png" title="Text is select(data.frame, a, c). On the right are four columns of data named a, b, c and d. On the left are two columns a and c. One arrow curves from a to a and the other arrow curves c to c." alt="Text is select(data.frame, a, c). On the right are four columns of data named a, b, c and d. On the left are two columns a and c. One arrow curves from a to a and the other arrow curves c to c."  /></p>
+<p>If we wanted to analyse only a few of the variables (columns) in our
+dataframe we could use the <code>select()</code> function. This will
+keep only the variables you select.</p>
+<pre class="r"><code>species_body &lt;- select(penguins, species,body_mass_g,sex)</code></pre>
+<p>If we open up <code>species_body</code> (under the environment tab)
+we’ll see that it only contains the species, body mass and sex. Above we
+used ‘normal’ grammar, but the strengths of <code>dplyr</code> lie in
+combining several functions using <strong>pipes</strong>. Since the
+pipes grammar is unlike anything we’ve seen in R before, let’s repeat
+what we’ve done above using a pipe:</p>
+<pre class="r"><code>species_body &lt;- penguins %&gt;% select(species, body_mass_g, sex)</code></pre>
+<p>First we assign the result to <code>species_bodymass</code>. Then, we
+call the penguins dataframe and pass it on, using the pipe symbol
+<code>%&gt;%</code>, to the next step, which is the
+<code>select()</code> function. this time we don’t specify which data
+object we use in the <code>select()</code> function since it gets that
+from the previous pipe.</p>
+<p><br></p>
+</div>
+<div id="filter" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> filter()</h2>
+<p>If we now wanted to use the above, but only with Adelie penguins, we
+can combine <code>select</code> and <code>filter</code></p>
+<pre class="r"><code>species_body_adelie &lt;- penguins %&gt;%
+    filter(species == &quot;Adelie&quot;) %&gt;%
+    select(species, body_mass_g, sex)</code></pre>
+<div class="darkorchidbox">
+<div class="center">
+<p><strong>Tip: select() and filter()</strong></p>
+</div>
+<p>Remember, <code>select()</code> choose columns and
+<code>filter()</code> chooses rows</p>
+</div>
+<p><br></p>
+<blockquote>
+<p><strong>Challenge 1</strong></p>
+<p>Write a single command (which can span multiple lines and includes
+pipes) that will produce a dataframe that has the Gentoo values for
+<code>island</code>, <code>flipper_length_mm</code> and
+<code>year</code>, but not for other penguins. How many rows does your
+dataframe have?</p>
+</blockquote>
+<details>
+<summary>
+<strong>Solution to Challenge 1</strong>
+</summary>
+<pre class="r"><code>gentoo_island_flipper_yr &lt;- penguins %&gt;%
+    filter(species == &quot;Gentoo&quot;) %&gt;%
+    select(island, flipper_length_mm, year)</code></pre>
+<p>You should have 124 rows.</p>
+<strong>Note:</strong> The order of operations is very important in this
+case. If we used ‘select’ first, filter would not be able to find the
+variable species since we would have removed it in the previous step
+</details>
+<p><br></p>
+</div>
+<div id="group_by-and-summarize" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> group_by() and
+summarize()</h2>
+<p>Now, we were supposed to be reducing the error prone repetitiveness
+of what can be done with base R, but up to now we haven’t done that
+since we would have to repeat the above for each species. Using
+<code>filter()</code>, will only pass observations that meet your
+criteria (in the above: <code>species=="Adelie"</code>). Instead, we can
+use <code>group_by()</code>, which will analyse all three species.</p>
+<p><img src="images/dplyr-fig2.png" title="Text is data.frame, pipe operator, group_by(a). On the right are four columns of data named a, b, c and d. Arrows show these rows split into three so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. " alt="Text is data.frame, pipe operator, group_by(a). On the right are four columns of data named a, b, c and d. Arrows show these rows split into three so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. "  /></p>
+<p><br></p>
+<div id="using-group_by-with-summarize" class="section level3"
+number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Using group_by()
+with summarize()</h3>
+<p><code>group_by()</code> is much more exciting in conjunction with
+<code>summarize()</code>. By using the <code>group_by()</code> function,
+we split our original data frame into multiple pieces, then we can run
+functions (e.g. <code>mean()</code> or <code>sd()</code>) within
+<code>summarize()</code>.</p>
+<p><img src="images/dplyr-fig3.png" title="Text is data.frame pipe operator group_by(a) pipe operator summarise(mean_b=mean(b)). On the right are four columns of data named a, b, c and d with six rows named 1,1,2,2,3 and 3 in column a. Arrows show these rows split so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. Three arrows goes from these 3 smaller dataframes to a final datafram with column a containing 1, 2 and 3 and a second column called mean_b." alt="Text is data.frame pipe operator group_by(a) pipe operator summarise(mean_b=mean(b)). On the right are four columns of data named a, b, c and d with six rows named 1,1,2,2,3 and 3 in column a. Arrows show these rows split so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. Three arrows goes from these 3 smaller dataframes to a final datafram with column a containing 1, 2 and 3 and a second column called mean_b."  /></p>
+<pre class="r"><code>penguins %&gt;%
+    group_by(species) %&gt;%
+    summarize(mean_body = mean(body_mass_g, na.rm=TRUE))</code></pre>
+<pre><code>## # A tibble: 3 × 2
+##   species   mean_body
+##   &lt;chr&gt;         &lt;dbl&gt;
+## 1 Adelie        3701.
+## 2 Chinstrap     3733.
+## 3 Gentoo        5076.</code></pre>
+<div class="darkorchidbox">
+<div class="center">
+<p><strong>Tip: To assign or not</strong></p>
+</div>
+<p>Starting the code with <code>species_body_means &lt;-</code> will
+assign the results as a new data frame called
+<code>species_body_means</code>. This<code>species_body_means</code>
+will then be listed under the environment tab so you can view it. Good
+for large data frames.</p>
+<p>As above, you can choose not to do this for smaller results. The
+results are not saved but given in your console window.</p>
+</div>
+<p><br></p>
+<p>The function <code>group_by()</code> allows us to group by multiple
+variables. Let’s group by <code>species</code> <strong>and</strong>
+<code>island</code>.</p>
+<pre class="r"><code>penguins %&gt;%
+    group_by(species, sex) %&gt;%
+    summarize(mean_body = mean(body_mass_g, na.rm=TRUE))</code></pre>
+<p><br></p>
+<p>You’re not limited to analysing only one variable with only one
+function in <code>summarize()</code>.</p>
+<pre class="r"><code>penguins %&gt;%
+    group_by(species, sex) %&gt;%
+    summarize(mean_body = mean(body_mass_g),
+              sd_body = sd(body_mass_g),
+              mean_flipper = mean(flipper_length_mm),
+              sd_flipper = sd(flipper_length_mm))</code></pre>
+<p><br></p>
+<p>The <code>filter()</code> function can remove the penguins who have
+<code>NA</code> under sex. (Read the exclamation mark as “not”)</p>
+<pre class="r"><code>penguins %&gt;%
+    group_by(species, sex) %&gt;%
+    filter(!is.na(sex)) %&gt;%
+    summarize(mean_body = mean(body_mass_g),
+              sd_body = sd(body_mass_g),
+              mean_flipper = mean(flipper_length_mm),
+              sd_flipper = sd(flipper_length_mm))</code></pre>
+<p><br></p>
+<blockquote>
+<p><strong>Challenge 2</strong></p>
+<p>For each species and sex, calculate the mean and sd of bill length
+and bill depth.</p>
+</blockquote>
+<details>
+<summary>
+<strong>Solution to Challenge 2</strong>
+</summary>
+<pre class="r"><code>penguins %&gt;%
+    group_by(species, sex) %&gt;%
+    filter(!is.na(sex)) %&gt;%
+    summarize(mean_billlength = mean(bill_length_mm),
+              sd_billlength = sd(bill_length_mm),
+              mean_billdepth = mean(bill_depth_mm),
+              sd_billdepth = sd(bill_depth_mm))</code></pre>
+</details>
+<p><br></p>
+</div>
+</div>
+<div id="count-and-n" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> count() and n()</h2>
+<p>If we wanted to check the number of penguins included in the dataset
+for the year 2007, we can use <code>filter()</code> then the
+<code>count()</code> function:</p>
+<pre class="r"><code>penguins %&gt;%
+    filter(year == 2007) %&gt;%
+    count</code></pre>
+<p>If we need to use the total number of observations in calculations,
+the <code>n()</code> function is useful. For instance, if we wanted the
+standard error of body mass per species:</p>
+<pre class="r"><code>penguins %&gt;%
+    group_by(species) %&gt;%
+    summarize(se_body = sd(body_mass_g)/sqrt(n()))</code></pre>
+<p>This works better if we filter out the NAs.</p>
+<pre class="r"><code>penguins %&gt;%
+    group_by(species) %&gt;%
+    filter(!is.na(body_mass_g)) %&gt;%
+    summarize(se_body = sd(body_mass_g)/sqrt(n()))</code></pre>
+<div class="darkorchidbox">
+<div class="center">
+<p><strong>Tip: Standard error</strong></p>
+</div>
+<p>To calculate standard error (se), the standard deviation (sd) is
+divided by the square root of the sample size (n). <span
+class="math inline">\(se = sd/\sqrt n\)</span></p>
+</div>
+<p><br></p>
+</div>
+<div id="mutate" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> mutate()</h2>
+<p><img src="images/dplyr_mutate.png" title="Cartoon of cute fuzzy monsters dressed up as different X-men characters, working together to add a new column to an existing data frame. Stylized title text reads “dplyr::mutate - add columns, keep existing." alt="Cartoon of cute fuzzy monsters dressed up as different X-men characters, working together to add a new column to an existing data frame. Stylized title text reads “dplyr::mutate - add columns, keep existing."  />
+Artwork by <span class="citation">@allison_horst</span></p>
+<p><br></p>
+<p>mutate() creates new variables(columns) from existing variables.</p>
+<pre class="r"><code>penguins_body_kg &lt;- penguins %&gt;%
+    mutate(body_weight_kg = body_mass_g / 1000)</code></pre>
+<p><br></p>
+<div id="connect-mutate-with-case_when" class="section level3"
+number="1.6.1">
+<h3><span class="header-section-number">1.6.1</span> Connect mutate with
+case_when</h3>
+<p>We can combine <code>mutate()</code> with <code>case_when()</code> to
+filter data in the moment of creating a new variable. (Note: case_when
+is an alternative to the older <code>ifelse()</code> function.)</p>
+<p>We can make a new column of data that categorises the Gentoo penguins
+as large and small and all other penguins as “not Gentoo”. To do this we
+use information in the species and body mass columns.</p>
+<pre class="r"><code>penguin_gentoo_bodysize &lt;- penguins %&gt;%
+  mutate(
+    size = case_when(
+      species == &quot;Gentoo&quot; &amp; body_mass_g &gt;= 5000 ~ &quot;large&quot;,
+      species == &quot;Gentoo&quot; &amp; body_mass_g &lt; 5000 ~ &quot;small&quot;,
+      TRUE ~ &quot;not Gentoo&quot;
+                    )
+        )</code></pre>
+<p>You can read <code>~</code> as “then write”. The last line of code
+can be read as “if none of the conditions are TRUE then output is not
+Gentoo”.</p>
+<p><br></p>
+<blockquote>
+<p><strong>Advanced Challenge</strong></p>
+<p>Write code to select only the species, island, flipper length and sex
+variables. Filter to only the Adelie penguins. Filter out the penguin
+with NA under flipper length. Group the data by island. Use mutate to
+create a new flipper length column in cm by dividing the flipper length
+by 100. Summarise the mean and sd of flipper lengths for each of the
+islands.</p>
+</blockquote>
+<details>
+<summary>
+<strong>Solution to Advanced Challenge</strong>
+</summary>
+<pre class="r"><code>penguins %&gt;%
+    select(species, island, flipper_length_mm, sex) %&gt;%
+    filter(species == &quot;Adelie&quot;) %&gt;%
+    filter(!is.na(flipper_length_mm)) %&gt;%
+    group_by(island) %&gt;%
+    mutate(flipper_cm = flipper_length_mm/100) %&gt;%
+    summarise(flipper_mean_cm = mean(flipper_cm),
+              flipper_sd = sd(flipper_cm))</code></pre>
+<pre><code>## # A tibble: 3 × 3
+##   island    flipper_mean_cm flipper_sd
+##   &lt;chr&gt;               &lt;dbl&gt;      &lt;dbl&gt;
+## 1 Biscoe               1.89     0.0673
+## 2 Dream                1.90     0.0659
+## 3 Torgersen            1.91     0.0623</code></pre>
+</details>
+<p><br></p>
+</div>
+</div>
+<div id="other-great-resources" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Other great
+resources</h2>
+<ul>
+<li><a href="http://r4ds.had.co.nz/">R for Data Science</a></li>
+<li><a
+href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data
+Wrangling Cheat sheet</a></li>
+<li><a href="https://dplyr.tidyverse.org/">Introduction to
+dplyr</a></li>
+<li><a
+href="https://www.rstudio.com/resources/webinars/data-wrangling-with-r-and-rstudio/">Data
+wrangling with R and RStudio</a></li>
+</ul>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

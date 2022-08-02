@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>tidyr</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">R and Rstudio</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Learning R</a>
+</li>
+<li>
+  <a href="Get_started.html">Get started</a>
+</li>
+<li>
+  <a href="Setting_up_a_project.html">Rproj</a>
+</li>
+<li>
+  <a href="ggplot.html">ggplot</a>
+</li>
+<li>
+  <a href="dplyr.html">dplyr</a>
+</li>
+<li>
+  <a href="tidyr.html">tidyr</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">tidyr</h1>
+
+</div>
+
+
+<p><strong>set up</strong></p>
+<p>To use the <code>tidyr</code> package you will need to ensure you
+have it installed on the computer you are using (hint: use the Packages
+tab, bottom right) and then load it.</p>
+<pre class="r"><code>library(tidyr)</code></pre>
+<p><br></p>
+<div id="tidy-data" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Tidy Data</h1>
+<p>The same data can be laid out in a spreadsheet in a number of
+different ways.</p>
+<p>“Tidy” data has a layout that makes it easier to do analyses in R.
+Real data is rarely in the format you need for analysis and often needs
+to be changed.</p>
+<p><img src="images/tidydata_quote.jpg" title="Stylized text providing an overview of Tidy Data. The top reads “Tidy data is a standard way of mapping the meaning of a dataset to its structure. - Hadley Wickham.” On the left reads “In tidy data: each variable forms a column; each observation forms a row; each cell is a single measurement.” There is an example table on the lower right with columns ‘id’, ‘name’ and ‘color’ with observations for different cats, illustrating tidy data structure.”." alt="Stylized text providing an overview of Tidy Data. The top reads “Tidy data is a standard way of mapping the meaning of a dataset to its structure. - Hadley Wickham.” On the left reads “In tidy data: each variable forms a column; each observation forms a row; each cell is a single measurement.” There is an example table on the lower right with columns ‘id’, ‘name’ and ‘color’ with observations for different cats, illustrating tidy data structure.”."  />
+Artwork by <span class="citation">@allison_horst</span></p>
+<p><br></p>
+<div id="examples" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Examples</h2>
+<p>Study the cartoon and the tables to understand what tidy data is.
+<img src="images/tidydata_messy.jpg" title="There are two sets of anthropomorphized data tables. The top group of three tables are all rectangular and smiling, with a shared speech bubble reading “our columns are variables and our rows are observations!”. Text to the left of that group reads “The standard structure of tidy data means that “tidy datasets are all alike…” The lower group of four tables are all different shapes, look ragged and concerned, and have different speech bubbles reading (from left to right) “my column are values and my rows are variables”, “I have variables in columns AND in rows”, “I have multiple variables in a single column”, and “I don’t even KNOW what my deal is.” Next to the frazzled data tables is text “...but every messy dataset is messy in its own way. -Hadley Wickham.”." alt="There are two sets of anthropomorphized data tables. The top group of three tables are all rectangular and smiling, with a shared speech bubble reading “our columns are variables and our rows are observations!”. Text to the left of that group reads “The standard structure of tidy data means that “tidy datasets are all alike…” The lower group of four tables are all different shapes, look ragged and concerned, and have different speech bubbles reading (from left to right) “my column are values and my rows are variables”, “I have variables in columns AND in rows”, “I have multiple variables in a single column”, and “I don’t even KNOW what my deal is.” Next to the frazzled data tables is text “...but every messy dataset is messy in its own way. -Hadley Wickham.”."  /></p>
+<p><img src="images/mtcars_messy.png" title="The text above the first table is “mtcars tidy”. The first table has the column names car, mpg, cyl, disp and hp and 4 rows of data. The data in the first column is Mazda RX4, Mazda RX4 Wag, Datsun 710 and Hornet 4 Drive. The second table has “messy - rows are variables” and is a pivoted (transposed) version of the first table with the column names as Mazda RX4, Mazda RX4 Wag, Datsun 710 and Hornet 4 Drive." alt="The text above the first table is “mtcars tidy”. The first table has the column names car, mpg, cyl, disp and hp and 4 rows of data. The data in the first column is Mazda RX4, Mazda RX4 Wag, Datsun 710 and Hornet 4 Drive. The second table has “messy - rows are variables” and is a pivoted (transposed) version of the first table with the column names as Mazda RX4, Mazda RX4 Wag, Datsun 710 and Hornet 4 Drive."  /></p>
+<p><img src="images/iris_messy.png" title="The text above the first table is “iris tidy”. The first table has the column names Petal.Length, Petal.Width and Species and 3 rows of data. The second table has “messy - multiple variables (petal length and petal width) in single column” and the first column Petal.Dimension has alternative LEngth and Width rows with the next column with the measurements in it" alt="The text above the first table is “iris tidy”. The first table has the column names Petal.Length, Petal.Width and Species and 3 rows of data. The second table has “messy - multiple variables (petal length and petal width) in single column” and the first column Petal.Dimension has alternative LEngth and Width rows with the next column with the measurements in it"  /></p>
+<p><img src="images/ToothGrowth_messy.png" title="The text above the first table is “ToothGrowth tidy”. The first table has the column names len, supp and dose and 18 rows of data. The second table has “messy - variables in columns (supp) and rows(dose)” and the first column supp has a variable but the next three columns are named dose0.5, dose, 1.0 and dose2.0 and all contain len measurements." alt="The text above the first table is “ToothGrowth tidy”. The first table has the column names len, supp and dose and 18 rows of data. The second table has “messy - variables in columns (supp) and rows(dose)” and the first column supp has a variable but the next three columns are named dose0.5, dose, 1.0 and dose2.0 and all contain len measurements."  /></p>
+<div class="darkorchidbox">
+<div class="center">
+<p><strong>Tip: Example data</strong></p>
+</div>
+<p>This data is sampled from datasets (mtcars, iris, ToothGrowth)
+commonly used on R internet help forums. Being familiar with the column
+names helps you to understand where the variables should go when you
+adapt example code.</p>
+</div>
+<p><br></p>
+<blockquote>
+<p><strong>Challenge 1</strong></p>
+<p>Decide if this data is tidy or messy. Explain why.</p>
+</blockquote>
+<p><img src="images/penguins_messy_only.png" title="The table has the text “messy - multiple variable (species an island) in single column” and &gt; is a table with the first column names species_island and that first column has Adelie and Biscoe in the same cell." alt="The table has the text “messy - multiple variable (species an island) in single column” and &gt; is a table with the first column names species_island and that first column has Adelie and Biscoe in the same cell."  /></p>
+<details>
+<summary>
+<strong>Solution to Challenge 1</strong>
+</summary>
+The data is messy because there are two variables (species and island)
+in a single column. In other words, there are two observations in each
+of the cells in the first column. The corresponding tidy version is
+below.
+<img src="images/penguins_tidy.png" title="The text above the table is “penguins tidy”. It has the column names species, island, bill_length_mm and bill_depth_mm." alt="The text above the table is “penguins tidy”. It has the column names species, island, bill_length_mm and bill_depth_mm."  />
+</details>
+<p><br></p>
+</div>
+<div id="separate" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> separate()</h2>
+<p>Since “…every messy dataset is messy in it’s own way” there are many
+functions you might need to change data. <code>separate()</code> is just
+one example.</p>
+<p>To demonstrate <code>separate()</code> we will first create the messy
+data set in the Challenge above using the combine <code>c()</code>
+function. (In internet help forums you may see small example data frames
+(df) created in this way.)</p>
+<pre class="r"><code>penguin_messy_df &lt;- data.frame(
+  species_island = c(rep(&quot;Adelie Biscoe&quot;, 2), rep(&quot;Adelie Torgersen&quot;, 2), rep(&quot;Adelie Cream&quot;, 2)), # `rep()` is the repeat function. 
+  bill_length_mm = c(35.7, 41.3, 35.9, 41.8, 37.3, 41.3),
+  bill_depth_mm = c(16.9, 21.1, 16.6, 19.4, 17.8, 20.3)
+)</code></pre>
+<p>If you run this code for yourself you can view the data frame under
+the environment tab.</p>
+<p>Now we can use <code>separate()</code> to split the
+<code>species_island</code> column into two columns and create a new
+data frame called <code>penguin_tidy_df</code>.</p>
+<pre class="r"><code>penguin_tidy_df &lt;- separate(
+  penguin_messy_df, # the data frame we want to change
+  col = species_island, # the column we want separated
+  into = c(&#39;species&#39;, &#39;island&#39;), # the names of the new columns we want to create
+  sep = &#39; &#39;) # what separates the data. In our case a space</code></pre>
+<p>View <code>penguin_tidy_df</code> to make sure it’s worked.</p>
+<p><br></p>
+</div>
+<div id="long-and-wide-data" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> long and wide
+data</h2>
+<p>Another way you may need to change data is by making it “longer” or
+“wider” using the functions <code>pivot_longer()</code> and
+<code>pivot_wider()</code>. Study the examples below so you understand
+the difference between the two data formats.</p>
+<p><br></p>
+<div id="pivot_wider" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> pivot_wider</h3>
+<p>This code creates a small data frame in long format:</p>
+<pre class="r"><code>population_long &lt;- data.frame(
+  country = c(rep(&quot;Chad&quot;, 2), rep(&quot;Cuba&quot;, 2), rep(&quot;Fiji&quot;, 2), rep(&quot;Iran&quot;, 2)),
+  year = rep(c(2000, 2020), 4),
+  population = c(9755000, 16818391, 11269000, 11113215, 848000, 898402, 69515000, 85655490)
+)
+population_long</code></pre>
+<pre><code>##   country year population
+## 1    Chad 2000    9755000
+## 2    Chad 2020   16818391
+## 3    Cuba 2000   11269000
+## 4    Cuba 2020   11113215
+## 5    Fiji 2000     848000
+## 6    Fiji 2020     898402
+## 7    Iran 2000   69515000
+## 8    Iran 2020   85655490</code></pre>
+<p>The function <code>pivot_wider()</code> is used to make each
+<strong>year</strong> a <strong>new column</strong>, with the values
+under <strong>population</strong> used to <strong>fill</strong> the new
+columns:</p>
+<pre class="r"><code>population_wide &lt;- pivot_wider(population_long, # the data frame to be made wider
+                               names_from = year, # column to take the names for the new columns from
+                               values_from = population, # the column to take values from to fill in the new columns
+                               )</code></pre>
+<p><br></p>
+</div>
+<div id="pivot_longer" class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> pivot_longer</h3>
+<p>This code, which creates a small data frame in wide format, shows
+fish weights before and after a treatment:</p>
+<pre class="r"><code>fish_wide &lt;- data.frame(
+  fish = c(1:4),
+  before = c(12.4, 12.9, 11.2, 10.8),
+  after = c(13.1, 13.2, 12.3, 11.7)
+)
+fish_wide</code></pre>
+<pre><code>##   fish before after
+## 1    1   12.4  13.1
+## 2    2   12.9  13.2
+## 3    3   11.2  12.3
+## 4    4   10.8  11.7</code></pre>
+<p>The function <code>pivot_longer()</code> is used to take the headings
+<strong>before</strong> and <strong>after</strong> and repeat in a
+column named <strong>time</strong> and put the
+<strong>measurements</strong> in a new column called
+<strong>weights</strong>:</p>
+<pre class="r"><code>pivot_longer(fish_wide, 
+  cols = c(before, after), # columns to pivot from wide to long
+  names_to = &quot;time&quot;, # name of the new column for the categories
+  values_to = &quot;weight&quot; # name of the new column where the values go
+)</code></pre>
+<p><br></p>
+<blockquote>
+<p><strong>Challenge 2</strong></p>
+<p>Use the code to create a wide data set containing the height of four
+people as children and adults. Use pivot_longer to make the data long.
+You can reveal the <strong>Hint</strong> if you need to.</p>
+</blockquote>
+<pre class="r"><code>people_heights_wide &lt;- data.frame(
+  person = 1:4,
+  child = c(85.4, 79.1, 81.9, 90.1),
+  adult = c(170.1, 165.9, 168.8, 183.7)
+)</code></pre>
+<details>
+<summary>
+<strong>Hint</strong>
+</summary>
+The columns to pivot are child and adult. The name of the new column
+could be “age” The name of the new column for the measurements could be
+“height”
+</details>
+<p><br></p>
+<details>
+<summary>
+<strong>Solution to Challenge 2</strong>
+</summary>
+<pre class="r"><code>pivot_longer(people_heights_wide, 
+  cols = c(child, adult),    
+  names_to = &quot;age&quot;, 
+  values_to = &quot;height&quot;
+)</code></pre>
+<pre><code>## # A tibble: 8 × 3
+##   person age   height
+##    &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt;
+## 1      1 child   85.4
+## 2      1 adult  170. 
+## 3      2 child   79.1
+## 4      2 adult  166. 
+## 5      3 child   81.9
+## 6      3 adult  169. 
+## 7      4 child   90.1
+## 8      4 adult  184.</code></pre>
+</details>
+<p><br></p>
+<div class="darkorchidbox">
+<div class="center">
+<p><strong>Tip: Collecting data</strong></p>
+</div>
+<p>These are small, simple examples. Real data can be difficult to
+change.</p>
+<p>If you are collecting your own data, plan in detail how the data will
+be analysed so that as you record data you arrange it in your
+spreadsheet in a way that will make data wrangling and analysis
+easier.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

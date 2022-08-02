@@ -12,6 +12,8 @@ navbar:
       href: ggplot.html
     - text: "dplyr"
       href: dplyr.html
+    - text: "tidyr"
+      href: tidyr.html
 output:
   html_document:
     toc: true

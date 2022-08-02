@@ -18,7 +18,9 @@ Artwork by @allison_horst
 
 ## Making graphs with ggplot2
 
-We will use the palmer penguin data to make graphs so check the "Environment" tab to make sure it is loaded into the R session. If it is not, then read it in.
+**Set up**
+
+We will use the palmer penguin data to make graphs, so open your saved Rproj in Rstudio by clicking **File** menu then **Open project** and look for your **.Rproj** file. Click the **Files** tab in the bottom right pane, click the **data** folder and check the penguins.csv is in there. Then read it in.
 
 ```{r, eval = TRUE}
 penguins <- read.csv(file = "data/penguins.csv")
@@ -29,11 +31,10 @@ penguins <- read.csv(file = "data/penguins.csv")
 There are different plotting systems in R for example,
 the [base plotting system](http://www.statmethods.net/graphs/index.html). But the function `ggplot` in the [ggplot2 package](http://www.statmethods.net/advgraphs/ggplot2.html) is used by the majority of people.
 
-To use it you will need to ensure you have the ggplot2 package installed (hint: use the Packages tab, bottom right) and then load it.
+To use it you will need to ensure you have the ggplot2 package installed (hint: use the Packages tab, bottom right) and then load it using the function `library()`.
 ```{r, eval = TRUE}
 library(ggplot2)
 ```
-
 
 
 ```{r, echo=FALSE, eval = TRUE, fig.alt="A hexagon with ggplot written in it and a zig zag line from left to right with some circles"}
@@ -45,7 +46,7 @@ made from the same set of components: a **data** set, a
 **coordinate system**, and a set of **geoms** -- the visual representation of data
 points.
 
-The key to understanding ggplot2 is thinking about a graph in layers.
+The key to understanding ggplot2 is to think about a graph in layers.
 
 Let's start off with an example:
 
@@ -59,11 +60,11 @@ In the command we call the `ggplot` function. Any of the arguments we give the
 layers on the plot.  
 
 We've passed in two arguments to `ggplot`. First, we tell `ggplot` what data we
-want to use to make the figure. In this example that is the penguins data we read in
+want to use to make the figure. In this example, that is the penguins data we read in
 earlier.   
 
 For the second argument called mapping,  we passed in the `aes` function, which
-tells `ggplot` how variables in the **data** map to *aesthetic* properties of
+tells `ggplot` how variables in the **data** map to **aesthetic** properties of
 the figure. In this case the **x** and **y** locations. Here we told `ggplot` we
 want to plot the "body mass" column of the penguins data frame on the x-axis, and
 the "flipper length" column on the y-axis. 
@@ -79,7 +80,7 @@ do by adding a **geom** layer. In our example, we used `geom_point`, which
 tells `ggplot` we want to visually represent the relationship between **x** and
 **y** as a scatterplot of points:
 
-```{r bodyMass-vs-flipperLength-scatter, message=FALSE}
+```{r bodyMass-vs-flipperLength-scatter, message=FALSE, eval = TRUE}
 ggplot(data = penguins, mapping = aes(x = body_mass_g, y = flipper_length_mm)) +
   geom_point()
 ```
@@ -91,7 +92,8 @@ ggplot(data = penguins, mapping = aes(x = body_mass_g, y = flipper_length_mm)) +
 > Modify the example so that the figure shows how **bill length** relates to flipper length:
 >
 > ```{r, eval=FALSE}
-> ggplot(data = penguins, mapping = aes(x = body_mass_g, y = flipper_length_mm)) + geom_point()
+> ggplot(data = penguins, mapping = aes(x = body_mass_g, y = flipper_length_mm)) + 
+    geom_point()
 > ```
 
 <details>
@@ -99,7 +101,8 @@ ggplot(data = penguins, mapping = aes(x = body_mass_g, y = flipper_length_mm)) +
 
 Here is one possible solution:
 ```{r, eval = TRUE}
-ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = flipper_length_mm)) + geom_point()
+ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = flipper_length_mm)) + 
+  geom_point()
 ```
 
 Note: we can add arguments to geom_point to control the size, transparency and shape of the points.
@@ -111,7 +114,7 @@ ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = flipper_length_mm)
 
 <br>
 
-> ** Challenge **
+> **Challenge 2**
 >
 > So far we've used the `aes` function to tell
 > the scatterplot **geom** about the **x** and **y** locations of each point.
@@ -132,7 +135,7 @@ ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = flipper_length_mm,
 
 We can make other types of graph using other **geoms**. If we wanted to compare body mass among the penguin species we might use a boxplot. We can change the `geom` to do this:
 
-```{r bodyMassSpecies}
+```{r bodyMassSpecies, eval = TRUE}
 ggplot(data = penguins, mapping = aes(x = species, y = body_mass_g)) + 
   geom_boxplot()
 ```
@@ -142,9 +145,9 @@ ggplot(data = penguins, mapping = aes(x = species, y = body_mass_g)) +
 **Tip: ggplot cheat sheet**
 :::
 
-There is a [ggplot cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf) to download which you can look at to see what the geoms are for common types of graph, as well as other ggplot code.  
+There is a <kbd>[ggplot cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf)</kbd> to download which you can look at to see what the geoms are for common types of graph, as well as other ggplot code.  
 
-Note that the layers on the cheat sheet have single letters and a `+` to represent the rest of the code for the graph. 
+Note that the layers on the cheat sheet have single letters and a <kbd>+</kbd> to represent the rest of the code for the graph. 
 ::::
 
 <br>
@@ -187,7 +190,7 @@ ggplot(data = penguins, mapping = aes(x = species, y = body_mass_g)) +
 
 > ** Challenge 3**
 >
-> Create a ggplot graph using the geom_violin() which shows the difference in bill length among the sexes. Add layers to > control what is written on the axes labels and the styling through a theme. 
+> Create a ggplot graph using the `geom_violin()` which shows the difference in **bill length** among the **sexes**. Add > layers for axes labels and theme styling. 
 
 <details>
   <summary>**Solution to Challenge 3**</summary>
@@ -195,10 +198,13 @@ ggplot(data = penguins, mapping = aes(x = species, y = body_mass_g)) +
 Here is one possible solution:
 ```{r, eval = TRUE}
 ggplot(data = penguins, mapping = aes(x = sex, y = bill_length_mm)) + 
-  geom_violin()
+  geom_violin() +
+  labs(x = "Sex",
+       y = "Bill Length (mm)") +
+  theme_classic()
 ```
 
-Note: when we learn about data wrangling we will go through ways of removing data points like the penguins that had NA under sex.
+Note: when we learn about data wrangling we will go through ways of removing data points such as the penguins that had NA under sex.
 </details>  
 
 <br>
@@ -217,7 +223,7 @@ ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = flipper_length_mm)
   geom_point(aes(colour = species))
 ```
 
-However, if we want to specify that all points should be a blue colour, oppose to levels in a variable being different colours, we use `colour =` but outside the `aes` brackets:
+However, if we want to specify that all points should be a blue colour, oppose to levels in a variable being different colours, we use `colour =` but **outside** of the `aes` brackets:
 ```{r}
 ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = flipper_length_mm)) + 
   geom_point(colour = "blue")
@@ -242,12 +248,14 @@ ggplot(data = penguins, mapping = aes(x = species, y = body_mass_g)) +
   geom_violin(colour = "darkorchid")
 ```
 
-Note: adding `fill = "purple"` will add a colour to the inside of the violin.
+Note: adding `fill = "darkorange"` will add a colour to the inside of the violin.
 ```{r, eval = TRUE}
 ggplot(data = penguins, mapping = aes(x = species, y = body_mass_g)) + 
   geom_violin(colour = "darkorchid", fill = "darkorange")
 ```
 </details>  
+
+<br>
 
 <br>
 
@@ -260,7 +268,7 @@ ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = flipper_length_mm,
   theme_classic()
 ```
 
-To specify colours, use `scale_colour_manual`:
+But to specify colours, use `scale_colour_manual`:
 ```{r}
 ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = flipper_length_mm, colour = species)) + 
   geom_point() +
@@ -277,7 +285,7 @@ ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = flipper_length_mm,
 **Tip: creating plots**
 :::
 
-When creating graphs people adapt code from the internet by replacing the names of the data and variables in the example code with their data.  
+When creating graphs, people adapt code from the internet by replacing the names of the data and variables in the example code with their data.  
 
 If searching for ggplot layers that will control specific parts of your graph, using the correct graph terminology helps. For example, tick marks, levels, error bars, axes, legends. 
 ::::
@@ -286,20 +294,13 @@ If searching for ggplot layers that will control specific parts of your graph, u
 
 ## Plotting statistics
 
-ggplot2 also makes it easy to overlay statistical models on the data:
-```{r billLengthDepth, message=FALSE}
-ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm)) + 
-  geom_point()
-```
-
-We can fit a trend line to the data by adding another layer,
-`geom_smooth`:
+ggplot2 makes it easy to overlay statistical models represented by a trend line on a graph by adding a `geom_smooth` layer:
 ```{r billflipper, message=FALSE}
 ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm)) + 
   geom_point() +
   geom_smooth(method="lm")
 ```
-Note: the `lm` stand for linear model and is the function used to do a linear regression.
+Note: the `lm` stands for linear model and is the function used to run a linear regression.
 
 We can also do this after the data has been split by **species** using `group`:
 ```{r billflippergroup, message=FALSE}

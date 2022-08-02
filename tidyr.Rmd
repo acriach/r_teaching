@@ -208,3 +208,9 @@ These are small, simple examples. Real data can be difficult to change.
 
 If you are collecting your own data, plan in detail how the data will be analysed so that as you record data you arrange it in your spreadsheet in a way that will make data wrangling and analysis easier. 
 ::::
+
+<br>
+
+<br>
+
+[Source](https://github.com/acriach/r_teaching) 

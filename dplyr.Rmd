@@ -17,7 +17,7 @@ penguins <- read.csv("data/penguins.csv", header=TRUE)
 
 **Set up**
 
-We will use the palmer penguin data so open your save Rproj in Rstudio by clicking **File** menu then **Open project** and look for your **.Rproj** file. Click the **Files** tab in bottom right pane, click the **data** folder and check the penguins.csv is in there. Then read it in.
+We will use the palmer penguin data so open your saved Rproj in Rstudio by clicking **File** menu then **Open project** and look for your **.Rproj** file. Click the **Files** tab in the bottom right pane, click the **data** folder and check the penguins.csv is in there. Then read it in.
 
 ```{r, eval = TRUE}
 penguins <- read.csv(file = "data/penguins.csv")
@@ -31,6 +31,8 @@ penguins <- read.csv(file = "data/penguins.csv")
 knitr::include_graphics("./images/dplyr_wrangling.png")
 ```
 Artwork by @allison_horst
+
+<br>
 
 Cleaning or wrangling data means many things to many researchers: we often
 select certain observations (rows) or variables (columns), we often group the
@@ -69,7 +71,7 @@ pipes (`%>%`) to combine them.
 4. `summarize()`
 5. `mutate()`
 
-If you have have not installed this package earlier, please do so:
+If you have have not installed this package previously, please do so:
 
 ```{r,eval=FALSE}
 install.packages('dplyr')
@@ -107,7 +109,7 @@ species_body <- penguins %>% select(species, body_mass_g, sex)
 ```
 
 First we assign the result to `species_bodymass`. Then, we call the penguins dataframe and pass it on, using the pipe
-symbol `%>%`, to the next step, which is the `select()` function. this time
+symbol `%>%`, to the next step, which is the `select()` function. This time
 we don't specify which data object we use in the `select()` function since it
 gets that from the previous pipe.
 
@@ -128,7 +130,7 @@ species_body_adelie <- penguins %>%
 **Tip: select() and filter()**
 :::
 
-Remember, `select()` choose columns and `filter()` chooses rows 
+Remember, <kbd>`select()`</kbd> choose columns and <kbd>`filter()`</kbd> chooses rows 
 
 ::::
 
@@ -136,7 +138,7 @@ Remember, `select()` choose columns and `filter()` chooses rows
 
 > **Challenge 1**
 >
-> Write a single command (which can span multiple lines and includes pipes) that
+> Write a single command (which can span multiple lines and include pipes) that
 > will produce a dataframe that has the Gentoo values for `island`, `flipper_length_mm`
 > and `year`, but not for other penguins.  How many rows does your dataframe
 > have?
@@ -174,8 +176,7 @@ knitr::include_graphics("./images/dplyr-fig2.png")
 
 ### Using group_by() with summarize()
 
-`group_by()` is much more
-exciting in conjunction with `summarize()`. By using the `group_by()` function, we split our
+`group_by()` is more easily understood when it's used with something like `summarize()`. By using the `group_by()` function, we split our
 original data frame into multiple pieces, then we can run functions
 (e.g. `mean()` or `sd()`) within `summarize()`.
 
@@ -194,9 +195,9 @@ penguins %>%
 **Tip: To assign or not**
 :::
 
-Starting the code with `species_body_means <-` will assign the results as a new data frame called `species_body_means`. This`species_body_means` will then be listed under the environment tab so you can view it. Good for large data frames. 
+Starting the code with <kbd>`species_body_means <-`</kbd> will assign the results as a new data frame called `species_body_means`. This <kbd>`species_body_means`</kbd> will then be listed under the environment tab so you can view it. Good for large data frames. 
 
-As above, you can choose not to do this for smaller results. The results are not saved but given in your console window.
+As was done in the last example, you can choose not to assign as an object if the resulting data frame is small. The results are not saved but given in your console window.
 
 ::::
 
@@ -212,7 +213,7 @@ penguins %>%
 
 <br>
 
-You're not limited to analysing only one variable with only one function in `summarize()`.
+And you're not limited to analysing only one variable with only one function in `summarize()`.
 
 ```{r, message=FALSE, eval = FALSE}
 penguins %>%
@@ -287,7 +288,7 @@ penguins %>%
     summarize(se_body = sd(body_mass_g)/sqrt(n()))
 ```
 
-
+<br>
 
 :::: {.darkorchidbox data-latex=""}
 ::: {.center data-latex=""}
@@ -310,7 +311,7 @@ Artwork by @allison_horst
 
 <br>
 
-mutate() creates new variables(columns) from existing variables.
+mutate() creates new variables (columns) from existing variables.
 
 ```{r}
 penguins_body_kg <- penguins %>%
@@ -328,7 +329,7 @@ We can combine
 knitr::include_graphics("./images/dplyr_case_when.png")
 ```
 
-We can make a new column of data that categorises the Gentoo penguins as large and small and all other penguins as "not Gentoo". To do this we use information in the species and body mass columns.
+We can make a new column of data that categorises the Gentoo penguins as large and small and all other penguins as "not Gentoo". To do this, we use information in the species and body mass columns.
 
 ```{r}
 penguin_gentoo_bodysize <- penguins %>%
@@ -340,14 +341,14 @@ penguin_gentoo_bodysize <- penguins %>%
                     )
         )
 ```
- You can read `~` as "then write". The last line of code can be read as "if none of the conditions are TRUE then output is not Gentoo".
+ You can read `~` as "then write". The last line of code can be read as "if none of the conditions are TRUE then write is not Gentoo".
 
 <br>
 
 > **Advanced Challenge**
 >
 > Write code to select only the species, island, flipper length and sex variables. Filter to only the Adelie penguins. 
-> Filter out the penguin with NA under flipper length. Group the data by island. Use mutate to create a new flipper
+> Filter out the penguins with NA under flipper length. Group the data by island. Use mutate to create a new flipper
 > length column in cm by dividing the flipper length by 100.
 > Summarise the mean and sd of flipper lengths for each of the islands.
 
@@ -372,6 +373,14 @@ penguins %>%
 ## Other great resources
 
 * [R for Data Science](http://r4ds.had.co.nz/)
-* [Data Wrangling Cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+* [Data Wrangling Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
 * [Introduction to dplyr](https://dplyr.tidyverse.org/)
 * [Data wrangling with R and RStudio](https://www.rstudio.com/resources/webinars/data-wrangling-with-r-and-rstudio/)
+
+<br>
+
+<br>
+
+[Source](https://github.com/acriach/r_teaching) 
+
+Adapted from [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/) licensed [CC_BY 4.0](https://creativecommons.org/licenses/by/4.0/) by [The Carpentries](https://carpentries.org/)

@@ -337,6 +337,9 @@ div.tocify {
 <li>
   <a href="dplyr.html">dplyr</a>
 </li>
+<li>
+  <a href="tidyr.html">tidyr</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -354,8 +357,8 @@ div.tocify {
 </div>
 
 
-<p><img src="images/cracked_setwd.png" title="A cartoon of a cracked glass cube looking frustrated with casts on its arm and leg, with bandaids on it, containing “setwd”, looks on at a metal riveted cube labeled “R Proj” holding a skateboard looking sympathetic, and a smaller cube with a helmet on labeled “here” doing a trick on a skateboard." alt="A cartoon of a cracked glass cube looking frustrated with casts on its arm and leg, with bandaids on it, containing “setwd”, looks on at a metal riveted cube labeled “R Proj” holding a skateboard looking sympathetic, and a smaller cube with a helmet on labeled “here” doing a trick on a skateboard."  /></p>
-<p>Artwork by <span class="citation">@allison_horst</span></p>
+<p><img src="images/cracked_setwd.png" title="A cartoon of a cracked glass cube looking frustrated with casts on its arm and leg, with bandaids on it, containing “setwd”, looks on at a metal riveted cube labeled “R Proj” holding a skateboard looking sympathetic, and a smaller cube with a helmet on labeled “here” doing a trick on a skateboard." alt="A cartoon of a cracked glass cube looking frustrated with casts on its arm and leg, with bandaids on it, containing “setwd”, looks on at a metal riveted cube labeled “R Proj” holding a skateboard looking sympathetic, and a smaller cube with a helmet on labeled “here” doing a trick on a skateboard."  />
+Artwork by <span class="citation">@allison_horst</span></p>
 <p><br></p>
 <div id="creating-a-new-project-in-r" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Creating a new Project
@@ -366,8 +369,7 @@ in R</h1>
 <li>Click the “File” menu button, then “New Project”.</li>
 <li>Click “New Directory”.</li>
 <li>Click “New Project”.</li>
-<li>Type in the name of the directory to store your project,
-e.g. “my_project”.</li>
+<li>Type in the name of your project, e.g. “Learning_R”.</li>
 <li>Click the “Create Project” button</li>
 </ol>
 </blockquote>
@@ -375,18 +377,19 @@ e.g. “my_project”.</li>
 is to click through your file system to get to the directory where it
 was saved and double click on the <code>.Rproj</code> file. This will
 open RStudio and start your R session in the same directory as the
-<code>.Rproj</code> file. All your data, plots and scripts will now be
-relative to the project directory. RStudio projects have the added
-benefit of allowing you to open multiple projects at the same time each
-open to its own project directory. This allows you to keep multiple
-projects open without them interfering with each other.</p>
+<code>.Rproj</code> file. Any data, plots or scripts can be saved and
+retrieved from this directory.</p>
+<p>RStudio projects have the added benefit of allowing you to open
+multiple projects at the same time each open to its own project
+directory. This allows you to keep multiple projects open without them
+interfering with each other.</p>
 <p><br></p>
 <div id="best-practices-for-project-organization" class="section level2"
 number="1.1">
 <h2><span class="header-section-number">1.1</span> Best practices for
 project organization</h2>
 <p>In the bottom left pane in RStudio, click the “Files” tab. To
-organise your project you could create folders called <code>data</code>,
+organise your project, create folders called <code>data</code>,
 <code>scripts</code>, <code>results</code>, <code>docs</code> by
 clicking the folder icon with the green plus sign.</p>
 <p><br></p>
@@ -398,41 +401,43 @@ selected lines (either using the keyboard shortcuts in RStudio or
 clicking the “Run” button) in the interactive R console.</p>
 <p>Open a script (click the white square with the cross in green below
 File). Save the script in your R project folder (click “File”, then
-“Save as” and browse to the <code>script</code> folder in your
-project)</p>
+“Save as” and browse to the <code>script</code> folder in your project).
+You could call it “Lesson 1”.</p>
 <p><br></p>
 </div>
 <div id="save-the-data-in-the-data-folder" class="section level3"
 number="1.1.2">
 <h3><span class="header-section-number">1.1.2</span> Save the data in
 the data folder</h3>
-<p><img src="images/lter_penguins.png" title="Three cartoon penguines with chinstrap, gentoo and adelie written above them." alt="Three cartoon penguines with chinstrap, gentoo and adelie written above them."  /></p>
+<p><img src="images/lter_penguins.png" title="Three cartoon penguines with chinstrap, gentoo and adelie written above them." alt="Three cartoon penguines with chinstrap, gentoo and adelie written above them."  />
+Artwork by <span class="citation">@allison_horst</span></p>
 <blockquote>
 <p><strong>Challenge 2</strong> Download the palmer penguins data from
 <a
-href="https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder_data.csv">here</a>.</p>
+href="https://raw.githubusercontent.com/acriach/r_teaching/main/data/penguins.csv">here</a>.</p>
 <ol style="list-style-type: decimal">
 <li>Download the file (CTRL + S, right mouse click -&gt; “Save as”, or
 File -&gt; “Save page as”)</li>
-<li>Make sure it’s saved under the name
-<code>penguins_data.csv</code></li>
+<li>Make sure it’s saved under the name <code>penguins.csv</code></li>
 <li>Save the file in the <code>data</code> folder within your
 project.</li>
 </ol>
-<p>We will load and inspect these data later.</p>
+<p>We will load and inspect these data shortly.</p>
 </blockquote>
+<p><br></p>
 </div>
 </div>
 <div id="reading-help-files" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Reading Help
+<h2><span class="header-section-number">1.2</span> Reading help
 files</h2>
-<p>R, and every package, provide help files for functions. This will
-load up a help page in RStudio:</p>
+<p>R, and every package author, provide help files for functions. Either
+of these will load up a help page in RStudio:</p>
 <pre class="r"><code>?function_name
 help(function_name)</code></pre>
 <p>Each help page is broken down into sections (Description, Usage,
-Arguments etc). The last section Examples is very useful. The command
-below will bring up the help for the function <code>log</code>.</p>
+Arguments etc). The last section Examples is very useful.</p>
+<p>The command below will bring up the help for the function
+<code>log</code>.</p>
 <pre class="r"><code>?log</code></pre>
 <p><br></p>
 <div class="darkorchidbox">
@@ -464,31 +469,29 @@ cheat sheets</a></li>
 <li><a href="http://www.cookbook-r.com/">Cookbook for R</a></li>
 </ul>
 <p><br></p>
-<p><br></p>
 </div>
 </div>
 <div id="reading-in-data" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Reading in data</h2>
-<p>We have already saved a csv data file in our data folder (you can do
-the same when you work with other datasets).</p>
+<p>We have already saved a .csv data file in our data folder (do the
+same when you work with your own datasets).</p>
 <p>We can load this into R via the following:</p>
 <pre class="r"><code>penguins &lt;- read.csv(file = &quot;data/penguins.csv&quot;)</code></pre>
 <p>Here we used the function <code>read.csv</code> but there are lots of
 different functions for reading in different types of files. For example
 <code>read_excel</code> in the readxl package.</p>
-<p>Tip: Reading in data problems</p>
 <div class="darkorchidbox">
 <div class="center">
 <p><strong>Tip: Problems reading in data</strong></p>
 </div>
 <p>If your spreadsheet won’t read in check:<br />
-1. You are using the correct function for the type of file for example
-<code>read.csv</code> for csv files<br />
-2. You have included the suffix after the name of the file 3. The name
-of the file is spelled correctly<br />
-4. The file exists in the folder you are directing R to. For example in
-our case we would click on the folder name data under the files tab at
-the bottom right of Rstudio.<br />
+1. You are using the correct function for the type of file, for example
+<kbd><code>read.csv</code></kbd> for csv files<br />
+2. You have included the suffix after the name of the file<br />
+3. The name of the file is spelled correctly<br />
+4. The file exists in the folder you are directing R to. For example, in
+our case we would click on the folder named data under the files tab at
+the bottom right of Rstudio to check.<br />
 5. Look at an example on the internet to ensure you have included all
 the necessary arguments. <code>read.csv</code> only needs
 <code>file =</code> but other functions may need other arguments.</p>
@@ -496,7 +499,7 @@ the necessary arguments. <code>read.csv</code> only needs
 <p><br></p>
 <p>Once data is in R, you can view it by clicking on it’s name under the
 Environment window.</p>
-<p>In R, datasets are called data frames (df) or tibbles.</p>
+<p>In R, datasets are called data frames (df) or sometimes tibbles.</p>
 <p>We can begin exploring our data frame right away, pulling out columns
 by specifying them using the <code>$</code> operator:</p>
 <pre class="r"><code>penguins$species</code></pre>
@@ -596,11 +599,12 @@ variable.</p>
 ##  $ body_mass_g      : int  3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
 ##  $ sex              : chr  &quot;male&quot; &quot;female&quot; &quot;female&quot; NA ...
 ##  $ year             : int  2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...</code></pre>
-<p>Species is <code>chr</code> which is short for character which R will
-treat as a factor (discrete data). Bill_length_mm is <code>num</code>
-which stands for numeric. <code>int</code> means integer. Both
-<code>num</code> and <code>int</code> variables are treated as
-continuous (scale) data by R.</p>
+<p>Species is <code>chr</code> short for character which R will treat as
+a factor (in other words, discrete data). Bill_length_mm is
+<code>num</code> which stands for numeric. <code>int</code> means
+integer. Both <code>num</code> and <code>int</code> variables are
+treated as continuous (scale) data by R.</p>
+<p><br></p>
 <p>We can calculate the mean of bill length.</p>
 <pre class="r"><code>mean(penguins$bill_length_mm, na.rm = TRUE)</code></pre>
 <pre><code>## [1] 43.92193</code></pre>
@@ -615,9 +619,8 @@ continuous (scale) data by R.</p>
 </div>
 <p>Sometimes R errors are caused by R treating a variable as a factor
 when you know it’s a number. Checking what R is “thinking” with
-<code>str</code> can help.</p>
+<kbd><code>str</code></kbd> can help.</p>
 </div>
-<p><br></p>
 <p><br></p>
 </div>
 <div id="indexing-square-brackets" class="section level2" number="1.4">
@@ -629,13 +632,13 @@ You can also use indexing.</p>
 <p><strong>Challenge 3</strong></p>
 <p>There are several subtly different ways to call variables,
 observations and elements from data.frames using indexing:</p>
+<p>Try out these examples and explain what is returned by each one.</p>
 <ul>
 <li><code>penguins[1]</code></li>
 <li><code>penguins[1, 1]</code></li>
 <li><code>penguins[, 1]</code></li>
 <li><code>penguins[1, ]</code></li>
 </ul>
-<p>Try out these examples and explain what is returned by each one.</p>
 </blockquote>
 <details>
 <summary>
@@ -1059,6 +1062,8 @@ observations and elements from data.frames using indexing:</p>
 Calls the first row.
 </details>
 <p><br></p>
+<p><br></p>
+<p><a href="https://github.com/acriach/r_teaching">Source</a></p>
 <p>Adapted from <a
 href="https://swcarpentry.github.io/r-novice-gapminder/">R for
 Reproducible Scientific Analysis</a> licensed <a

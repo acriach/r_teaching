@@ -337,6 +337,9 @@ div.tocify {
 <li>
   <a href="dplyr.html">dplyr</a>
 </li>
+<li>
+  <a href="tidyr.html">tidyr</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -356,10 +359,10 @@ div.tocify {
 
 <p><br></p>
 <p><strong>Set up</strong></p>
-<p>We will use the palmer penguin data so open your save Rproj in
+<p>We will use the palmer penguin data so open your saved Rproj in
 Rstudio by clicking <strong>File</strong> menu then <strong>Open
 project</strong> and look for your <strong>.Rproj</strong> file. Click
-the <strong>Files</strong> tab in bottom right pane, click the
+the <strong>Files</strong> tab in the bottom right pane, click the
 <strong>data</strong> folder and check the penguins.csv is in there.
 Then read it in.</p>
 <pre class="r"><code>penguins &lt;- read.csv(file = &quot;data/penguins.csv&quot;)</code></pre>
@@ -368,6 +371,7 @@ Then read it in.</p>
 <h1><span class="header-section-number">1</span> Data wrangling</h1>
 <p><img src="images/dplyr_wrangling.png" title="Cartoon of a fuzzy monster with a cowboy hat and lasso, riding another fuzzy monster labeled “dplyr”, lassoing a group of angry / unruly looking creatures labeled “data”." alt="Cartoon of a fuzzy monster with a cowboy hat and lasso, riding another fuzzy monster labeled “dplyr”, lassoing a group of angry / unruly looking creatures labeled “data”."  />
 Artwork by <span class="citation">@allison_horst</span></p>
+<p><br></p>
 <p>Cleaning or wrangling data means many things to many researchers: we
 often select certain observations (rows) or variables (columns), we
 often group the data by a certain variable(s), or we even calculate
@@ -400,7 +404,7 @@ well as using pipes (<code>%&gt;%</code>) to combine them.</p>
 <li><code>summarize()</code></li>
 <li><code>mutate()</code></li>
 </ol>
-<p>If you have have not installed this package earlier, please do
+<p>If you have have not installed this package previously, please do
 so:</p>
 <pre class="r"><code>install.packages(&#39;dplyr&#39;)</code></pre>
 <p>Now let’s load the package:</p>
@@ -424,7 +428,7 @@ what we’ve done above using a pipe:</p>
 <p>First we assign the result to <code>species_bodymass</code>. Then, we
 call the penguins dataframe and pass it on, using the pipe symbol
 <code>%&gt;%</code>, to the next step, which is the
-<code>select()</code> function. this time we don’t specify which data
+<code>select()</code> function. This time we don’t specify which data
 object we use in the <code>select()</code> function since it gets that
 from the previous pipe.</p>
 <p><br></p>
@@ -440,13 +444,13 @@ can combine <code>select</code> and <code>filter</code></p>
 <div class="center">
 <p><strong>Tip: select() and filter()</strong></p>
 </div>
-<p>Remember, <code>select()</code> choose columns and
-<code>filter()</code> chooses rows</p>
+<p>Remember, <kbd><code>select()</code></kbd> choose columns and
+<kbd><code>filter()</code></kbd> chooses rows</p>
 </div>
 <p><br></p>
 <blockquote>
 <p><strong>Challenge 1</strong></p>
-<p>Write a single command (which can span multiple lines and includes
+<p>Write a single command (which can span multiple lines and include
 pipes) that will produce a dataframe that has the Gentoo values for
 <code>island</code>, <code>flipper_length_mm</code> and
 <code>year</code>, but not for other penguins. How many rows does your
@@ -481,11 +485,11 @@ use <code>group_by()</code>, which will analyse all three species.</p>
 number="1.4.1">
 <h3><span class="header-section-number">1.4.1</span> Using group_by()
 with summarize()</h3>
-<p><code>group_by()</code> is much more exciting in conjunction with
-<code>summarize()</code>. By using the <code>group_by()</code> function,
-we split our original data frame into multiple pieces, then we can run
-functions (e.g. <code>mean()</code> or <code>sd()</code>) within
-<code>summarize()</code>.</p>
+<p><code>group_by()</code> is more easily understood when it’s used with
+something like <code>summarize()</code>. By using the
+<code>group_by()</code> function, we split our original data frame into
+multiple pieces, then we can run functions (e.g. <code>mean()</code> or
+<code>sd()</code>) within <code>summarize()</code>.</p>
 <p><img src="images/dplyr-fig3.png" title="Text is data.frame pipe operator group_by(a) pipe operator summarise(mean_b=mean(b)). On the right are four columns of data named a, b, c and d with six rows named 1,1,2,2,3 and 3 in column a. Arrows show these rows split so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. Three arrows goes from these 3 smaller dataframes to a final datafram with column a containing 1, 2 and 3 and a second column called mean_b." alt="Text is data.frame pipe operator group_by(a) pipe operator summarise(mean_b=mean(b)). On the right are four columns of data named a, b, c and d with six rows named 1,1,2,2,3 and 3 in column a. Arrows show these rows split so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. Three arrows goes from these 3 smaller dataframes to a final datafram with column a containing 1, 2 and 3 and a second column called mean_b."  /></p>
 <pre class="r"><code>penguins %&gt;%
     group_by(species) %&gt;%
@@ -500,13 +504,14 @@ functions (e.g. <code>mean()</code> or <code>sd()</code>) within
 <div class="center">
 <p><strong>Tip: To assign or not</strong></p>
 </div>
-<p>Starting the code with <code>species_body_means &lt;-</code> will
-assign the results as a new data frame called
-<code>species_body_means</code>. This<code>species_body_means</code>
-will then be listed under the environment tab so you can view it. Good
-for large data frames.</p>
-<p>As above, you can choose not to do this for smaller results. The
-results are not saved but given in your console window.</p>
+<p>Starting the code with
+<kbd><code>species_body_means &lt;-</code></kbd> will assign the results
+as a new data frame called <code>species_body_means</code>. This
+<kbd><code>species_body_means</code></kbd> will then be listed under the
+environment tab so you can view it. Good for large data frames.</p>
+<p>As was done in the last example, you can choose not to assign as an
+object if the resulting data frame is small. The results are not saved
+but given in your console window.</p>
 </div>
 <p><br></p>
 <p>The function <code>group_by()</code> allows us to group by multiple
@@ -516,7 +521,7 @@ variables. Let’s group by <code>species</code> <strong>and</strong>
     group_by(species, sex) %&gt;%
     summarize(mean_body = mean(body_mass_g, na.rm=TRUE))</code></pre>
 <p><br></p>
-<p>You’re not limited to analysing only one variable with only one
+<p>And you’re not limited to analysing only one variable with only one
 function in <code>summarize()</code>.</p>
 <pre class="r"><code>penguins %&gt;%
     group_by(species, sex) %&gt;%
@@ -574,6 +579,7 @@ standard error of body mass per species:</p>
     group_by(species) %&gt;%
     filter(!is.na(body_mass_g)) %&gt;%
     summarize(se_body = sd(body_mass_g)/sqrt(n()))</code></pre>
+<p><br></p>
 <div class="darkorchidbox">
 <div class="center">
 <p><strong>Tip: Standard error</strong></p>
@@ -589,7 +595,7 @@ class="math inline">\(se = sd/\sqrt n\)</span></p>
 <p><img src="images/dplyr_mutate.png" title="Cartoon of cute fuzzy monsters dressed up as different X-men characters, working together to add a new column to an existing data frame. Stylized title text reads “dplyr::mutate - add columns, keep existing." alt="Cartoon of cute fuzzy monsters dressed up as different X-men characters, working together to add a new column to an existing data frame. Stylized title text reads “dplyr::mutate - add columns, keep existing."  />
 Artwork by <span class="citation">@allison_horst</span></p>
 <p><br></p>
-<p>mutate() creates new variables(columns) from existing variables.</p>
+<p>mutate() creates new variables (columns) from existing variables.</p>
 <pre class="r"><code>penguins_body_kg &lt;- penguins %&gt;%
     mutate(body_weight_kg = body_mass_g / 1000)</code></pre>
 <p><br></p>
@@ -601,8 +607,8 @@ case_when</h3>
 filter data in the moment of creating a new variable. (Note: case_when
 is an alternative to the older <code>ifelse()</code> function.)</p>
 <p>We can make a new column of data that categorises the Gentoo penguins
-as large and small and all other penguins as “not Gentoo”. To do this we
-use information in the species and body mass columns.</p>
+as large and small and all other penguins as “not Gentoo”. To do this,
+we use information in the species and body mass columns.</p>
 <pre class="r"><code>penguin_gentoo_bodysize &lt;- penguins %&gt;%
   mutate(
     size = case_when(
@@ -612,13 +618,13 @@ use information in the species and body mass columns.</p>
                     )
         )</code></pre>
 <p>You can read <code>~</code> as “then write”. The last line of code
-can be read as “if none of the conditions are TRUE then output is not
+can be read as “if none of the conditions are TRUE then write is not
 Gentoo”.</p>
 <p><br></p>
 <blockquote>
 <p><strong>Advanced Challenge</strong></p>
 <p>Write code to select only the species, island, flipper length and sex
-variables. Filter to only the Adelie penguins. Filter out the penguin
+variables. Filter to only the Adelie penguins. Filter out the penguins
 with NA under flipper length. Group the data by island. Use mutate to
 create a new flipper length column in cm by dividing the flipper length
 by 100. Summarise the mean and sd of flipper lengths for each of the
@@ -653,13 +659,21 @@ resources</h2>
 <li><a href="http://r4ds.had.co.nz/">R for Data Science</a></li>
 <li><a
 href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data
-Wrangling Cheat sheet</a></li>
+Wrangling Cheat Sheet</a></li>
 <li><a href="https://dplyr.tidyverse.org/">Introduction to
 dplyr</a></li>
 <li><a
 href="https://www.rstudio.com/resources/webinars/data-wrangling-with-r-and-rstudio/">Data
 wrangling with R and RStudio</a></li>
 </ul>
+<p><br></p>
+<p><br></p>
+<p><a href="https://github.com/acriach/r_teaching">Source</a></p>
+<p>Adapted from <a
+href="https://swcarpentry.github.io/r-novice-gapminder/">R for
+Reproducible Scientific Analysis</a> licensed <a
+href="https://creativecommons.org/licenses/by/4.0/">CC_BY 4.0</a> by <a
+href="https://carpentries.org/">The Carpentries</a></p>
 </div>
 </div>
 

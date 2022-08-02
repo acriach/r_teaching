@@ -337,6 +337,9 @@ div.tocify {
 <li>
   <a href="dplyr.html">dplyr</a>
 </li>
+<li>
+  <a href="tidyr.html">tidyr</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -354,6 +357,7 @@ div.tocify {
 </div>
 
 
+<p><br></p>
 <div id="this-is-r" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> This is R</h1>
 <div id="you-need-both-r-and-rstudio-installed" class="section level2"
@@ -381,9 +385,10 @@ RStudio</a></li>
 </ul>
 <p><img src="images/RStudio_screenshot.png" title="A screenshot of Rstudio showing eleven menus at the top left. One panel covers the left half with text about the R software. The right is divided into two panels with text saying that the environment is empty in the top panel and a display of the current file directory in the bottom panel." alt="A screenshot of Rstudio showing eleven menus at the top left. One panel covers the left half with text about the R software. The right is divided into two panels with text saying that the environment is empty in the top panel and a display of the current file directory in the bottom panel."  /></p>
 <p>Once you open files, such as R scripts (click on the white square
-with the arrow in green icon), another panel will open in the top
+with the plus in green icon), another panel will open in the top
 left.</p>
 <p><img src="images/RStudio_screenshot_script.png" title="Two zoomed in screenshots of the top left menus in RStudio. The first screenshot shows a black rectangle highlighting an icon which is a white square with a plus inside a green circle. The second screenshot shows a black rectangle highlighting a menu item that reads R Script followed by the associated keyboard shortcut, Ctrl + Shift + N." alt="Two zoomed in screenshots of the top left menus in RStudio. The first screenshot shows a black rectangle highlighting an icon which is a white square with a plus inside a green circle. The second screenshot shows a black rectangle highlighting a menu item that reads R Script followed by the associated keyboard shortcut, Ctrl + Shift + N."  /></p>
+<p><br></p>
 </div>
 <div id="working-in-rstudio" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Working in
@@ -408,27 +413,28 @@ RStudio.</li>
 or<br />
 2. hit <kbd>Ctrl</kbd>+<kbd>Return</kbd> in Windows or Linux or
 <kbd>⌘</kbd>+<kbd>Return</kbd> on MacOS.<br />
-To run a block of code, select it and then <code>Run</code>.</p>
+To run a block of code, select it and then <kbd>Run</kbd>.</p>
 </div>
+<p><br></p>
 <p>The first thing you will see in the R console is a bunch of
 information, followed by a “&gt;” and a blinking cursor. It operates by
 you typing in commands, R tries to execute them, and then returns a
 result.</p>
 <p><br></p>
-<p>The simplest thing you could do with R is use it as a big
-calculator:</p>
+<p>The simplest thing you can do with R is use it as a calculator:</p>
 <pre class="r"><code>1 + 100</code></pre>
 <pre><code>## [1] 101</code></pre>
-<p>R will print out the answer, with a preceding “[1]”. Don’t worry
-about this. For now think of it as indicating what line the output is
-on.</p>
+<p>R will print out the answer, with a preceding <code>[1]</code>. Don’t
+worry about this. Think of it as merely indicating what line the output
+is on.</p>
 <p>If you type in an incomplete command, for example:</p>
 <pre><code>&gt; 1 +</code></pre>
-<pre><code>+</code></pre>
-<p>R will wait for you to complete it and show a “+” instead of a
-“&gt;”. This means it’s waiting for you to complete the command.<br />
+<p>R will show a <code>+</code> instead of a <code>&gt;</code>. ~~~ +
+~~~</p>
+<p>This means it’s waiting for you to complete the command.<br />
 If you want to cancel a command you can hit “Esc” and RStudio will give
 you back the “&gt;” prompt.</p>
+<p><br></p>
 </div>
 <div id="functions" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> Functions</h2>
@@ -443,13 +449,24 @@ follows after the hash symbol # is ignored by R when it executes
 code.</p>
 <pre class="r"><code>sqrt(25) # square root</code></pre>
 <pre><code>## [1] 5</code></pre>
+<div class="darkorchidbox">
+<div class="center">
+<p><strong>Tip</strong></p>
+</div>
 <p>Don’t worry about trying to remember every function in R. You can
 look them up on Google, or if you can remember the start of the
 function’s name, use the tab completion in RStudio.</p>
-<p>Typing a <code>?</code> before the name of a command will open the
-help page for that command. As well as providing a detailed description
-of the command and how it works, scrolling to the bottom of the help
-page will usually show examples.</p>
+</div>
+<p><br></p>
+<div class="darkorchidbox">
+<div class="center">
+<p><strong>Tip</strong></p>
+</div>
+<p>Typing a <kbd>?</kbd> before the name of a command will open the help
+page for that command. As well as providing a detailed description of
+the command and how it works, scrolling to the bottom of the help page
+will usually show examples</p>
+</div>
 <p><br></p>
 <p>We can also do comparisons in R:</p>
 <pre class="r"><code>1 == 1  # equality (note two equals signs, read as &quot;is equal to&quot;)</code></pre>
@@ -458,37 +475,39 @@ page will usually show examples.</p>
 <pre><code>## [1] TRUE</code></pre>
 <pre class="r"><code>1 &gt;= -9 # greater than or equal to</code></pre>
 <pre><code>## [1] TRUE</code></pre>
+<p><br></p>
 </div>
-<div id="variables-and-assignment" class="section level2" number="1.5">
-<h2><span class="header-section-number">1.5</span> Variables and
+<div id="objects-and-assignment" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Objects and
 assignment</h2>
-<p>We can store values in variables using the assignment operator
-<code>&lt;-</code>, like this:</p>
+<p>We can store values in <strong>objects</strong> using the assignment
+operator <code>&lt;-</code>, like this:</p>
 <pre class="r"><code>x &lt;- 1/40</code></pre>
-<p>Notice that assignment does not print a value. Instead, we stored it
-for later in something called a <strong>variable</strong>.
-<code>x</code> now contains the <strong>value</strong>
-<code>0.025</code>:</p>
+<p>Notice that assignment does not print a value. Instead, we stored the
+number for later in the object <code>x</code>. <code>x</code> now
+contains the <strong>value</strong> <code>0.025</code>:</p>
 <pre class="r"><code>x</code></pre>
 <pre><code>## [1] 0.025</code></pre>
 <p>More precisely, the stored value is a <em>decimal approximation</em>
 of this fraction called a <a
 href="http://en.wikipedia.org/wiki/Floating_point">floating point
 number</a>.</p>
+<p><br></p>
 <p>Look for the <code>Environment</code> tab in one of the panes of
 RStudio, and you will see that <code>x</code> and its value have
-appeared. Our variable <code>x</code> can be used in place of a number
-in any calculation that expects a number:</p>
+appeared. Our object <code>x</code> can be used in place of a number in
+any calculation that expects a number:</p>
 <pre class="r"><code>log(x)</code></pre>
 <pre><code>## [1] -3.688879</code></pre>
-<p>Notice also that variables can be reassigned:</p>
+<p>Notice also that objects can be reassigned:</p>
 <pre class="r"><code>x &lt;- 100</code></pre>
 <p><code>x</code> used to contain the value 0.025 and now it has the
 value 100.</p>
-<p>Assignment values can contain the variable being assigned to:</p>
-<pre class="r"><code>x &lt;- x + 1 #notice how RStudio updates its description of x on the top right tab
+<p>Assignment values can contain the object being assigned to:</p>
+<pre class="r"><code>x &lt;- x + 1 # notice how RStudio updates its description of x on the top right tab
 y &lt;- x * 2</code></pre>
-<p>Variable names can contain letters, numbers, underscores and periods.
+<p><br></p>
+<p>Object names can contain letters, numbers, underscores and periods.
 They must start with a letter. They cannot start with a number,
 underscore nor contain spaces at all. Different people use different
 conventions for long variable names, these include</p>
@@ -498,12 +517,12 @@ conventions for long variable names, these include</p>
 <li>camelCaseToSeparateWords</li>
 </ul>
 <p>What you use is up to you, but <strong>be consistent</strong>.</p>
-<p><img src="images/coding_cases.png" title="A wound up snake with mouth open is beside the screaming_snake_case. A spread out snake has snake_case written on it. A camel with headphones on has camelCase written on it with the captial C in the space of it's hump. Colourful letters on a line spell out kebab-case" alt="A wound up snake with mouth open is beside the screaming_snake_case. A spread out snake has snake_case written on it. A camel with headphones on has camelCase written on it with the captial C in the space of it's hump. Colourful letters on a line spell out kebab-case"  /></p>
-<p>Artwork by <span class="citation">@allison_horst</span></p>
+<p><img src="images/coding_cases.png" title="A wound up snake with mouth open is beside the screaming_snake_case. A spread out snake has snake_case written on it. A camel with headphones on has camelCase written on it with the captial C in the space of it's hump. Colourful letters on a line spell out kebab-case" alt="A wound up snake with mouth open is beside the screaming_snake_case. A spread out snake has snake_case written on it. A camel with headphones on has camelCase written on it with the captial C in the space of it's hump. Colourful letters on a line spell out kebab-case"  />
+Artwork by <span class="citation">@allison_horst</span></p>
 <p><br></p>
 <blockquote>
 <p><strong>Challenge 1</strong></p>
-<p>Which of the following are valid R variable names?</p>
+<p>Which of the following are valid R object names?</p>
 <pre class="r"><code>min_height
 max.height
 _age
@@ -516,38 +535,81 @@ celsius2kelvin</code></pre>
 <summary>
 <strong>Solution to Challenge 1</strong>
 </summary>
-<p>The following can be used as R variables:</p>
+<p>The following can be used as R object names:</p>
 <pre class="r"><code>min_height
 max.height
 MaxLength
 celsius2kelvin</code></pre>
-<p>The following will not be able to be used to create a variable</p>
+<p>The following will not be able to be used to create an object:</p>
 <pre class="r"><code>_age
 min-length
 2widths</code></pre>
 </details>
 <p><br></p>
 <p>One thing to be aware of is that R is <em>vectorized</em>, meaning
-that variables and functions can have vectors as values. In contrast to
+that objects and functions can have vectors as values. In contrast to
 physics and mathematics, a vector in R describes a set of values in a
-certain order of the same data type. For example</p>
+certain order of the same data type. For example:</p>
 <pre class="r"><code>1:5</code></pre>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
+<p>Assign this vector to the object <code>x</code></p>
 <pre class="r"><code>x &lt;- 1:5</code></pre>
+<p>This is incredibly powerful as you will see:</p>
 <pre class="r"><code>log(x)</code></pre>
 <pre><code>## [1] 0.0000000 0.6931472 1.0986123 1.3862944 1.6094379</code></pre>
-<p>This is incredibly powerful as you will see.</p>
+<p><br></p>
+<blockquote>
+<p><strong>Challenge 2</strong></p>
+<p>What will be the value of each object after each line of code in the
+following?</p>
+<pre class="r"><code>mass &lt;- 40
+age &lt;- 122
+mass &lt;- mass * 2
+age &lt;- age - 20</code></pre>
+</blockquote>
+<details>
+<summary>
+<strong>Solution to Challenge 2</strong>
+</summary>
+<pre class="r"><code>mass &lt;- 40</code></pre>
+<p>This will give a value of 40 for the object mass</p>
+<pre class="r"><code>age &lt;- 122</code></pre>
+<p>This will give a value of 122 for the object age</p>
+<pre class="r"><code>mass &lt;- mass * 2</code></pre>
+<p>This will multiply the existing value of 40 by 2 to give a new value
+of 80 to the object mass.</p>
+<pre class="r"><code>age &lt;- age - 20</code></pre>
+This will subtract 20 from the existing value of 122 to give a new value
+of 102 to the object age.
+</details>
+<p><br></p>
+<blockquote>
+<p><strong>Challenge 3</strong></p>
+<p>If we ran this code</p>
+<pre class="r"><code>mass &lt;- 40
+age &lt;- 122</code></pre>
+<p>What command would tell us if mass is larger than age?</p>
+</blockquote>
+<details>
+<summary>
+<strong>Solution to Challenge 3</strong>
+</summary>
+<p>One way of answering this question in R is to use the
+<code>&gt;</code> to set up the following:</p>
+<pre class="r"><code>mass &gt; age</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+This should yield a boolean value of TRUE since 80 is greater than 102.
+</details>
+<p><br></p>
 </div>
 <div id="managing-your-environment" class="section level2" number="1.6">
 <h2><span class="header-section-number">1.6</span> Managing your
 environment</h2>
 <p>There are lots of useful commands you can use to interact with the R
 session.</p>
-<p><code>ls</code> will list all of the variables and functions stored
-in the global environment (your working R session):</p>
+<p><code>ls</code> will list all of the objects and functions stored in
+the global environment (your working R session):</p>
 <pre class="r"><code>ls()</code></pre>
-<pre><code>## [1] &quot;gentoo_island_flipper_yr&quot; &quot;penguins&quot;                
-## [3] &quot;x&quot;                        &quot;y&quot;</code></pre>
 <p>Note here that we didn’t give any arguments to <code>ls</code>, but
 we still needed to give the parentheses to tell R to call the
 function.</p>
@@ -585,29 +647,32 @@ instead of listing objects.</p>
 ##     }
 ##     else all.names
 ## }
-## &lt;bytecode: 0x0000019e843604a8&gt;
+## &lt;bytecode: 0x00000197430fa428&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>What going on here? Like everything in R, <code>ls</code> is the name
 of an object, and entering the name of an object by itself prints the
-contents of the object. The object <code>x</code> that we created
-earlier contains 1,2,3,4,5:</p>
+contents of the object.</p>
+<p>The object <code>x</code> that we created earlier contains
+1,2,3,4,5:</p>
 <pre class="r"><code>x</code></pre>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
 <p>The object <code>ls</code> contains the R code that makes the
-<code>ls</code> function work! <br> You can use <code>rm</code> to
-delete objects you no longer need:</p>
+<code>ls</code> function work!</p>
+<p><br></p>
+<p><code>rm</code> to deletes objects you no longer need:</p>
 <pre class="r"><code>rm(x)</code></pre>
 <p>If you have lots of things in your environment and want to delete all
-of them, you can pass the results of <code>ls</code> to the
-<code>rm</code> function:</p>
+of them, you can <strong>pass</strong> the results of <code>ls</code>
+through the <code>rm</code> function:</p>
 <pre class="r"><code>rm(list = ls())</code></pre>
 <p>Here we’ve combined two functions. Like the order of maths
 operations, anything inside the innermost parentheses is evaluated
 first, and so on.</p>
 <p>In this case we’ve specified that the results of <code>ls</code>
-should be used for the <code>list</code> argument in <code>rm</code>.
-When assigning values to arguments by name, you <em>must</em> use the
-<code>=</code> operator!</p>
+should be used for the <code>list</code> argument in
+<code>rm</code>.</p>
+<p>Note: When assigning values to arguments by name, you use the
+<code>=</code> operator.</p>
 <p>If instead we use <code>&lt;-</code>, there will be unintended side
 effects, or you may get an error message:</p>
 <pre class="r"><code>rm(list &lt;- ls())</code></pre>
@@ -623,6 +688,7 @@ hasn’t worked as expected.</p>
 <p>In both cases, the message that R prints out usually give you clues
 how to fix a problem.</p>
 </div>
+<p><br></p>
 </div>
 <div id="r-packages" class="section level2" number="1.7">
 <h2><span class="header-section-number">1.7</span> R Packages</h2>
@@ -635,7 +701,7 @@ network). R and RStudio have functions for managing packages:</p>
 <code>installed.packages()</code></li>
 <li>You can install packages by typing
 <code>install.packages("packagename")</code>, where
-<code>packagename</code> is the package name, in quotes.</li>
+<code>packagename</code> is the package name in quotes.</li>
 <li>You can load a package and make it available for use with
 <code>library(packagename)</code></li>
 </ul>
@@ -648,53 +714,11 @@ to library load that package as an alternate to
 <code>library()</code>.</p>
 <p>Packages can be installed and updated from the Package tab with the
 Install and Update buttons at the top of the tab.</p>
-<blockquote>
-<p><strong>Challenge 2</strong></p>
-<p>What will be the value of each variable after each statement in the
-following program?</p>
-<pre class="r"><code>mass &lt;- 40
-age &lt;- 122
-mass &lt;- mass * 2
-age &lt;- age - 20</code></pre>
-</blockquote>
-<details>
-<summary>
-<strong>Solution to Challenge 2</strong>
-</summary>
-<pre class="r"><code>mass &lt;- 40</code></pre>
-<p>This will give a value of 40 for the variable mass</p>
-<pre class="r"><code>age &lt;- 122</code></pre>
-<p>This will give a value of 122 for the variable age</p>
-<pre class="r"><code>mass &lt;- mass * 2</code></pre>
-<p>This will multiply the existing value of 40 by 2 to give a new value
-of 80 to the variable mass.</p>
-<pre class="r"><code>age &lt;- age - 20</code></pre>
-This will subtract 20 from the existing value of 122 to give a new value
-of 102 to the variable age.
-</details>
-<p><br></p>
-<blockquote>
-<p><strong>Challenge 3</strong></p>
-<p>If we ran this code</p>
-<pre class="r"><code>mass &lt;- 40
-age &lt;- 122</code></pre>
-<p>What command would tell us if mass is larger than age?</p>
-</blockquote>
-<details>
-<summary>
-<strong>Solution to Challenge 3</strong>
-</summary>
-<p>One way of answering this question in R is to use the
-<code>&gt;</code> to set up the following:</p>
-<pre class="r"><code>mass &gt; age</code></pre>
-<pre><code>## [1] FALSE</code></pre>
-This should yield a boolean value of TRUE since 80 is greater than 102.
-</details>
 <p><br></p>
 <blockquote>
 <p><strong>Challenge 4</strong></p>
 <p>Install the following packages: <code>ggplot2</code>,
-<code>plyr</code>, <code>penguins</code></p>
+<code>dplyr</code>, <code>penguins</code></p>
 </blockquote>
 <details>
 <summary>
@@ -703,11 +727,11 @@ This should yield a boolean value of TRUE since 80 is greater than 102.
 <p>We can use the <code>install.packages()</code> command to install the
 required packages.</p>
 <pre class="r"><code>install.packages(&quot;ggplot2&quot;)
-install.packages(&quot;plyr&quot;)
+install.packages(&quot;dplyr&quot;)
 install.packages(&quot;penguins&quot;)</code></pre>
 <p>An alternate solution, to install multiple packages with a single
 <code>install.packages()</code> command is:</p>
-<pre class="r"><code>install.packages(c(&quot;ggplot2&quot;, &quot;plyr&quot;, &quot;penguins&quot;))</code></pre>
+<pre class="r"><code>install.packages(c(&quot;ggplot2&quot;, &quot;dplyr&quot;, &quot;penguins&quot;))</code></pre>
 </details>
 <p><br></p>
 <p><br></p>

@@ -111,7 +111,7 @@ View `penguin_tidy_df` to make sure it's worked.
 
 ## long and wide data
 
-Another way you may need to change data is by making it "longer" or "wider" using the functions `pivot_longer()` and `pivot_wider()`. Study the examples below so you understand the difference between the two data formats.
+Another way you may need to change data is by making it "longer" or "wider" using the functions `pivot_longer()` and `pivot_wider()`. Study the examples in the following sections so you understand the difference between the two data formats.
 
 <br>
 
@@ -128,11 +128,13 @@ population_long
 ```
 
 The function `pivot_wider()` is used to make each **year** a **new column**, with the values under **population** used to **fill** the new columns:
-```{r}
-population_wide <- pivot_wider(population_long, # the data frame to be made wider
-                               names_from = year, # column to take the names for the new columns from
-                               values_from = population, # the column to take values from to fill in the new columns
+```{r, echo = TRUE, eval = TRUE}
+population_wide <- pivot_wider(
+  population_long, # the data frame to be made wider
+  names_from = year, # the column to take the names for the new columns from
+  values_from = population, # the column to take values from to fill in the new columns
                                )
+population_wide
 ```
 
 <br>
@@ -150,12 +152,13 @@ fish_wide
 ```
 
 The function `pivot_longer()` is used to take the headings **before** and **after** and repeat in a column named **time** and put the **measurements** in a new column called **weights**:
-```{r, echo=TRUE}
-pivot_longer(fish_wide, 
+```{r, echo=TRUE, eval=TRUE}
+fish_long <- pivot_longer(fish_wide, 
   cols = c(before, after), # columns to pivot from wide to long
   names_to = "time", # name of the new column for the categories
   values_to = "weight" # name of the new column where the values go
 )
+fish_long
 ```
 
 <br>

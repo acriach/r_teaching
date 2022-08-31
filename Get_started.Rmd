@@ -3,7 +3,8 @@ title: "Get started"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+
 ```
 
 <br>
@@ -14,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 If you only downloaded RStudio onto your computer it would not work. RStudio needs R to make it work.
 
-Computers in the clusters have both software. You can try to download them onto your own laptop after this class.
+Computers in the clusters have both software. You can try to download them onto your own laptop in your own time.
 
 * [Download and install the latest version of R](https://www.r-project.org/)
 * [Download and install RStudio](https://www.rstudio.com/)
@@ -48,13 +49,15 @@ There are two main ways one can work within RStudio.
    * This is a great way to start; all your code is saved for later
    * You will be able to run the .R file (script) you create from within RStudio.
 
+<br>
+
 :::: {.darkorchidbox data-latex=""}
 ::: {.center data-latex=""}
 **Tip: Running segments of your code**
 :::
 
 To run a line of your script code in the R console, you can  
-1. click on the `Run` button at the top right of the script, or  
+1. click on the <kbd>Run</kbd> button at the top right of the script, or  
 2. hit <kbd>Ctrl</kbd>+<kbd>Return</kbd> in Windows or Linux or <kbd>&#8984;</kbd>+<kbd>Return</kbd> on MacOS.  
 To run a block of code, select it and then <kbd>Run</kbd>.
 ::::
@@ -81,13 +84,9 @@ If you type in an incomplete command, for example:
 > 1 +
 ~~~
 
-R will show a `+` instead of a `>`. 
-~~~
-+
-~~~
+R will show a `+` instead of a `>`. This means it's waiting for you to complete the command.  
 
-This means it's waiting for you to complete the command.  
-If you want to cancel a command you can hit "Esc" and RStudio will give you back the ">" prompt.
+If you want to cancel the command you can hit "Esc" and RStudio will give you back the ">" prompt.
 
 <br>
 
@@ -107,14 +106,16 @@ The text after each line of code is called a “comment”. Anything that follow
 sqrt(25) # square root
 ```
 
+<br>
+
 :::: {.darkorchidbox data-latex=""}
 ::: {.center data-latex=""}
 **Tip**
 :::
 
 Don't worry about trying to remember every function in R. You
-can look them up on Google, or if you can remember the
-start of the function's name, use the tab completion in RStudio.
+can Google them, or if you can remember the
+start of a function's name, use the tab completion in RStudio.
 ::::
 
 <br>
@@ -163,8 +164,6 @@ in the object `x`. `x` now contains the **value** `0.025`:
 x
 ```
 
-More precisely, the stored value is a *decimal approximation* of
-this fraction called a [floating point number](http://en.wikipedia.org/wiki/Floating_point).
 
 <br>
 
@@ -175,7 +174,7 @@ have appeared. Our object `x` can be used in place of a number in any calculatio
 log(x)
 ```
 
-Notice also that objects can be reassigned:
+Objects can be reassigned:
 
 ```{r}
 x <- 100
@@ -192,7 +191,7 @@ y <- x * 2
 
 <br>
 
-Object names can contain letters, numbers, underscores and periods. They must start with a letter. They
+Object names are not limited to `x` and `y`. They can contain letters, numbers, underscores and periods. They must start with a letter. They
 cannot start with a number, underscore nor contain spaces at all. Different people use
 different conventions for long variable names, these include
 
@@ -269,7 +268,7 @@ log(x)
 > **Challenge 2**
 >
 > What will be the value of each object after each
-> line of code in the following?
+> of these lines of code?
 >
 > ```{r, eval=FALSE}
 > mass <- 40
@@ -311,7 +310,7 @@ This will subtract 20 from the existing value of `r age + 20 ` to give a new val
 > mass <- 40
 > age <- 122
 > ```
-> What command would tell us if mass is larger than age?
+> What command would tell us if mass is greater than age?
 
 <details>
   <summary>**Solution to Challenge 3**</summary>
@@ -357,7 +356,7 @@ The object `ls` contains the R code that makes the `ls` function work!
 
 <br>
 
-`rm` to deletes objects you no longer need:
+`rm` deletes objects you no longer need:
 
 ```{r, eval=FALSE}
 rm(x)
@@ -384,6 +383,8 @@ If instead we use `<-`, there will be unintended side effects, or you may get an
 rm(list <- ls())
 ```
 
+<br>
+
 :::: {.darkorchidbox data-latex=""}
 ::: {.center data-latex=""}
 **Tip: Warnings vs. Errors**
@@ -401,17 +402,17 @@ In both cases, the message that R prints out usually give you clues how to fix a
 It is possible to add functions to R by writing a package, or by
 obtaining a package written by someone else. As of this writing, there
 are over 18,000 packages available on CRAN (the comprehensive R archive
-network). R and RStudio have functions for managing packages:
+network). 
 
-* You can see what packages are installed by typing
-  `installed.packages()`
-* You can install packages by typing `install.packages("packagename")`,
+To install a package either:
+
+* Type `install.packages("packagename")`,
   where `packagename` is the package name in quotes.
-* You can load a package and make it available for use with `library(packagename)`
+* Or, under the **Packages** tab, click **Install** and type the name of the package.
 
-Packages can also be viewed, installed and library loaded, in the Packages tab of the lower right panel in RStudio. Clicking on this tab will display all of the installed packages with a checkbox next to them. If the box next to a package name is checked, the package is library loaded and if it is empty, the package is not loaded. Click an empty box to library load that package as an alternate to `library()`.
+The package tab is where the packages already installed are listed.
 
-Packages can be installed and updated from the Package tab with the Install and Update buttons at the top of the tab.
+Installing a package only needs doing once unless you change the computer you are working on. 
 
 <br>
 
@@ -433,6 +434,34 @@ An alternate solution, to install multiple packages with a single `install.packa
 ```{r ch4-sol-alt, eval=FALSE}
 install.packages(c("ggplot2", "dplyr", "penguins"))
 ```
+
+Or you can use the **Packages** tab.
+</details>
+
+<br>
+
+Even though a package only needs to be installed **once** onto your computer, a package needs to be `library` loaded  **everytime** you open up RStudio before you can use it.
+
+* You can load a package and make it available for use with `library(packagename)`
+* Or, under the **Packages** tab, click the empty check box next to a package name.
+
+<br>
+
+> **Challenge 5**
+>
+> Library load the following packages: `ggplot2`, `dplyr`, `penguins`
+
+<details>
+  <summary>**Solution to Challenge 5**</summary>
+
+We can use the `library()` command to load the required packages.
+```{r ch5-sol, eval=FALSE}
+library(ggplot2)
+library(dplyr)
+library(penguins)
+```
+
+Or you can use the check boxes under the **Packages** tab.
 </details>
 
 <br>

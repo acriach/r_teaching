@@ -367,7 +367,7 @@ RStudio Installed</h2>
 <p>If you only downloaded RStudio onto your computer it would not work.
 RStudio needs R to make it work.</p>
 <p>Computers in the clusters have both software. You can try to download
-them onto your own laptop after this class.</p>
+them onto your own laptop in your own time.</p>
 <ul>
 <li><a href="https://www.r-project.org/">Download and install the latest
 version of R</a></li>
@@ -404,12 +404,13 @@ keys to run the commands in the R console.
 RStudio.</li>
 </ul></li>
 </ol>
+<p><br></p>
 <div class="darkorchidbox">
 <div class="center">
 <p><strong>Tip: Running segments of your code</strong></p>
 </div>
 <p>To run a line of your script code in the R console, you can<br />
-1. click on the <code>Run</code> button at the top right of the script,
+1. click on the <kbd>Run</kbd> button at the top right of the script,
 or<br />
 2. hit <kbd>Ctrl</kbd>+<kbd>Return</kbd> in Windows or Linux or
 <kbd>⌘</kbd>+<kbd>Return</kbd> on MacOS.<br />
@@ -423,17 +424,16 @@ result.</p>
 <p><br></p>
 <p>The simplest thing you can do with R is use it as a calculator:</p>
 <pre class="r"><code>1 + 100</code></pre>
-<pre><code>## [1] 101</code></pre>
+<pre><code>[1] 101</code></pre>
 <p>R will print out the answer, with a preceding <code>[1]</code>. Don’t
 worry about this. Think of it as merely indicating what line the output
 is on.</p>
 <p>If you type in an incomplete command, for example:</p>
 <pre><code>&gt; 1 +</code></pre>
-<p>R will show a <code>+</code> instead of a <code>&gt;</code>. ~~~ +
-~~~</p>
-<p>This means it’s waiting for you to complete the command.<br />
-If you want to cancel a command you can hit “Esc” and RStudio will give
-you back the “&gt;” prompt.</p>
+<p>R will show a <code>+</code> instead of a <code>&gt;</code>. This
+means it’s waiting for you to complete the command.</p>
+<p>If you want to cancel the command you can hit “Esc” and RStudio will
+give you back the “&gt;” prompt.</p>
 <p><br></p>
 </div>
 <div id="functions" class="section level2" number="1.4">
@@ -443,19 +443,20 @@ function, we can type its name, followed by open and closing
 parentheses. Anything we type inside the parentheses is called the
 function’s arguments:</p>
 <pre class="r"><code>log(15)  # natural logarithm</code></pre>
-<pre><code>## [1] 2.70805</code></pre>
+<pre><code>[1] 2.70805</code></pre>
 <p>The text after each line of code is called a “comment”. Anything that
 follows after the hash symbol # is ignored by R when it executes
 code.</p>
 <pre class="r"><code>sqrt(25) # square root</code></pre>
-<pre><code>## [1] 5</code></pre>
+<pre><code>[1] 5</code></pre>
+<p><br></p>
 <div class="darkorchidbox">
 <div class="center">
 <p><strong>Tip</strong></p>
 </div>
 <p>Don’t worry about trying to remember every function in R. You can
-look them up on Google, or if you can remember the start of the
-function’s name, use the tab completion in RStudio.</p>
+Google them, or if you can remember the start of a function’s name, use
+the tab completion in RStudio.</p>
 </div>
 <p><br></p>
 <div class="darkorchidbox">
@@ -470,11 +471,11 @@ will usually show examples</p>
 <p><br></p>
 <p>We can also do comparisons in R:</p>
 <pre class="r"><code>1 == 1  # equality (note two equals signs, read as &quot;is equal to&quot;)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <pre class="r"><code>1 != 2  # inequality (read as &quot;is not equal to&quot;)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <pre class="r"><code>1 &gt;= -9 # greater than or equal to</code></pre>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <p><br></p>
 </div>
 <div id="objects-and-assignment" class="section level2" number="1.5">
@@ -487,19 +488,15 @@ operator <code>&lt;-</code>, like this:</p>
 number for later in the object <code>x</code>. <code>x</code> now
 contains the <strong>value</strong> <code>0.025</code>:</p>
 <pre class="r"><code>x</code></pre>
-<pre><code>## [1] 0.025</code></pre>
-<p>More precisely, the stored value is a <em>decimal approximation</em>
-of this fraction called a <a
-href="http://en.wikipedia.org/wiki/Floating_point">floating point
-number</a>.</p>
+<pre><code>[1] 0.025</code></pre>
 <p><br></p>
 <p>Look for the <code>Environment</code> tab in one of the panes of
 RStudio, and you will see that <code>x</code> and its value have
 appeared. Our object <code>x</code> can be used in place of a number in
 any calculation that expects a number:</p>
 <pre class="r"><code>log(x)</code></pre>
-<pre><code>## [1] -3.688879</code></pre>
-<p>Notice also that objects can be reassigned:</p>
+<pre><code>[1] -3.688879</code></pre>
+<p>Objects can be reassigned:</p>
 <pre class="r"><code>x &lt;- 100</code></pre>
 <p><code>x</code> used to contain the value 0.025 and now it has the
 value 100.</p>
@@ -507,10 +504,11 @@ value 100.</p>
 <pre class="r"><code>x &lt;- x + 1 # notice how RStudio updates its description of x on the top right tab
 y &lt;- x * 2</code></pre>
 <p><br></p>
-<p>Object names can contain letters, numbers, underscores and periods.
-They must start with a letter. They cannot start with a number,
-underscore nor contain spaces at all. Different people use different
-conventions for long variable names, these include</p>
+<p>Object names are not limited to <code>x</code> and <code>y</code>.
+They can contain letters, numbers, underscores and periods. They must
+start with a letter. They cannot start with a number, underscore nor
+contain spaces at all. Different people use different conventions for
+long variable names, these include</p>
 <ul>
 <li>periods.between.words</li>
 <li>underscores_between_words</li>
@@ -551,17 +549,17 @@ that objects and functions can have vectors as values. In contrast to
 physics and mathematics, a vector in R describes a set of values in a
 certain order of the same data type. For example:</p>
 <pre class="r"><code>1:5</code></pre>
-<pre><code>## [1] 1 2 3 4 5</code></pre>
+<pre><code>[1] 1 2 3 4 5</code></pre>
 <p>Assign this vector to the object <code>x</code></p>
 <pre class="r"><code>x &lt;- 1:5</code></pre>
 <p>This is incredibly powerful as you will see:</p>
 <pre class="r"><code>log(x)</code></pre>
-<pre><code>## [1] 0.0000000 0.6931472 1.0986123 1.3862944 1.6094379</code></pre>
+<pre><code>[1] 0.0000000 0.6931472 1.0986123 1.3862944 1.6094379</code></pre>
 <p><br></p>
 <blockquote>
 <p><strong>Challenge 2</strong></p>
-<p>What will be the value of each object after each line of code in the
-following?</p>
+<p>What will be the value of each object after each of these lines of
+code?</p>
 <pre class="r"><code>mass &lt;- 40
 age &lt;- 122
 mass &lt;- mass * 2
@@ -588,7 +586,7 @@ of 102 to the object age.
 <p>If we ran this code</p>
 <pre class="r"><code>mass &lt;- 40
 age &lt;- 122</code></pre>
-<p>What command would tell us if mass is larger than age?</p>
+<p>What command would tell us if mass is greater than age?</p>
 </blockquote>
 <details>
 <summary>
@@ -597,7 +595,7 @@ age &lt;- 122</code></pre>
 <p>One way of answering this question in R is to use the
 <code>&gt;</code> to set up the following:</p>
 <pre class="r"><code>mass &gt; age</code></pre>
-<pre><code>## [1] FALSE</code></pre>
+<pre><code>[1] FALSE</code></pre>
 This should yield a boolean value of TRUE since 80 is greater than 102.
 </details>
 <p><br></p>
@@ -616,50 +614,50 @@ function.</p>
 <p>If we type <code>ls</code> by itself, R prints a bunch of code
 instead of listing objects.</p>
 <pre class="r"><code>ls</code></pre>
-<pre><code>## function (name, pos = -1L, envir = as.environment(pos), all.names = FALSE, 
-##     pattern, sorted = TRUE) 
-## {
-##     if (!missing(name)) {
-##         pos &lt;- tryCatch(name, error = function(e) e)
-##         if (inherits(pos, &quot;error&quot;)) {
-##             name &lt;- substitute(name)
-##             if (!is.character(name)) 
-##                 name &lt;- deparse(name)
-##             warning(gettextf(&quot;%s converted to character string&quot;, 
-##                 sQuote(name)), domain = NA)
-##             pos &lt;- name
-##         }
-##     }
-##     all.names &lt;- .Internal(ls(envir, all.names, sorted))
-##     if (!missing(pattern)) {
-##         if ((ll &lt;- length(grep(&quot;[&quot;, pattern, fixed = TRUE))) &amp;&amp; 
-##             ll != length(grep(&quot;]&quot;, pattern, fixed = TRUE))) {
-##             if (pattern == &quot;[&quot;) {
-##                 pattern &lt;- &quot;\\[&quot;
-##                 warning(&quot;replaced regular expression pattern &#39;[&#39; by  &#39;\\\\[&#39;&quot;)
-##             }
-##             else if (length(grep(&quot;[^\\\\]\\[&lt;-&quot;, pattern))) {
-##                 pattern &lt;- sub(&quot;\\[&lt;-&quot;, &quot;\\\\\\[&lt;-&quot;, pattern)
-##                 warning(&quot;replaced &#39;[&lt;-&#39; by &#39;\\\\[&lt;-&#39; in regular expression pattern&quot;)
-##             }
-##         }
-##         grep(pattern, all.names, value = TRUE)
-##     }
-##     else all.names
-## }
-## &lt;bytecode: 0x0000018494b003c8&gt;
-## &lt;environment: namespace:base&gt;</code></pre>
+<pre><code>function (name, pos = -1L, envir = as.environment(pos), all.names = FALSE, 
+    pattern, sorted = TRUE) 
+{
+    if (!missing(name)) {
+        pos &lt;- tryCatch(name, error = function(e) e)
+        if (inherits(pos, &quot;error&quot;)) {
+            name &lt;- substitute(name)
+            if (!is.character(name)) 
+                name &lt;- deparse(name)
+            warning(gettextf(&quot;%s converted to character string&quot;, 
+                sQuote(name)), domain = NA)
+            pos &lt;- name
+        }
+    }
+    all.names &lt;- .Internal(ls(envir, all.names, sorted))
+    if (!missing(pattern)) {
+        if ((ll &lt;- length(grep(&quot;[&quot;, pattern, fixed = TRUE))) &amp;&amp; 
+            ll != length(grep(&quot;]&quot;, pattern, fixed = TRUE))) {
+            if (pattern == &quot;[&quot;) {
+                pattern &lt;- &quot;\\[&quot;
+                warning(&quot;replaced regular expression pattern &#39;[&#39; by  &#39;\\\\[&#39;&quot;)
+            }
+            else if (length(grep(&quot;[^\\\\]\\[&lt;-&quot;, pattern))) {
+                pattern &lt;- sub(&quot;\\[&lt;-&quot;, &quot;\\\\\\[&lt;-&quot;, pattern)
+                warning(&quot;replaced &#39;[&lt;-&#39; by &#39;\\\\[&lt;-&#39; in regular expression pattern&quot;)
+            }
+        }
+        grep(pattern, all.names, value = TRUE)
+    }
+    else all.names
+}
+&lt;bytecode: 0x0000021305c2c428&gt;
+&lt;environment: namespace:base&gt;</code></pre>
 <p>What going on here? Like everything in R, <code>ls</code> is the name
 of an object, and entering the name of an object by itself prints the
 contents of the object.</p>
 <p>The object <code>x</code> that we created earlier contains
 1,2,3,4,5:</p>
 <pre class="r"><code>x</code></pre>
-<pre><code>## [1] 1 2 3 4 5</code></pre>
+<pre><code>[1] 1 2 3 4 5</code></pre>
 <p>The object <code>ls</code> contains the R code that makes the
 <code>ls</code> function work!</p>
 <p><br></p>
-<p><code>rm</code> to deletes objects you no longer need:</p>
+<p><code>rm</code> deletes objects you no longer need:</p>
 <pre class="r"><code>rm(x)</code></pre>
 <p>If you have lots of things in your environment and want to delete all
 of them, you can <strong>pass</strong> the results of <code>ls</code>
@@ -676,7 +674,8 @@ should be used for the <code>list</code> argument in
 <p>If instead we use <code>&lt;-</code>, there will be unintended side
 effects, or you may get an error message:</p>
 <pre class="r"><code>rm(list &lt;- ls())</code></pre>
-<pre><code>## Error in rm(list &lt;- ls()): ... must contain names or character strings</code></pre>
+<pre><code>Error in rm(list &lt;- ls()): ... must contain names or character strings</code></pre>
+<p><br></p>
 <div class="darkorchidbox">
 <div class="center">
 <p><strong>Tip: Warnings vs. Errors</strong></p>
@@ -695,25 +694,18 @@ how to fix a problem.</p>
 <p>It is possible to add functions to R by writing a package, or by
 obtaining a package written by someone else. As of this writing, there
 are over 18,000 packages available on CRAN (the comprehensive R archive
-network). R and RStudio have functions for managing packages:</p>
+network).</p>
+<p>To install a package either:</p>
 <ul>
-<li>You can see what packages are installed by typing
-<code>installed.packages()</code></li>
-<li>You can install packages by typing
-<code>install.packages("packagename")</code>, where
+<li>Type <code>install.packages("packagename")</code>, where
 <code>packagename</code> is the package name in quotes.</li>
-<li>You can load a package and make it available for use with
-<code>library(packagename)</code></li>
+<li>Or, under the <strong>Packages</strong> tab, click
+<strong>Install</strong> and type the name of the package.</li>
 </ul>
-<p>Packages can also be viewed, installed and library loaded, in the
-Packages tab of the lower right panel in RStudio. Clicking on this tab
-will display all of the installed packages with a checkbox next to them.
-If the box next to a package name is checked, the package is library
-loaded and if it is empty, the package is not loaded. Click an empty box
-to library load that package as an alternate to
-<code>library()</code>.</p>
-<p>Packages can be installed and updated from the Package tab with the
-Install and Update buttons at the top of the tab.</p>
+<p>The package tab is where the packages already installed are
+listed.</p>
+<p>Installing a package only needs doing once unless you change the
+computer you are working on.</p>
 <p><br></p>
 <blockquote>
 <p><strong>Challenge 4</strong></p>
@@ -732,6 +724,35 @@ install.packages(&quot;penguins&quot;)</code></pre>
 <p>An alternate solution, to install multiple packages with a single
 <code>install.packages()</code> command is:</p>
 <pre class="r"><code>install.packages(c(&quot;ggplot2&quot;, &quot;dplyr&quot;, &quot;penguins&quot;))</code></pre>
+Or you can use the <strong>Packages</strong> tab.
+</details>
+<p><br></p>
+<p>Even though a package only needs to be installed
+<strong>once</strong> onto your computer, a package needs to be
+<code>library</code> loaded <strong>everytime</strong> you open up
+RStudio before you can use it.</p>
+<ul>
+<li>You can load a package and make it available for use with
+<code>library(packagename)</code></li>
+<li>Or, under the <strong>Packages</strong> tab, click the empty check
+box next to a package name.</li>
+</ul>
+<p><br></p>
+<blockquote>
+<p><strong>Challenge 5</strong></p>
+<p>Library load the following packages: <code>ggplot2</code>,
+<code>dplyr</code>, <code>penguins</code></p>
+</blockquote>
+<details>
+<summary>
+<strong>Solution to Challenge 5</strong>
+</summary>
+<p>We can use the <code>library()</code> command to load the required
+packages.</p>
+<pre class="r"><code>library(ggplot2)
+library(dplyr)
+library(penguins)</code></pre>
+Or you can use the check boxes under the <strong>Packages</strong> tab.
 </details>
 <p><br></p>
 <p><br></p>

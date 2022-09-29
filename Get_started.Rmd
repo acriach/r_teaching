@@ -60,6 +60,7 @@ There are two main ways one can work within RStudio.
 2. Start writing in an .R file (script) and use RStudio's short cut keys to run the commands in the R console.
    * This is a great way to start; all your code is saved for later
    * You will be able to run the .R file (script) you create from within RStudio.
+We will set up a script in the next lesson.
 
 <br>
 
@@ -82,7 +83,7 @@ returns a result.
 
 <br>
 
-The simplest thing you can do with R is use it as a calculator:
+The simplest thing you can do with R is use it as a calculator. Type the below into the Console:
 
 ```{r}
 1 + 100
@@ -128,19 +129,6 @@ sqrt(25) # square root
 Don't worry about trying to remember every function in R. You
 can Google them, or if you can remember the
 start of a function's name, use the tab completion in RStudio.
-::::
-
-<br>
-
-:::: {.darkorchidbox data-latex=""}
-::: {.center data-latex=""}
-**Tip**
-:::
-
-Typing a <kbd>?</kbd> before the name of a function will open the help page
-for that function. As well as providing a detailed description of
-the function and how it works, scrolling to the bottom of the
-help page will usually show examples.
 ::::
 
 <br>

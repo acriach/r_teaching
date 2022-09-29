@@ -1,5 +1,5 @@
 ---
-title: "Setting_up_a_project.Rmd"
+title: "Setting up a project"
 ---
 
 ```{r setup, include=FALSE}
@@ -39,30 +39,30 @@ interfering with each other.
 
 ## Best practices for project organization
 
-In the bottom left pane in RStudio, click the "Files" tab. To organise your project, create folders called `data`, `scripts`, `results`, `docs` by clicking the folder icon with the green plus sign. 
+In the bottom right pane in RStudio, click the "Files" tab. To organise your project, create folders called `data`, `scripts`, `results`, `docs` by clicking the folder icon with the green plus sign. 
 
 <br>
 
 ### Use a script
 
-One of the more effective ways to work with R is to start by writing the code you want to run directly in an .R script, and then running the selected lines (either using the keyboard shortcuts in RStudio or clicking the "Run" button) in the interactive R console.
+One of the more effective ways to work with R is to start by writing the code you want to run directly in an .R script. You then run the selected lines (by either using a keyboard shortcut or clicking the "Run" button) in the R console.
 
-Open a script (click the white square with the cross in green below File). Save the script in your R project folder (click "File", then "Save as" and browse to the `script` folder in your project). You could call it "Lesson 1".
+Open a script (click the white square with the cross in green below File at the top left). Save the script in your R project folder (click "File", then "Save as" and browse to the `script` folder in your project). You could call it "Lesson 1".
 
 <br>
 
 ### Save the data in the data folder
 
-```{r, echo=FALSE, fig.alt="Three cartoon penguines with chinstrap, gentoo and adelie written above them."}
+```{r, echo=FALSE, fig.alt="Three cartoon penguins with chinstrap, gentoo and adelie written above them."}
 knitr::include_graphics("./images/lter_penguins.png")
 ```
 Artwork by @allison_horst
 
 
 > **Challenge 2**
-> Download the palmer penguins data from [here](https://raw.githubusercontent.com/acriach/r_teaching/main/data/penguins.csv).
+> View the palmer penguins data [here](https://raw.githubusercontent.com/acriach/r_teaching/main/data/penguins.csv).
 >
-> 1. Download the file (CTRL + S, right mouse click -> "Save as", or File -> "Save page as")
+> 1. In the window showing the data, save the data as a file (CTRL + S or right mouse click > "Save as")
 > 2. Make sure it's saved under the name `penguins.csv`
 > 3. Save the file in the `data` folder within your project.
 >
@@ -101,7 +101,7 @@ One of the most daunting aspects of R is the large number of functions available
 <br>
 
 
-### When your code doesn't work: seek help from your peers
+### When your code doesn't work: seek help from the R community
 
 If you're having trouble using a function, 9 times out of 10,
 the answers you are seeking have already been answered on
@@ -139,7 +139,7 @@ If your spreadsheet won't read in check:
 1. You are using the correct function for the type of file, for example <kbd>`read.csv`</kbd> for csv files  
 2. You have included the suffix after the name of the file  
 3. The name of the file is spelled correctly  
-4. The file exists in the folder you are directing R to. For example, in our case we would click on the folder named data under the files tab at the bottom right of Rstudio to check.   
+4. The file exists in the folder you are directing R to. For example, in our case we would click on the folder named data under the files tab at the bottom right of RStudio to check.   
 5. Look at an example on the internet to ensure you have included all the necessary arguments. `read.csv` only needs `file =` but other functions may need other arguments.  
 
 ::::

@@ -11,7 +11,7 @@
 
 
 
-<title>Setting_up_a_project.Rmd</title>
+<title>Setting up a project</title>
 
 <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -352,7 +352,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Setting_up_a_project.Rmd</h1>
+<h1 class="title toc-ignore">Setting up a project</h1>
 
 </div>
 
@@ -388,7 +388,7 @@ interfering with each other.</p>
 number="1.1">
 <h2><span class="header-section-number">1.1</span> Best practices for
 project organization</h2>
-<p>In the bottom left pane in RStudio, click the “Files” tab. To
+<p>In the bottom right pane in RStudio, click the “Files” tab. To
 organise your project, create folders called <code>data</code>,
 <code>scripts</code>, <code>results</code>, <code>docs</code> by
 clicking the folder icon with the green plus sign.</p>
@@ -396,28 +396,27 @@ clicking the folder icon with the green plus sign.</p>
 <div id="use-a-script" class="section level3" number="1.1.1">
 <h3><span class="header-section-number">1.1.1</span> Use a script</h3>
 <p>One of the more effective ways to work with R is to start by writing
-the code you want to run directly in an .R script, and then running the
-selected lines (either using the keyboard shortcuts in RStudio or
-clicking the “Run” button) in the interactive R console.</p>
+the code you want to run directly in an .R script. You then run the
+selected lines (by either using a keyboard shortcut or clicking the
+“Run” button) in the R console.</p>
 <p>Open a script (click the white square with the cross in green below
-File). Save the script in your R project folder (click “File”, then
-“Save as” and browse to the <code>script</code> folder in your project).
-You could call it “Lesson 1”.</p>
+File at the top left). Save the script in your R project folder (click
+“File”, then “Save as” and browse to the <code>script</code> folder in
+your project). You could call it “Lesson 1”.</p>
 <p><br></p>
 </div>
 <div id="save-the-data-in-the-data-folder" class="section level3"
 number="1.1.2">
 <h3><span class="header-section-number">1.1.2</span> Save the data in
 the data folder</h3>
-<p><img src="images/lter_penguins.png" title="Three cartoon penguines with chinstrap, gentoo and adelie written above them." alt="Three cartoon penguines with chinstrap, gentoo and adelie written above them."  />
+<p><img src="images/lter_penguins.png" title="Three cartoon penguins with chinstrap, gentoo and adelie written above them." alt="Three cartoon penguins with chinstrap, gentoo and adelie written above them."  />
 Artwork by <span class="citation">@allison_horst</span></p>
 <blockquote>
-<p><strong>Challenge 2</strong> Download the palmer penguins data from
-<a
+<p><strong>Challenge 2</strong> View the palmer penguins data <a
 href="https://raw.githubusercontent.com/acriach/r_teaching/main/data/penguins.csv">here</a>.</p>
 <ol style="list-style-type: decimal">
-<li>Download the file (CTRL + S, right mouse click -&gt; “Save as”, or
-File -&gt; “Save page as”)</li>
+<li>In the window showing the data, save the data as a file (CTRL + S or
+right mouse click &gt; “Save as”)</li>
 <li>Make sure it’s saved under the name <code>penguins.csv</code></li>
 <li>Save the file in the <code>data</code> folder within your
 project.</li>
@@ -450,10 +449,10 @@ remember the correct usage for every function you use. Luckily, the help
 files mean you don’t have to!</p>
 </div>
 <p><br></p>
-<div id="when-your-code-doesnt-work-seek-help-from-your-peers"
+<div id="when-your-code-doesnt-work-seek-help-from-the-r-community"
 class="section level3" number="1.2.1">
 <h3><span class="header-section-number">1.2.1</span> When your code
-doesn’t work: seek help from your peers</h3>
+doesn’t work: seek help from the R community</h3>
 <p>If you’re having trouble using a function, 9 times out of 10, the
 answers you are seeking have already been answered on <a
 href="http://stackoverflow.com/">Stack Overflow</a>.</p>
@@ -491,7 +490,7 @@ different functions for reading in different types of files. For example
 3. The name of the file is spelled correctly<br />
 4. The file exists in the folder you are directing R to. For example, in
 our case we would click on the folder named data under the files tab at
-the bottom right of Rstudio to check.<br />
+the bottom right of RStudio to check.<br />
 5. Look at an example on the internet to ensure you have included all
 the necessary arguments. <code>read.csv</code> only needs
 <code>file =</code> but other functions may need other arguments.</p>

@@ -15,7 +15,19 @@ knitr::opts_chunk$set(echo = TRUE, comment = NA)
 
 If you only downloaded RStudio onto your computer it would not work. RStudio needs R to make it work.
 
-Computers in the clusters have both software. You can try to download them onto your own laptop in your own time.
+<br>
+
+When using a university computer in a cluster, use R and RStudio through AppsAnywhere. 
+
+* Click the AppsAnywhere icon, scroll down to "Cran R" and click launch. 
+* Once R has opened and downloaded onto the computer you can close it. 
+* Now go back into Apps Anywhere to find RStudio and launch that.
+
+<br>
+
+You can try to download R and RStudio onto your own laptop in your own time.
+
+<br>
 
 * [Download and install the latest version of R](https://www.r-project.org/)
 * [Download and install RStudio](https://www.rstudio.com/)
@@ -125,10 +137,10 @@ start of a function's name, use the tab completion in RStudio.
 **Tip**
 :::
 
-Typing a <kbd>?</kbd> before the name of a command will open the help page
-for that command. As well as providing a detailed description of
-the command and how it works, scrolling to the bottom of the
-help page will usually show examples
+Typing a <kbd>?</kbd> before the name of a function will open the help page
+for that function. As well as providing a detailed description of
+the function and how it works, scrolling to the bottom of the
+help page will usually show examples.
 ::::
 
 <br>

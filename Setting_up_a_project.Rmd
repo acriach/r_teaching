@@ -45,9 +45,9 @@ In the bottom right pane in RStudio, click the "Files" tab. To organise your pro
 
 ### Use a script
 
-One of the more effective ways to work with R is to start by writing the code you want to run directly in an .R script. You then run the selected lines (by either using a keyboard shortcut or clicking the "Run" button) in the R console.
+The most effective way to work with R is to write the code you want to run in an .R script. You then run the selected lines (by either using a keyboard shortcut or clicking the "Run" button) in the R console.
 
-Open a script (click the white square with the cross in green below File at the top left). Save the script in your R project folder (click "File", then "Save as" and browse to the `script` folder in your project). You could call it "Lesson 1".
+Open a script (click the white square with the cross in green below File at the top left). Save the script in your R project folder (click "File", then "Save as" and browse to the `script` folder in your project). You could call it Lesson 1.
 
 <br>
 
@@ -62,7 +62,7 @@ Artwork by @allison_horst
 > **Challenge 2**
 > View the palmer penguins data [here](https://raw.githubusercontent.com/acriach/r_teaching/main/data/penguins.csv).
 >
-> 1. In the window showing the data, save the data as a file (CTRL + S or right mouse click > "Save as")
+> 1. From the window showing the data, save the data as a file (CTRL + S or right mouse click > "Save as")
 > 2. Make sure it's saved under the name `penguins.csv`
 > 3. Save the file in the `data` folder within your project.
 >
@@ -72,7 +72,7 @@ Artwork by @allison_horst
 
 ## Reading help files
 
-R, and every package author, provide help files for functions. Either of these will load up a help page in RStudio:
+Every package author writes help files for their functions. Either of these will load up a help page in RStudio:
 
 ```{r, eval=FALSE}
 ?function_name
@@ -169,7 +169,7 @@ str(penguins)
 ```
 
 
-Species is `chr` short for character which R will treat as a factor (in other words, discrete data). Bill_length_mm is `num` which stands for numeric. `int` means integer. Both `num` and `int` variables are treated as continuous (scale) data by R.
+'str' shows us that species is `chr` which is short for character. This means R will treat species as a factor (in other words, discrete data). Bill_length_mm is `num` which stands for numeric. `int` means integer. Both `num` and `int` variables are treated as continuous (scale) data by R.
 
 <br>
 
@@ -180,7 +180,7 @@ mean(penguins$bill_length_mm, na.rm = TRUE)
 
 But we can't use the mean function on a factor.
 ```{r, warning=TRUE}
-mean(penguins$sepecies, na.rm = TRUE)
+mean(penguins$species, na.rm = TRUE)
 ```
 
 :::: {.darkorchidbox data-latex=""}
@@ -203,7 +203,7 @@ The `$` operator will specify a variable in a data frame. You can also use index
 > There are several subtly different ways to call variables, observations and
 > elements from data.frames using indexing:
 >
-> Try out these examples and explain what is returned by each one.
+> Try out these examples and after a # in your script describe what data is returned by each one.
 >
 > - `penguins[1]`
 > - `penguins[1, 1]`

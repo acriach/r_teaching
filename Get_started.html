@@ -379,13 +379,13 @@ it.</li>
 <p><br></p>
 <p>You can try to download R and RStudio onto your own laptop in your
 own time.</p>
-<p><br></p>
 <ul>
 <li><a href="https://www.r-project.org/">Download and install the latest
 version of R</a></li>
 <li><a href="https://www.rstudio.com/">Download and install
 RStudio</a></li>
 </ul>
+<p><br></p>
 </div>
 <div id="basic-layout" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Basic Layout</h2>
@@ -396,9 +396,11 @@ RStudio</a></li>
 <li>Files/Plots/Packages/Help/Viewer (tabbed in lower right)</li>
 </ul>
 <p><img src="images/RStudio_screenshot.png" title="A screenshot of Rstudio showing eleven menus at the top left. One panel covers the left half with text about the R software. The right is divided into two panels with text saying that the environment is empty in the top panel and a display of the current file directory in the bottom panel." alt="A screenshot of Rstudio showing eleven menus at the top left. One panel covers the left half with text about the R software. The right is divided into two panels with text saying that the environment is empty in the top panel and a display of the current file directory in the bottom panel."  /></p>
-<p>Once you open files, such as R scripts (click on the white square
-with the plus in green icon), another panel will open in the top
-left.</p>
+<p>Once you open files, such as R scripts another panel will open in the
+top left.</p>
+<ul>
+<li>Click on the white square with the plus in green icon top left.</li>
+</ul>
 <p><img src="images/RStudio_screenshot_script.png" title="Two zoomed in screenshots of the top left menus in RStudio. The first screenshot shows a black rectangle highlighting an icon which is a white square with a plus inside a green circle. The second screenshot shows a black rectangle highlighting a menu item that reads R Script followed by the associated keyboard shortcut, Ctrl + Shift + N." alt="Two zoomed in screenshots of the top left menus in RStudio. The first screenshot shows a black rectangle highlighting an icon which is a white square with a plus inside a green circle. The second screenshot shows a black rectangle highlighting a menu item that reads R Script followed by the associated keyboard shortcut, Ctrl + Shift + N."  /></p>
 <p><br></p>
 </div>
@@ -413,9 +415,19 @@ keys to run the commands in the R console.
 <ul>
 <li>This is a great way to start; all your code is saved for later</li>
 <li>You will be able to run the .R file (script) you create from within
-RStudio. We will set up a script in the next lesson.</li>
+RStudio.</li>
 </ul></li>
 </ol>
+<p><br></p>
+<p>The first thing you will see in the R Console is a bunch of
+information, followed by a “&gt;” and a blinking cursor. It operates by
+you typing in commands, R tries to execute them, and then returns a
+result.</p>
+<p><br></p>
+<p>The simplest thing you can do with R is use it as a calculator. Type
+the below into the script:</p>
+<pre class="r"><code>1 + 100</code></pre>
+<pre><code>[1] 101</code></pre>
 <p><br></p>
 <div class="darkorchidbox">
 <div class="center">
@@ -429,15 +441,6 @@ or<br />
 To run a block of code, select it and then <kbd>Run</kbd>.</p>
 </div>
 <p><br></p>
-<p>The first thing you will see in the R console is a bunch of
-information, followed by a “&gt;” and a blinking cursor. It operates by
-you typing in commands, R tries to execute them, and then returns a
-result.</p>
-<p><br></p>
-<p>The simplest thing you can do with R is use it as a calculator. Type
-the below into the Console:</p>
-<pre class="r"><code>1 + 100</code></pre>
-<pre><code>[1] 101</code></pre>
 <p>R will print out the answer, with a preceding <code>[1]</code>. Don’t
 worry about this. Think of it as merely indicating what line the output
 is on.</p>
@@ -648,7 +651,7 @@ instead of listing objects.</p>
     }
     else all.names
 }
-&lt;bytecode: 0x00000238514fe438&gt;
+&lt;bytecode: 0x00000124bcd7d178&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 <p>What going on here? Like everything in R, <code>ls</code> is the name
 of an object, and entering the name of an object by itself prints the
@@ -683,11 +686,10 @@ effects, or you may get an error message:</p>
 <div class="center">
 <p><strong>Tip: Warnings vs. Errors</strong></p>
 </div>
-<p>Pay attention when R does something unexpected! Errors, like above,
-are thrown when R cannot proceed with a calculation. Warnings on the
-other hand usually mean that the function has run, but it probably
-hasn’t worked as expected.</p>
-<p>In both cases, the message that R prints out usually give you clues
+<p>Errors, like above, are thrown when R cannot proceed with a
+calculation. Warnings on the other hand usually mean that the function
+has run, but it probably hasn’t worked as expected.</p>
+<p>In both cases, the message that R prints out can give you clues on
 how to fix a problem.</p>
 </div>
 <p><br></p>

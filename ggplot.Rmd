@@ -20,7 +20,9 @@ Artwork by @allison_horst
 
 **Set up**
 
-We will use the palmer penguin data to make graphs, so open your saved Rproj in Rstudio by clicking **File** menu then **Open project** and look for your **.Rproj** file. Click the **Files** tab in the bottom right pane, click the **data** folder and check the penguins.csv is in there. Then read it in.
+We will use the palmer penguin data to make graphs.
+
+If you don't have a project open already, open your saved Rproj in Rstudio by clicking **File** menu then **Open project** and look for your **.Rproj** file. Click the **Files** tab in the bottom right pane, click the **data** folder and check the penguins.csv is in there. Then read it in.
 
 ```{r, eval = TRUE}
 penguins <- read.csv(file = "data/penguins.csv")
@@ -31,7 +33,7 @@ penguins <- read.csv(file = "data/penguins.csv")
 There are different plotting systems in R for example,
 the [base plotting system](http://www.statmethods.net/graphs/index.html). But the function `ggplot` in the [ggplot2 package](http://www.statmethods.net/advgraphs/ggplot2.html) is used by the majority of people.
 
-To use it you will need to ensure you have the ggplot2 package installed (hint: use the Packages tab, bottom right) and then load it using the function `library()`.
+To use it you will need to ensure you have the ggplot2 package installed. Hint: you could use the Packages tab, bottom right and then load it using the function `library()`.
 ```{r, eval = TRUE}
 library(ggplot2)
 ```
@@ -43,8 +45,7 @@ knitr::include_graphics("./images/ggplot2.png")
 
 ggplot2 is built on the idea that any plot can be
 made from the same set of components: a **data** set, a
-**coordinate system**, and a set of **geoms** -- the visual representation of data
-points.
+**mapping**, and some **geoms**.
 
 The key to understanding ggplot2 is to think about a graph in layers.
 
@@ -190,7 +191,7 @@ ggplot(data = penguins, mapping = aes(x = species, y = body_mass_g)) +
 
 > ** Challenge 3**
 >
-> Create a ggplot graph using the `geom_violin()` which shows the difference in **bill length** among the **sexes**. Add > layers for axes labels and theme styling. 
+> Create a ggplot graph using the `geom_violin()` which shows the difference in **bill length** among the **sexes**. Add layers for axes labels and theme styling. 
 
 <details>
   <summary>**Solution to Challenge 3**</summary>
@@ -236,7 +237,7 @@ Note the word blue is put in "speech marks".
 >
 > Choose a colour from this 
 > [website that lists R colours](https://www.datanovia.com/en/blog/awesome-list-of-657-r-color-names/) 
-> and create a **violin plot** of that colour which shows the difference in **body mass** among **species**. You can 
+> and create a **violin plot** outlined in that colour which shows the difference in **body mass** among **species**. You can 
 > include layers for axes labels and styling. 
 
 <details>

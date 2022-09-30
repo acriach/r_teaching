@@ -395,14 +395,13 @@ clicking the folder icon with the green plus sign.</p>
 <p><br></p>
 <div id="use-a-script" class="section level3" number="1.1.1">
 <h3><span class="header-section-number">1.1.1</span> Use a script</h3>
-<p>One of the more effective ways to work with R is to start by writing
-the code you want to run directly in an .R script. You then run the
-selected lines (by either using a keyboard shortcut or clicking the
-“Run” button) in the R console.</p>
+<p>The most effective way to work with R is to write the code you want
+to run in an .R script. You then run the selected lines (by either using
+a keyboard shortcut or clicking the “Run” button) in the R console.</p>
 <p>Open a script (click the white square with the cross in green below
 File at the top left). Save the script in your R project folder (click
 “File”, then “Save as” and browse to the <code>script</code> folder in
-your project). You could call it “Lesson 1”.</p>
+your project). You could call it Lesson 1.</p>
 <p><br></p>
 </div>
 <div id="save-the-data-in-the-data-folder" class="section level3"
@@ -415,8 +414,8 @@ Artwork by <span class="citation">@allison_horst</span></p>
 <p><strong>Challenge 2</strong> View the palmer penguins data <a
 href="https://raw.githubusercontent.com/acriach/r_teaching/main/data/penguins.csv">here</a>.</p>
 <ol style="list-style-type: decimal">
-<li>In the window showing the data, save the data as a file (CTRL + S or
-right mouse click &gt; “Save as”)</li>
+<li>From the window showing the data, save the data as a file (CTRL + S
+or right mouse click &gt; “Save as”)</li>
 <li>Make sure it’s saved under the name <code>penguins.csv</code></li>
 <li>Save the file in the <code>data</code> folder within your
 project.</li>
@@ -429,8 +428,8 @@ project.</li>
 <div id="reading-help-files" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Reading help
 files</h2>
-<p>R, and every package author, provide help files for functions. Either
-of these will load up a help page in RStudio:</p>
+<p>Every package author writes help files for their functions. Either of
+these will load up a help page in RStudio:</p>
 <pre class="r"><code>?function_name
 help(function_name)</code></pre>
 <p>Each help page is broken down into sections (Description, Usage,
@@ -598,19 +597,20 @@ variable.</p>
 ##  $ body_mass_g      : int  3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
 ##  $ sex              : chr  &quot;male&quot; &quot;female&quot; &quot;female&quot; NA ...
 ##  $ year             : int  2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...</code></pre>
-<p>Species is <code>chr</code> short for character which R will treat as
-a factor (in other words, discrete data). Bill_length_mm is
-<code>num</code> which stands for numeric. <code>int</code> means
-integer. Both <code>num</code> and <code>int</code> variables are
-treated as continuous (scale) data by R.</p>
+<p>‘str’ shows us that species is <code>chr</code> which is short for
+character. This means R will treat species as a factor (in other words,
+discrete data). Bill_length_mm is <code>num</code> which stands for
+numeric. <code>int</code> means integer. Both <code>num</code> and
+<code>int</code> variables are treated as continuous (scale) data by
+R.</p>
 <p><br></p>
 <p>We can calculate the mean of bill length.</p>
 <pre class="r"><code>mean(penguins$bill_length_mm, na.rm = TRUE)</code></pre>
 <pre><code>## [1] 43.92193</code></pre>
 <p>But we can’t use the mean function on a factor.</p>
-<pre class="r"><code>mean(penguins$sepecies, na.rm = TRUE)</code></pre>
-<pre><code>## Warning in mean.default(penguins$sepecies, na.rm = TRUE): argument is not
-## numeric or logical: returning NA</code></pre>
+<pre class="r"><code>mean(penguins$species, na.rm = TRUE)</code></pre>
+<pre><code>## Warning in mean.default(penguins$species, na.rm = TRUE): argument is not numeric
+## or logical: returning NA</code></pre>
 <pre><code>## [1] NA</code></pre>
 <div class="darkorchidbox">
 <div class="center">
@@ -631,7 +631,8 @@ You can also use indexing.</p>
 <p><strong>Challenge 3</strong></p>
 <p>There are several subtly different ways to call variables,
 observations and elements from data.frames using indexing:</p>
-<p>Try out these examples and explain what is returned by each one.</p>
+<p>Try out these examples and after a # in your script describe what
+data is returned by each one.</p>
 <ul>
 <li><code>penguins[1]</code></li>
 <li><code>penguins[1, 1]</code></li>

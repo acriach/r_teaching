@@ -27,10 +27,10 @@ When using a university computer in a cluster, use R and RStudio through AppsAny
 
 You can try to download R and RStudio onto your own laptop in your own time.
 
-<br>
-
 * [Download and install the latest version of R](https://www.r-project.org/)
 * [Download and install RStudio](https://www.rstudio.com/)
+
+<br>
 
 ## Basic Layout
 
@@ -44,7 +44,9 @@ When you first open RStudio, you will see three panels:
 knitr::include_graphics("./images/RStudio_screenshot.png")
 ```
 
-Once you open files, such as R scripts (click on the white square with the plus in green icon), another panel will open in the top left.
+Once you open files, such as R scripts another panel will open in the top left.
+
+* Click on the white square with the plus in green icon top left.
 
 ```{r,echo=FALSE, fig.alt="Two zoomed in screenshots of the top left menus in RStudio. The first screenshot shows a black rectangle highlighting an icon which is a white square with a plus inside a green circle. The second screenshot shows a black rectangle highlighting a menu item that reads R Script followed by the associated keyboard shortcut, Ctrl + Shift + N."}
 knitr::include_graphics("./images/RStudio_screenshot_script.png")
@@ -60,7 +62,19 @@ There are two main ways one can work within RStudio.
 2. Start writing in an .R file (script) and use RStudio's short cut keys to run the commands in the R console.
    * This is a great way to start; all your code is saved for later
    * You will be able to run the .R file (script) you create from within RStudio.
-We will set up a script in the next lesson.
+
+<br>
+
+The first thing you will see in the R Console is a bunch
+of information, followed by a ">" and a blinking cursor.  It operates by you typing in commands, R tries to execute them, and then returns a result.
+
+<br>
+
+The simplest thing you can do with R is use it as a calculator. Type the below into the script:
+
+```{r}
+1 + 100
+```
 
 <br>
 
@@ -76,18 +90,6 @@ To run a block of code, select it and then <kbd>Run</kbd>.
 ::::
 
 <br>
-
-The first thing you will see in the R console is a bunch
-of information, followed by a ">" and a blinking cursor.  It operates by you typing in commands, R tries to execute them, and then
-returns a result.
-
-<br>
-
-The simplest thing you can do with R is use it as a calculator. Type the below into the Console:
-
-```{r}
-1 + 100
-```
 
 R will print out the answer, with a preceding `[1]`. Don't worry about this. Think of it as merely indicating what line the output is on.
 
@@ -390,9 +392,9 @@ rm(list <- ls())
 **Tip: Warnings vs. Errors**
 :::
 
-Pay attention when R does something unexpected! Errors, like above, are thrown when R cannot proceed with a calculation. Warnings on the other hand usually mean that the function has run, but it probably hasn't worked as expected.  
+Errors, like above, are thrown when R cannot proceed with a calculation. Warnings on the other hand usually mean that the function has run, but it probably hasn't worked as expected.  
 
-In both cases, the message that R prints out usually give you clues how to fix a problem.
+In both cases, the message that R prints out can give you clues on how to fix a problem.
 ::::
 
 <br>

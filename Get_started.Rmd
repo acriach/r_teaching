@@ -420,7 +420,7 @@ Installing a package only needs doing once unless you change the computer you ar
 
 > **Challenge 4**
 >
-> Install the following packages: `ggplot2`, `dplyr`, `penguins`
+> Install the following packages: `ggplot2`, `dplyr`, `palmerpenguins`
 
 <details>
   <summary>**Solution to Challenge 4**</summary>
@@ -429,12 +429,12 @@ We can use the `install.packages()` command to install the required packages.
 ```{r ch4-sol, eval=FALSE}
 install.packages("ggplot2")
 install.packages("dplyr")
-install.packages("penguins")
+install.packages("palmerpenguins")
 ```
 
 An alternate solution, to install multiple packages with a single `install.packages()` command is:
 ```{r ch4-sol-alt, eval=FALSE}
-install.packages(c("ggplot2", "dplyr", "penguins"))
+install.packages(c("ggplot2", "dplyr", "palmerpenguins"))
 ```
 
 Or you can use the **Packages** tab.

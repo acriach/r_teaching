@@ -104,7 +104,7 @@ using a pipe:
 species_body <- penguins %>% select(species, body_mass_g, sex)
 ```
 
-First we assign the result to `species_bodymass`. Then, we call the penguins dataframe and pass it on, using the pipe
+First we assign the result to `species_body`. Then, we call the penguins dataframe and pass it on, using the pipe
 symbol `%>%`, to the next step, which is the `select()` function. This time
 we don't specify which data object we use in the `select()` function since it
 gets that from the previous pipe.

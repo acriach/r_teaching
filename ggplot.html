@@ -377,19 +377,18 @@ Then read it in.</p>
 <pre class="r"><code>penguins &lt;- read.csv(file = &quot;data/penguins.csv&quot;)</code></pre>
 <p><br></p>
 <p>There are different plotting systems in R for example, the <a
-href="http://www.statmethods.net/graphs/index.html">base plotting
+href="http://www.sthda.com/english/wiki/r-base-graphs">base plotting
 system</a>. But the function <code>ggplot</code> in the <a
 href="http://www.statmethods.net/advgraphs/ggplot2.html">ggplot2
 package</a> is used by the majority of people.</p>
 <p>To use it you will need to ensure you have the ggplot2 package
-installed (hint: use the Packages tab, bottom right) and then load it
-using the function <code>library()</code>.</p>
+installed. Hint: you could use the Packages tab, bottom right and then
+load it using the function <code>library()</code>.</p>
 <pre class="r"><code>library(ggplot2)</code></pre>
 <p><img src="images/ggplot2.png" title="A hexagon with ggplot written in it and a zig zag line from left to right with some circles" alt="A hexagon with ggplot written in it and a zig zag line from left to right with some circles"  /></p>
 <p>ggplot2 is built on the idea that any plot can be made from the same
-set of components: a <strong>data</strong> set, a <strong>coordinate
-system</strong>, and a set of <strong>geoms</strong> – the visual
-representation of data points.</p>
+set of components: a <strong>data</strong> set, a
+<strong>mapping</strong>, and some <strong>geoms</strong>.</p>
 <p>The key to understanding ggplot2 is to think about a graph in
 layers.</p>
 <p>Let’s start off with an example:</p>
@@ -514,7 +513,7 @@ scientific journal.</p>
 <p>** Challenge 3**</p>
 <p>Create a ggplot graph using the <code>geom_violin()</code> which
 shows the difference in <strong>bill length</strong> among the
-<strong>sexes</strong>. Add &gt; layers for axes labels and theme
+<strong>sexes</strong>. Add layers for axes labels and theme
 styling.</p>
 </blockquote>
 <details>
@@ -555,10 +554,10 @@ colour, oppose to levels in a variable being different colours, we use
 <p>** Challenge 4**</p>
 <p>Choose a colour from this <a
 href="https://www.datanovia.com/en/blog/awesome-list-of-657-r-color-names/">website
-that lists R colours</a> and create a <strong>violin plot</strong> of
-that colour which shows the difference in <strong>body mass</strong>
-among <strong>species</strong>. You can include layers for axes labels
-and styling.</p>
+that lists R colours</a> and create a <strong>violin plot</strong>
+outlined in that colour which shows the difference in <strong>body
+mass</strong> among <strong>species</strong>. You can include layers for
+axes labels and styling.</p>
 </blockquote>
 <details>
 <summary>

@@ -37,7 +37,7 @@ Artwork by @allison_horst
 Cleaning or wrangling data means many things to many researchers: we often
 select certain observations (rows) or variables (columns), we often group the
 data by a certain variable(s), or we even calculate summary statistics. We can
-do these operations using the normal base R operations:
+do these operations using the normal base R functions:
 
 ```{r}
 mean(penguins[penguins$species == "Adelie", "body_mass_g"], na.rm = TRUE)
@@ -95,31 +95,39 @@ species_body <- select(penguins, species,body_mass_g,sex)
 ```
 
 If we open up `species_body` (under the environment tab) we'll see that it only contains the species,
-body mass and sex. Above we used 'normal' grammar, but the strengths of
-`dplyr` lie in combining several functions using **pipes**. Since the pipes grammar
-is unlike anything we've seen in R before, let's repeat what we've done above
-using a pipe:
-
-```{r}
-species_body <- penguins %>% select(species, body_mass_g, sex)
-```
-
-First we assign the result to `species_body`. Then, we call the penguins dataframe and pass it on, using the pipe
-symbol `%>%`, to the next step, which is the `select()` function. This time
-we don't specify which data object we use in the `select()` function since it
-gets that from the previous pipe.
+body mass and sex. 
 
 <br>
 
 ## filter()
 
-If we now wanted to use the above, but only with Adelie penguins, we can combine `select` and `filter`
+If we now wanted to use the columns selected above, but only with Adelie penguins, we can use `filter`
 
 ```{r}
-species_body_adelie <- penguins %>%
+species_body_adelie <- filter(species_body, species =="Adelie")
+```
+
+Open `species_body_adelie` to check it only contains Adelie penguin data.
+
+<br>
+
+Above we used 'normal' grammar, but the strengths of
+`dplyr` lie in combining several functions using **pipes**. 
+
+To demonstrate a pipe (`%>%`) let's repeat what we've done above by combining `select` and `filter` in one command.
+
+```{r}
+species_body_adelie2 <- penguins %>%
     filter(species == "Adelie") %>%
     select(species, body_mass_g, sex)
 ```
+
+First we assign the result to `species_body_adelie2`. Then, we call the penguins dataframe and pass it on, using the pipe
+symbol `%>%` to the `filter()` function. We don't need to name which data object to use in the `filter()` function since we've piped `penguins` in. Then the resulting data frame is piped into the `select()` part of the code.
+
+Pipes allow you to do many actions in one command, make code easier to read and avoid creating multiple data objects.
+
+<br>
 
 :::: {.darkorchidbox data-latex=""}
 ::: {.center data-latex=""}

@@ -376,7 +376,7 @@ Artwork by <span class="citation">@allison_horst</span></p>
 often select certain observations (rows) or variables (columns), we
 often group the data by a certain variable(s), or we even calculate
 summary statistics. We can do these operations using the normal base R
-operations:</p>
+functions:</p>
 <pre class="r"><code>mean(penguins[penguins$species == &quot;Adelie&quot;, &quot;body_mass_g&quot;], na.rm = TRUE)
 mean(penguins[penguins$species == &quot;Gentoo&quot;, &quot;body_mass_g&quot;], na.rm = TRUE)
 mean(penguins[penguins$species == &quot;Chinstrap&quot;, &quot;body_mass_g&quot;])</code></pre>
@@ -418,27 +418,35 @@ dataframe we could use the <code>select()</code> function. This will
 keep only the variables you select.</p>
 <pre class="r"><code>species_body &lt;- select(penguins, species,body_mass_g,sex)</code></pre>
 <p>If we open up <code>species_body</code> (under the environment tab)
-we’ll see that it only contains the species, body mass and sex. Above we
-used ‘normal’ grammar, but the strengths of <code>dplyr</code> lie in
-combining several functions using <strong>pipes</strong>. Since the
-pipes grammar is unlike anything we’ve seen in R before, let’s repeat
-what we’ve done above using a pipe:</p>
-<pre class="r"><code>species_body &lt;- penguins %&gt;% select(species, body_mass_g, sex)</code></pre>
-<p>First we assign the result to <code>species_body</code>. Then, we
-call the penguins dataframe and pass it on, using the pipe symbol
-<code>%&gt;%</code>, to the next step, which is the
-<code>select()</code> function. This time we don’t specify which data
-object we use in the <code>select()</code> function since it gets that
-from the previous pipe.</p>
+we’ll see that it only contains the species, body mass and sex.</p>
 <p><br></p>
 </div>
 <div id="filter" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> filter()</h2>
-<p>If we now wanted to use the above, but only with Adelie penguins, we
-can combine <code>select</code> and <code>filter</code></p>
-<pre class="r"><code>species_body_adelie &lt;- penguins %&gt;%
+<p>If we now wanted to use the columns selected above, but only with
+Adelie penguins, we can use <code>filter</code></p>
+<pre class="r"><code>species_body_adelie &lt;- filter(species_body, species ==&quot;Adelie&quot;)</code></pre>
+<p>Open <code>species_body_adelie</code> to check it only contains
+Adelie penguin data.</p>
+<p><br></p>
+<p>Above we used ‘normal’ grammar, but the strengths of
+<code>dplyr</code> lie in combining several functions using
+<strong>pipes</strong>.</p>
+<p>To demonstrate a pipe (<code>%&gt;%</code>) let’s repeat what we’ve
+done above by combining <code>select</code> and <code>filter</code> in
+one command.</p>
+<pre class="r"><code>species_body_adelie2 &lt;- penguins %&gt;%
     filter(species == &quot;Adelie&quot;) %&gt;%
     select(species, body_mass_g, sex)</code></pre>
+<p>First we assign the result to <code>species_body_adelie2</code>.
+Then, we call the penguins dataframe and pass it on, using the pipe
+symbol <code>%&gt;%</code> to the <code>filter()</code> function. We
+don’t need to name which data object to use in the <code>filter()</code>
+function since we’ve piped <code>penguins</code> in. Then the resulting
+data frame is piped into the <code>select()</code> part of the code.</p>
+<p>Pipes allow you to do many actions in one command, make code easier
+to read and avoid creating multiple data objects.</p>
+<p><br></p>
 <div class="darkorchidbox">
 <div class="center">
 <p><strong>Tip: select() and filter()</strong></p>

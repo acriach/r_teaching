@@ -346,7 +346,7 @@ If we type `ls` by itself, R prints a bunch of code instead of listing objects.
 ls
 ```
 
-What going on here?
+What's going on here?
 Like everything in R, `ls` is the name of an object, and entering the name of an object by itself prints the contents of the object. 
 
 The object `x` that we created earlier contains 1,2,3,4,5:

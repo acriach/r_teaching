@@ -220,16 +220,22 @@ penguins[1]
 
 Calls the data in column 1.
 
+<br>
+
 ```{r, eval=TRUE, echo=TRUE}
 penguins[1, 1]
 ```
 Calls the information that is in the first row, first column. 
+
+<br>
 
 ```{r, eval=TRUE, echo=TRUE}
 penguins[, 1]
 ```
 
 Also, calls the first column.
+
+<br>
 
 ```{r, eval=TRUE, echo=TRUE}
 penguins[1, ]

@@ -31,7 +31,7 @@ penguins <- read.csv(file = "data/penguins.csv")
 <br>
 
 There are different plotting systems in R for example,
-the [base plotting system](http://www.sthda.com/english/wiki/r-base-graphs). But the function `ggplot` in the [ggplot2 package](http://www.statmethods.net/advgraphs/ggplot2.html) is used by the majority of people.
+the [base plotting system](http://www.sthda.com/english/wiki/r-base-graphs). But the function `ggplot` in the [ggplot2 package](https://r-graph-gallery.com/ggplot2-package.html#:~:text=ggplot2%20is%20a%20R%20package,almost%20any%20type%20of%20chart.) is used by the majority of people.
 
 To use it you will need to ensure you have the ggplot2 package installed. Hint: you could use the Packages tab, bottom right and then load it using the function `library()`.
 ```{r, eval = TRUE}
@@ -189,7 +189,7 @@ ggplot(data = penguins, mapping = aes(x = species, y = body_mass_g)) +
 
 <br>
 
-> ** Challenge 3**
+> **Challenge 3**
 >
 > Create a ggplot graph using the `geom_violin()` which shows the difference in **bill length** among the **sexes**. Add layers for axes labels and theme styling. 
 
@@ -233,7 +233,7 @@ Note the word blue is put in "speech marks".
 
 <br>
 
-> ** Challenge 4**
+> **Challenge 4**
 >
 > Choose a colour from this 
 > [website that lists R colours](https://www.datanovia.com/en/blog/awesome-list-of-657-r-color-names/) 

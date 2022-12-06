@@ -207,7 +207,7 @@ As was done in the last example, you can choose not to assign as an object if th
 
 <br>
 
-The function `group_by()` allows us to group by multiple variables. Let's group by `species` **and** `island`.
+The function `group_by()` allows us to group by multiple variables. Let's group by `species` **and** `sex`.
 
 ```{r, eval = FALSE}
 penguins %>%

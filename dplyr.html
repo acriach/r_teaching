@@ -369,7 +369,7 @@ Then read it in.</p>
 <p><br></p>
 <div id="data-wrangling" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Data wrangling</h1>
-<p><img src="images/dplyr_wrangling.png" title="Cartoon of a fuzzy monster with a cowboy hat and lasso, riding another fuzzy monster labeled “dplyr”, lassoing a group of angry / unruly looking creatures labeled “data”." alt="Cartoon of a fuzzy monster with a cowboy hat and lasso, riding another fuzzy monster labeled “dplyr”, lassoing a group of angry / unruly looking creatures labeled “data”."  />
+<p><img src="images/dplyr_wrangling.png" title="Cartoon of a fuzzy monster with a cowboy hat and lasso, riding another fuzzy monster labeled “dplyr”, lassoing a group of angry / unruly looking creatures labeled “data”." alt="Cartoon of a fuzzy monster with a cowboy hat and lasso, riding another fuzzy monster labeled “dplyr”, lassoing a group of angry / unruly looking creatures labeled “data”." width="956" />
 Artwork by <span class="citation">@allison_horst</span></p>
 <p><br></p>
 <p>Cleaning or wrangling data means many things to many researchers: we
@@ -387,7 +387,7 @@ and potentially introduce some nasty bugs.</p>
 <div id="the-dplyr-package" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> The
 <code>dplyr</code> package</h2>
-<p><img src="images/dplyr_logo.png" title="A hexagon with dplyr written in it and three colourful plyers on a space background" alt="A hexagon with dplyr written in it and three colourful plyers on a space background"  /></p>
+<p><img src="images/dplyr_logo.png" title="A hexagon with dplyr written in it and three colourful plyers on a space background" alt="A hexagon with dplyr written in it and three colourful plyers on a space background" width="120" /></p>
 <p>Luckily, the <a
 href="https://cran.r-project.org/package=dplyr"><code>dplyr</code></a>
 package provides a number of very useful functions for manipulating
@@ -412,7 +412,7 @@ tab, bottom right.</p>
 </div>
 <div id="select" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> select()</h2>
-<p><img src="images/dplyr-fig1.png" title="Text is select(data.frame, a, c). On the right are four columns of data named a, b, c and d. On the left are two columns a and c. One arrow curves from a to a and the other arrow curves c to c." alt="Text is select(data.frame, a, c). On the right are four columns of data named a, b, c and d. On the left are two columns a and c. One arrow curves from a to a and the other arrow curves c to c."  /></p>
+<p><img src="images/dplyr-fig1.png" title="Text is select(data.frame, a, c). On the right are four columns of data named a, b, c and d. On the left are two columns a and c. One arrow curves from a to a and the other arrow curves c to c." alt="Text is select(data.frame, a, c). On the right are four columns of data named a, b, c and d. On the left are two columns a and c. One arrow curves from a to a and the other arrow curves c to c." width="284" /></p>
 <p>If we wanted to analyse only a few of the variables (columns) in our
 dataframe we could use the <code>select()</code> function. This will
 keep only the variables you select.</p>
@@ -486,7 +486,7 @@ since we would have to repeat the above for each species. Using
 <code>filter()</code>, will only pass observations that meet your
 criteria (in the above: <code>species=="Adelie"</code>). Instead, we can
 use <code>group_by()</code>, which will analyse all three species.</p>
-<p><img src="images/dplyr-fig2.png" title="Text is data.frame, pipe operator, group_by(a). On the right are four columns of data named a, b, c and d. Arrows show these rows split into three so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. " alt="Text is data.frame, pipe operator, group_by(a). On the right are four columns of data named a, b, c and d. Arrows show these rows split into three so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. "  /></p>
+<p><img src="images/dplyr-fig2.png" title="Text is data.frame, pipe operator, group_by(a). On the right are four columns of data named a, b, c and d. Arrows show these rows split into three so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. " alt="Text is data.frame, pipe operator, group_by(a). On the right are four columns of data named a, b, c and d. Arrows show these rows split into three so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. " width="708" /></p>
 <p><br></p>
 <div id="using-group_by-with-summarize" class="section level3"
 number="1.4.1">
@@ -497,7 +497,7 @@ something like <code>summarize()</code>. By using the
 <code>group_by()</code> function, we split our original data frame into
 multiple pieces, then we can run functions (e.g. <code>mean()</code> or
 <code>sd()</code>) within <code>summarize()</code>.</p>
-<p><img src="images/dplyr-fig3.png" title="Text is data.frame pipe operator group_by(a) pipe operator summarise(mean_b=mean(b)). On the right are four columns of data named a, b, c and d with six rows named 1,1,2,2,3 and 3 in column a. Arrows show these rows split so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. Three arrows goes from these 3 smaller dataframes to a final datafram with column a containing 1, 2 and 3 and a second column called mean_b." alt="Text is data.frame pipe operator group_by(a) pipe operator summarise(mean_b=mean(b)). On the right are four columns of data named a, b, c and d with six rows named 1,1,2,2,3 and 3 in column a. Arrows show these rows split so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. Three arrows goes from these 3 smaller dataframes to a final datafram with column a containing 1, 2 and 3 and a second column called mean_b."  /></p>
+<p><img src="images/dplyr-fig3.png" title="Text is data.frame pipe operator group_by(a) pipe operator summarise(mean_b=mean(b)). On the right are four columns of data named a, b, c and d with six rows named 1,1,2,2,3 and 3 in column a. Arrows show these rows split so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. Three arrows goes from these 3 smaller dataframes to a final datafram with column a containing 1, 2 and 3 and a second column called mean_b." alt="Text is data.frame pipe operator group_by(a) pipe operator summarise(mean_b=mean(b)). On the right are four columns of data named a, b, c and d with six rows named 1,1,2,2,3 and 3 in column a. Arrows show these rows split so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. Three arrows goes from these 3 smaller dataframes to a final datafram with column a containing 1, 2 and 3 and a second column called mean_b." width="708" /></p>
 <pre class="r"><code>penguins %&gt;%
     group_by(species) %&gt;%
     summarize(mean_body = mean(body_mass_g, na.rm=TRUE))</code></pre>
@@ -524,7 +524,7 @@ but given in your console window.</p>
 <p><br></p>
 <p>The function <code>group_by()</code> allows us to group by multiple
 variables. Let’s group by <code>species</code> <strong>and</strong>
-<code>island</code>.</p>
+<code>sex</code>.</p>
 <pre class="r"><code>penguins %&gt;%
     group_by(species, sex) %&gt;%
     summarize(mean_body = mean(body_mass_g, na.rm=TRUE))</code></pre>
@@ -600,7 +600,7 @@ class="math inline">\(se = sd/\sqrt n\)</span></p>
 </div>
 <div id="mutate" class="section level2" number="1.6">
 <h2><span class="header-section-number">1.6</span> mutate()</h2>
-<p><img src="images/dplyr_mutate.png" title="Cartoon of cute fuzzy monsters dressed up as different X-men characters, working together to add a new column to an existing data frame. Stylized title text reads “dplyr::mutate - add columns, keep existing." alt="Cartoon of cute fuzzy monsters dressed up as different X-men characters, working together to add a new column to an existing data frame. Stylized title text reads “dplyr::mutate - add columns, keep existing."  />
+<p><img src="images/dplyr_mutate.png" title="Cartoon of cute fuzzy monsters dressed up as different X-men characters, working together to add a new column to an existing data frame. Stylized title text reads “dplyr::mutate - add columns, keep existing." alt="Cartoon of cute fuzzy monsters dressed up as different X-men characters, working together to add a new column to an existing data frame. Stylized title text reads “dplyr::mutate - add columns, keep existing." width="2240" />
 Artwork by <span class="citation">@allison_horst</span></p>
 <p><br></p>
 <p>mutate() creates new variables (columns) from existing variables.</p>

@@ -140,7 +140,7 @@ If your spreadsheet won't read in check:
 2. You have included the suffix after the name of the file  
 3. The name of the file is spelled correctly  
 4. The file exists in the folder you are directing R to. For example, in our case we would click on the folder named data under the files tab at the bottom right of RStudio to check.   
-5. Look at an example on the internet to ensure you have included all the necessary arguments. `read.csv` only needs `file =` but other functions may need other arguments.  
+5. Look at an example on the internet to ensure you have included all the necessary arguments. <kbd>`read.csv`</kbd> only needs <kbd>`file =`</kbd> but other functions may need other arguments.  
 
 ::::
 

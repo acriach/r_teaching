@@ -13,7 +13,7 @@
 
 <title>ggplot</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -29,7 +29,7 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
@@ -145,11 +145,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -178,8 +182,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -187,16 +191,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -359,7 +356,7 @@ div.tocify {
 
 <div id="creating-graphs" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Creating graphs</h1>
-<p><img src="images/ggplot2_masterpiece.png" title="A fuzzy monster in a beret and scarf, critiquing their own column graph on a canvas in front of them while other assistant monsters (also in berets) carry over boxes full of elements that can be used to customize a graph (like themes and geometric shapes). In the background is a wall with framed data visualizations. Stylized text reads “ggplot2: build a data masterpiece." alt="A fuzzy monster in a beret and scarf, critiquing their own column graph on a canvas in front of them while other assistant monsters (also in berets) carry over boxes full of elements that can be used to customize a graph (like themes and geometric shapes). In the background is a wall with framed data visualizations. Stylized text reads “ggplot2: build a data masterpiece." width="1040" /></p>
+<p><img src="images/ggplot2_masterpiece.png" alt="A fuzzy monster in a beret and scarf, critiquing their own column graph on a canvas in front of them while other assistant monsters (also in berets) carry over boxes full of elements that can be used to customize a graph (like themes and geometric shapes). In the background is a wall with framed data visualizations. Stylized text reads “ggplot2: build a data masterpiece." width="1040" /></p>
 <p>Artwork by <span class="citation">@allison_horst</span></p>
 <p><br></p>
 <div id="making-graphs-with-ggplot2" class="section level2"
@@ -385,7 +382,7 @@ package</a> is used by the majority of people.</p>
 installed. Hint: you could use the Packages tab, bottom right and then
 load it using the function <code>library()</code>.</p>
 <pre class="r"><code>library(ggplot2)</code></pre>
-<p><img src="images/ggplot2.png" title="A hexagon with ggplot written in it and a zig zag line from left to right with some circles" alt="A hexagon with ggplot written in it and a zig zag line from left to right with some circles" width="120" /></p>
+<p><img src="images/ggplot2.png" alt="A hexagon with ggplot written in it and a zig zag line from left to right with some circles" width="120" /></p>
 <p>ggplot2 is built on the idea that any plot can be made from the same
 set of components: a <strong>data</strong> set, a
 <strong>mapping</strong>, and some <strong>geoms</strong>.</p>
@@ -578,14 +575,14 @@ the inside of the violin.</p>
 <p>This graph uses default colours:</p>
 <pre class="r"><code>ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = flipper_length_mm, colour = species)) + 
   geom_point() +
-  labs(x = &quot;Species&quot;,
-       y = &quot;Body Mass (g)&quot;) +
+  labs(x = &quot;Bill Length (mm)&quot;,
+       y = &quot;Flipper Length (mm)&quot;) +
   theme_classic()</code></pre>
 <p>But to specify colours, use <code>scale_colour_manual</code>:</p>
 <pre class="r"><code>ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = flipper_length_mm, colour = species)) + 
   geom_point() +
-  labs(x = &quot;Species&quot;,
-       y = &quot;Body Mass (g)&quot;) +
+  labs(x = &quot;Bill Length (mm)&quot;,
+       y = &quot;Flipper Length (mm)&quot;) +
   theme_classic() +
   scale_colour_manual(values = c(&quot;darkorange&quot;,&quot;purple&quot;,&quot;cyan4&quot;))</code></pre>
 <p><br></p>
@@ -619,7 +616,7 @@ used to run a linear regression.</p>
   geom_smooth(method=&quot;lm&quot;)</code></pre>
 <p><br></p>
 <blockquote>
-<h2 id="challenge-4">Challenge 4</h2>
+<p><strong>Challenge 5</strong></p>
 <p>Make a <strong>scatterplot</strong> of <strong>bill length</strong>
 and <strong>bill depth</strong>, grouped and coloured by
 <strong>species</strong>, with <strong>trendlines</strong> for each
@@ -629,7 +626,7 @@ colours</strong> (you can choose colours). Give it appropriate axes
 </blockquote>
 <details>
 <summary>
-<strong>Solution to Challenge 4</strong>
+<strong>Solution to Challenge 5</strong>
 </summary>
 <p>Here is one possible solution:</p>
 <pre class="r"><code>ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, colour = species, grouped = species)) + 
@@ -639,7 +636,7 @@ colours</strong> (you can choose colours). Give it appropriate axes
   theme_classic() +
   scale_colour_manual(values = c(&quot;darkorange&quot;,&quot;purple&quot;,&quot;cyan4&quot;)) +
   geom_smooth(method = lm)</code></pre>
-<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
 <img src="ggplot_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 </details>
 <p><br></p>

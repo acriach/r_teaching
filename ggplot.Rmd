@@ -264,8 +264,8 @@ This graph uses default colours:
 ```{r}
 ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = flipper_length_mm, colour = species)) + 
   geom_point() +
-  labs(x = "Species",
-       y = "Body Mass (g)") +
+  labs(x = "Bill Length (mm)",
+       y = "Flipper Length (mm)") +
   theme_classic()
 ```
 
@@ -273,8 +273,8 @@ But to specify colours, use `scale_colour_manual`:
 ```{r}
 ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = flipper_length_mm, colour = species)) + 
   geom_point() +
-  labs(x = "Species",
-       y = "Body Mass (g)") +
+  labs(x = "Bill Length (mm)",
+       y = "Flipper Length (mm)") +
   theme_classic() +
   scale_colour_manual(values = c("darkorange","purple","cyan4"))
 ```
@@ -312,13 +312,13 @@ ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, gro
 
 <br>
 
-> ## Challenge 4
+> **Challenge 5**
 >
 > Make a **scatterplot** of **bill length** and **bill depth**, grouped and coloured by **species**, with **trendlines** for each species and **triangles** for points and **specify colours** (you can choose colours). Give it appropriate axes **labels** and a **classic theme**.
  
 
 <details>
-  <summary>**Solution to Challenge 4**</summary>
+  <summary>**Solution to Challenge 5**</summary>
 
 Here is one possible solution:
 ```{r, eval = TRUE}

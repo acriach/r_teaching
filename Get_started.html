@@ -13,7 +13,7 @@
 
 <title>Get started</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -29,7 +29,7 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
@@ -145,11 +145,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -178,8 +182,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -187,16 +191,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -395,13 +392,13 @@ RStudio</a></li>
 <li>Environment/History (tabbed in upper right)</li>
 <li>Files/Plots/Packages/Help/Viewer (tabbed in lower right)</li>
 </ul>
-<p><img src="images/RStudio_screenshot.png" title="A screenshot of Rstudio showing eleven menus at the top left. One panel covers the left half with text about the R software. The right is divided into two panels with text saying that the environment is empty in the top panel and a display of the current file directory in the bottom panel." alt="A screenshot of Rstudio showing eleven menus at the top left. One panel covers the left half with text about the R software. The right is divided into two panels with text saying that the environment is empty in the top panel and a display of the current file directory in the bottom panel."  /></p>
+<p><img src="images/RStudio_screenshot.png" alt="A screenshot of Rstudio showing eleven menus at the top left. One panel covers the left half with text about the R software. The right is divided into two panels with text saying that the environment is empty in the top panel and a display of the current file directory in the bottom panel." width="960" /></p>
 <p>Once you open files, such as R scripts another panel will open in the
 top left.</p>
 <ul>
 <li>Click on the white square with the plus in green icon top left.</li>
 </ul>
-<p><img src="images/RStudio_screenshot_script.png" title="Two zoomed in screenshots of the top left menus in RStudio. The first screenshot shows a black rectangle highlighting an icon which is a white square with a plus inside a green circle. The second screenshot shows a black rectangle highlighting a menu item that reads R Script followed by the associated keyboard shortcut, Ctrl + Shift + N." alt="Two zoomed in screenshots of the top left menus in RStudio. The first screenshot shows a black rectangle highlighting an icon which is a white square with a plus inside a green circle. The second screenshot shows a black rectangle highlighting a menu item that reads R Script followed by the associated keyboard shortcut, Ctrl + Shift + N."  /></p>
+<p><img src="images/RStudio_screenshot_script.png" alt="Two zoomed in screenshots of the top left menus in RStudio. The first screenshot shows a black rectangle highlighting an icon which is a white square with a plus inside a green circle. The second screenshot shows a black rectangle highlighting a menu item that reads R Script followed by the associated keyboard shortcut, Ctrl + Shift + N." width="960" /></p>
 <p><br></p>
 </div>
 <div id="working-in-rstudio" class="section level2" number="1.3">
@@ -521,7 +518,7 @@ long variable names, these include</p>
 <li>camelCaseToSeparateWords</li>
 </ul>
 <p>What you use is up to you, but <strong>be consistent</strong>.</p>
-<p><img src="images/coding_cases.png" title="A wound up snake with mouth open is beside the screaming_snake_case. A spread out snake has snake_case written on it. A camel with headphones on has camelCase written on it with the captial C in the space of it's hump. Colourful letters on a line spell out kebab-case" alt="A wound up snake with mouth open is beside the screaming_snake_case. A spread out snake has snake_case written on it. A camel with headphones on has camelCase written on it with the captial C in the space of it's hump. Colourful letters on a line spell out kebab-case"  />
+<p><img src="images/coding_cases.png" alt="A wound up snake with mouth open is beside the screaming_snake_case. A spread out snake has snake_case written on it. A camel with headphones on has camelCase written on it with the captial C in the space of it's hump. Colourful letters on a line spell out kebab-case" width="2000" />
 Artwork by <span class="citation">@allison_horst</span></p>
 <p><br></p>
 <blockquote>
@@ -651,7 +648,7 @@ instead of listing objects.</p>
     }
     else all.names
 }
-&lt;bytecode: 0x000001eafa834458&gt;
+&lt;bytecode: 0x000001ff3dd31870&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 <p>What’s going on here? Like everything in R, <code>ls</code> is the
 name of an object, and entering the name of an object by itself prints
@@ -746,7 +743,7 @@ box next to a package name.</li>
 <blockquote>
 <p><strong>Challenge 5</strong></p>
 <p>Library load the following packages: <code>ggplot2</code>,
-<code>dplyr</code>, <code>penguins</code></p>
+<code>dplyr</code>, <code>palmerpenguins</code></p>
 </blockquote>
 <details>
 <summary>
@@ -756,7 +753,7 @@ box next to a package name.</li>
 packages.</p>
 <pre class="r"><code>library(ggplot2)
 library(dplyr)
-library(penguins)</code></pre>
+library(palmerpenguins)</code></pre>
 Or you can use the check boxes under the <strong>Packages</strong> tab.
 </details>
 <p><br></p>

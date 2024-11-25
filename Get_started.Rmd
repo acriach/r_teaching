@@ -19,7 +19,7 @@ If you only downloaded RStudio onto your computer it would not work. RStudio nee
 
 When using a university computer in a cluster, use R and RStudio through AppsAnywhere. 
 
-* Click the AppsAnywhere icon, scroll down to "Cran R" and click launch. 
+* Click the AppsAnywhere icon, scroll down to "R for windows" and click launch. 
 * Once R has opened and downloaded onto the computer you can close it. 
 * Now go back into Apps Anywhere to find RStudio and launch that.
 

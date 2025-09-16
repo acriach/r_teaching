@@ -28,7 +28,7 @@ When using a university computer in a cluster, use R and RStudio through AppsAny
 You can try to download R and RStudio onto your own laptop in your own time.
 
 * [Download and install the latest version of R](https://www.r-project.org/)
-* [Download and install RStudio](https://www.rstudio.com/)
+* [Download and install RStudio](https://posit.co/downloads/)
 
 <br>
 

@@ -24,7 +24,7 @@ Artwork by @allison_horst
 > 4. Type in the name of your project, e.g. "Learning_R".
 > 5. Click the "Create Project" button
 
-The simplest way to open an RStudio project once it has been created is to click
+For future computer labs, if you want to open this same RStudio project now it has been created, click
 through your file system to get to the directory where it was saved and double
 click on the `.Rproj` file. This will open RStudio and start your R session in the
 same directory as the `.Rproj` file. Any data, plots or scripts can be saved and 
@@ -65,62 +65,13 @@ Artwork by @allison_horst
 > 1. From the window showing the data, save the data as a file (CTRL + S or right mouse click > "Save as")
 > 2. Make sure it's saved under the name `penguins.csv`
 > 3. Save the file in the `data` folder within your project.
->
-> We will load and inspect these data shortly.
-
-<br>
-
-## Reading help files
-
-Every package author writes help files for their functions. Either of these will load up a help page in RStudio:
-
-```{r, eval=FALSE}
-?function_name
-help(function_name)
-```
-
-Each help page is broken down into sections (Description, Usage, Arguments etc). The last section Examples is very useful.  
-
-The command below will bring up the help for the function `log`.
-
-```{r, eval=FALSE}
-?log
-```
-
-<br>
-
-:::: {.darkorchidbox data-latex=""}
-::: {.center data-latex=""}
-**Tip: Help files**
-:::
-
-One of the most daunting aspects of R is the large number of functions available. It would be prohibitive, if not impossible to remember the correct usage for every function you use. Luckily, the help files mean you don't have to!  
-
-::::
-
-<br>
-
-
-### When your code doesn't work: seek help from the R community
-
-If you're having trouble using a function, 9 times out of 10,
-the answers you are seeking have already been answered on
-[Stack Overflow](http://stackoverflow.com/).
-
-<br>
-
-### Other Resources
-
-* [Quick R](http://www.statmethods.net/)
-* [RStudio cheat sheets](http://www.rstudio.com/resources/cheatsheets/)
-* [Cookbook for R](http://www.cookbook-r.com/)
 
 <br>
 
 ## Reading in data
 
 
-We have already saved a .csv data file in our data folder (do the same when you work with your own datasets).
+Remember that the .csv data file is now saved in our data folder (do the same when you work with your own datasets).
 
 We can load this into R via the following:
 
@@ -243,6 +194,85 @@ penguins[1, ]
 
 Calls the first row.
 </details>
+
+<br>
+
+## Getting help with coding
+
+
+:::: {.darkorchidbox data-latex=""}
+::: {.center data-latex=""}
+**Tip: Help files**
+:::
+
+One of the most daunting aspects of R is the large number of functions available. It would be prohibitive, if not impossible to remember the correct usage for every function you use. Luckily, there are many sources of help!  
+
+::::
+
+<br>
+
+### Using Gen AI to get help with coding
+
+Gen AI can give you the specific help you need when your code won't work or when you are trying to do something new in R. It is recommended that you use copilot which the university provides for all staff and students. The data you enter into this version of copilot is not shared and therefore more secure.
+
+If you want to use GenAI go to https://uoldigital.net/copilot and use your university username and password to sign in.
+
+<br>
+
+:::: {.darkorchidbox data-latex=""}
+::: {.center data-latex=""}
+**Don't rely solely on AI**
+:::
+
+You have to know the basics of R so that you can understand the code AI suggests. This means you can identify when GenAI hasn't quite understood your prompt and why the code it is giving you isn't working.
+
+Try to avoid using code written by Gen AI and then getting into a spiral by repeatedly asking it to debug that code.  
+
+::::
+
+<br>
+
+GenAI is only as good as the prompt you provide. Here's some tips
+
+* Make sure your prompt includes the names of your variables and dataframe. 
+* You can paste the code or error message in as part of your prompt if you are trying to de-bug.
+* Ask it to use specific functions if you have a rough idea.
+* Be specific: the prompt "use indexing on a dataframe called penguins" is less likely to help you than "select the first row of data from a dataframe called penguins using indexing".
+
+<br>
+
+The university has a guide for students on the use of [Gen AI in assessments](https://generative-ai.leeds.ac.uk/ai-and-assessments/). Your assessment must include a section similar to the below.
+
+**Acknowledgement**
+
+I acknowledge the use of Copilot (https://m365.cloud.microsoft/chat) to debug R code when cleaning and analysing my data.
+
+<br>
+
+### Getting help without Gen AI
+
+Every package author writes help files for their functions. Each help page is broken down into sections (Description, Usage, Arguments etc). The last section Examples is very useful.  
+
+Either of the commands below will bring up the help for the function `log`.
+
+```{r, eval=FALSE}
+?log
+help(log)
+```
+
+<br>
+
+When your code doesn't work: seek help from the R community. 9 times out of 10,
+the answers you are seeking have already been answered on
+[Stack Overflow](http://stackoverflow.com/).
+
+<br>
+
+Other internet resources to look out for while googling are:
+
+* [Quick R](http://www.statmethods.net/)
+* [RStudio cheat sheets](http://www.rstudio.com/resources/cheatsheets/)
+* [Cookbook for R](http://www.cookbook-r.com/)
 
 
 <br>

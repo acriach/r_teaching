@@ -14,6 +14,8 @@ navbar:
       href: dplyr.html
     - text: "tidyr"
       href: tidyr.html
+    - text: "Quiz"
+      href: Quiz.html
 output:
   html_document:
     toc: true

@@ -1,0 +1,163 @@
+---
+title: "Quiz"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+```
+
+<br>
+
+Recap what you've learned by answering these 8 questions.
+
+> **Question 1**
+>
+> What is a .R file?
+>
+> A a file that helps R to know where in the file system you are working and organise files associated with the project.  
+> B a script file where you can write and save code.  
+> C a file used to store raw data to read into R.  
+> D a configuration file that controls RStudio's user interface layout.  
+
+<details>
+  <summary>**Answer**</summary>
+
+B
+
+</details>
+
+<br>
+
+> **Question 2**
+>
+> What is a .Rproj file?
+>
+> A a file that helps R to know where in the file system you are working and organise files associated with the project.  
+> B a script file where you can write and save code.  
+> C a file used to store raw data to read into R.  
+> D a configuration file that controls RStudio's user interface layout.  
+
+<details>
+  <summary>**Answer**</summary>
+
+A
+
+</details>
+
+<br>
+
+> **Question 3**
+>
+> Which of the below will install and library load the ggplot2 package?
+>
+> A Run the code `load.package("ggplot2")`.  
+> B Tick the box by ggplot2 in the Packages tab  
+> C In the Packages tab, click Install and type ggplot2. Then run the code `library(gpglot2)`  
+> D Run ggplot code and the package is automatically installed and loaded  
+
+<details>
+  <summary>**Answer**</summary>
+
+C
+
+(Note that B will library load the package but this will only work if the package is already installed on the computer.)
+
+</details>
+
+<br>
+
+> **Question 4**
+>
+> If your data file is not reading into R what things could you check?
+>
+> A That you are using the correct function for the type of file, for example read.csv for csv files.  
+> B The name of the file is spelled correctly.  
+> C The file exists in the folder you are directing R to.  
+> D All of the above.  
+
+<details>
+  <summary>**Answer**</summary>
+
+D
+
+</details>
+
+<br>
+
+> **Question 5**
+>
+> Why will this code on it's own not work? `ggplot(data = penguins, mapping = aes(x = body_mass_g, y = flipper_length_mm))`
+>
+> A It also needs a `geom` layer.  
+> B The `mapping = ` part needs to be removed.  
+> C The function should be `ggplot2` instead of `ggplot`.  
+> D The code is missing a `theme()` function which is needed to display the plot.  
+
+<details>
+  <summary>**Answer**</summary>
+
+A
+
+</details>
+
+<br>
+
+> **Question 6**
+>
+> Which of these is NOT the name of a geom layer?
+>
+> A geom_smooth  
+> B geom_point  
+> C geom_aes  
+> D geom_violin  
+
+<details>
+  <summary>**Answer**</summary>
+
+C 
+
+Note that `aes` is not a geom but stands for aesthetic and tells R what variables to use.
+
+</details>
+
+<br>
+
+> **Question 7**
+>
+> Which of these would you use if you wanted to only work with the Gentoo penguin rows of data?
+>
+> A `group_by()`  
+> B `mutate()`  
+> C `select()`  
+> D `filter()`  
+
+<details>
+  <summary>**Answer**</summary>
+
+D
+
+</details>
+
+<br>
+
+> **Question 8**
+>
+> What is tidy data?
+>
+> A Data that has been cleaned of all missing values.  
+> B Data that has no duplicated rows.  
+> C Data where each variables forms a column, each observation forms a row and each cell is a single measurement.  
+> D Data that has been sorted alphabetically.  
+
+<details>
+  <summary>**Answer**</summary>
+
+C
+
+</details>
+
+<br>
+
+<br>
+
+[Source](https://github.com/acriach/r_teaching)

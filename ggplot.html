@@ -13,7 +13,7 @@
 
 <title>ggplot</title>
 
-<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -365,13 +365,18 @@ number="1.1">
 ggplot2</h2>
 <p><strong>Set up</strong></p>
 <p>We will use the palmer penguin data to make graphs.</p>
-<p>If you don’t have a project open already, open your saved Rproj in
-Rstudio by clicking <strong>File</strong> menu then <strong>Open
-project</strong> and look for your <strong>.Rproj</strong> file. Click
-the <strong>Files</strong> tab in the bottom right pane, click the
-<strong>data</strong> folder and check the penguins.csv is in there.
-Then read it in.</p>
+<details>
+<summary>
+<strong>How to open a saved Rproj and read in data if not already
+open</strong>
+</summary>
+<p>Open your saved Rproj in Rstudio by clicking <strong>File</strong>
+menu then <strong>Open project</strong> and look for your
+<strong>.Rproj</strong> file. Click the <strong>Files</strong> tab in
+the bottom right pane, click the <strong>data</strong> folder and check
+the penguins.csv is in there. Then read it in.</p>
 <pre class="r"><code>penguins &lt;- read.csv(file = &quot;data/penguins.csv&quot;)</code></pre>
+</details>
 <p><br></p>
 <p>There are different plotting systems in R for example, the <a
 href="http://www.sthda.com/english/wiki/r-base-graphs">base plotting
@@ -444,8 +449,8 @@ transparency and shape of the points.</p>
 <p>So far we’ve used the <code>aes</code> function to tell the
 scatterplot <strong>geom</strong> about the <strong>x</strong> and
 <strong>y</strong> locations of each point. Another aesthetic property
-we can modify is <strong>color</strong>. Add a <code>colour=</code>
-argument to the aes brackets to <strong>color</strong> the points
+we can modify is <strong>colour</strong>. Add a <code>colour=</code>
+argument to the aes brackets to <strong>colour</strong> the points
 according to the “species” column.</p>
 </blockquote>
 <details>
@@ -515,14 +520,8 @@ styling.</p>
 </blockquote>
 <details>
 <summary>
-<strong>Solution to Challenge 3</strong>
+<strong>What the Challenge 3 graph might look like</strong>
 </summary>
-<p>Here is one possible solution:</p>
-<pre class="r"><code>ggplot(data = penguins, mapping = aes(x = sex, y = bill_length_mm)) + 
-  geom_violin() +
-  labs(x = &quot;Sex&quot;,
-       y = &quot;Bill Length (mm)&quot;) +
-  theme_classic()</code></pre>
 <p><img src="ggplot_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 Note: when we learn about data wrangling we will go through ways of
 removing data points such as the penguins that had NA under sex.
@@ -558,16 +557,11 @@ axes labels and styling.</p>
 </blockquote>
 <details>
 <summary>
-<strong>Solution to Challenge 4</strong>
+<strong>What the Challenge 4 graph might look like</strong>
 </summary>
-<p>Here is one possible solution:</p>
-<pre class="r"><code>ggplot(data = penguins, mapping = aes(x = species, y = body_mass_g)) + 
-  geom_violin(colour = &quot;darkorchid&quot;)</code></pre>
 <p><img src="ggplot_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<p>Note: adding <code>fill = "darkorange"</code> will add a colour to
-the inside of the violin.</p>
-<pre class="r"><code>ggplot(data = penguins, mapping = aes(x = species, y = body_mass_g)) + 
-  geom_violin(colour = &quot;darkorchid&quot;, fill = &quot;darkorange&quot;)</code></pre>
+Note: adding <code>fill = "darkorange"</code> will add a colour to the
+inside of the violin.
 <img src="ggplot_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 </details>
 <p><br></p>
@@ -578,24 +572,24 @@ the inside of the violin.</p>
   labs(x = &quot;Bill Length (mm)&quot;,
        y = &quot;Flipper Length (mm)&quot;) +
   theme_classic()</code></pre>
-<p>But to specify colours, use <code>scale_colour_manual</code>:</p>
-<pre class="r"><code>ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = flipper_length_mm, colour = species)) + 
-  geom_point() +
-  labs(x = &quot;Bill Length (mm)&quot;,
-       y = &quot;Flipper Length (mm)&quot;) +
-  theme_classic() +
-  scale_colour_manual(values = c(&quot;darkorange&quot;,&quot;purple&quot;,&quot;cyan4&quot;))</code></pre>
+<p>But to specify colours you need to use
+<code>scale_colour_manual</code>.</p>
+<blockquote>
+<p><strong>Challenge 5</strong> Adapt your code to add a
+scale_colour_manual layer with the colours darkorange, purple and cyan4
+to create the graph below.</p>
+</blockquote>
+<p><img src="ggplot_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p><br></p>
 <div class="darkorchidbox">
 <div class="center">
 <p><strong>Tip: creating plots</strong></p>
 </div>
-<p>When creating graphs, people adapt code from the internet by
-replacing the names of the data and variables in the example code with
-their data.</p>
 <p>If searching for ggplot layers that will control specific parts of
 your graph, using the correct graph terminology helps. For example, tick
 marks, levels, error bars, axes, legends.</p>
+<p>If code is not working, try running it repeatedly without different
+layers in turn to identify which layer is the problem.</p>
 </div>
 <p><br></p>
 </div>
@@ -616,7 +610,7 @@ used to run a linear regression.</p>
   geom_smooth(method=&quot;lm&quot;)</code></pre>
 <p><br></p>
 <blockquote>
-<p><strong>Challenge 5</strong></p>
+<p><strong>Challenge 6</strong></p>
 <p>Make a <strong>scatterplot</strong> of <strong>bill length</strong>
 and <strong>bill depth</strong>, grouped and coloured by
 <strong>species</strong>, with <strong>trendlines</strong> for each
@@ -626,17 +620,9 @@ colours</strong> (you can choose colours). Give it appropriate axes
 </blockquote>
 <details>
 <summary>
-<strong>Solution to Challenge 5</strong>
+<strong>What the Challenge 6 graph might look like</strong>
 </summary>
-<p>Here is one possible solution:</p>
-<pre class="r"><code>ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, colour = species, grouped = species)) + 
-  geom_point(shape = &quot;triangle&quot;) +
-  labs(x = &quot;Bill Length (mm)&quot;,
-       y = &quot;Bill Depth (mm)&quot;) +
-  theme_classic() +
-  scale_colour_manual(values = c(&quot;darkorange&quot;,&quot;purple&quot;,&quot;cyan4&quot;)) +
-  geom_smooth(method = lm)</code></pre>
-<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
+Here is one possible solution:
 <img src="ggplot_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 </details>
 <p><br></p>
@@ -644,11 +630,11 @@ colours</strong> (you can choose colours). Give it appropriate axes
 <div id="exporting-plots" class="section level2" number="1.5">
 <h2><span class="header-section-number">1.5</span> Exporting plots</h2>
 <p>The <code>ggsave()</code> function allows you to export a plot
-created with ggplot. You can specify the dimension and resolution of
-your plot by adjusting the appropriate arguments (<code>width</code>,
-<code>height</code> and <code>dpi</code>) to create high quality
-graphics for publication.<br />
-In order to save a plot from above, we first assign it to a variable, we
+created with ggplot so you can paste it into word. You can specify the
+dimension and resolution of your plot by adjusting the appropriate
+arguments (<code>width</code>, <code>height</code> and <code>dpi</code>)
+to create high quality graphics for your assessments.<br />
+In order to save a plot from above, we first assign it to an object, we
 could call it <code>penguin_plot</code>:</p>
 <pre class="r"><code>penguin_plot &lt;- ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, colour = species, grouped = species)) + 
   geom_point(shape = &quot;triangle&quot;) +
@@ -660,7 +646,7 @@ could call it <code>penguin_plot</code>:</p>
 <p>Now we can tell <code>ggsave</code> to save that plot in our
 <code>results</code> folder, with the file name “billScatterplot”, in
 <code>png</code> format and specify the width and height in cm and the
-resolution (dpi). Check you have a <code>results/</code> folder in your
+resolution (dpi). Check you have a <code>results</code> folder in your
 working directory by clicking the files tab in the bottom left pane.</p>
 <pre class="r"><code>ggsave(filename = &quot;results/billScatterplot.png&quot;, plot = penguin_plot, width = 12, height = 10, dpi = 300, units = &quot;cm&quot;)</code></pre>
 <p><br></p>

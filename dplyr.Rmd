@@ -17,11 +17,14 @@ penguins <- read.csv("data/penguins.csv", header=TRUE)
 
 **Set up**
 
-We will use the palmer penguin data so open your saved Rproj in Rstudio by clicking **File** menu then **Open project** and look for your **.Rproj** file. Click the **Files** tab in the bottom right pane, click the **data** folder and check the penguins.csv is in there. Then read it in.
+<details>
+  <summary>**How to open a saved Rproj and read in data if not already open**</summary>
 
+Open your saved Rproj in Rstudio by clicking **File** menu then **Open project** and look for your **.Rproj** file. Click the **Files** tab in the bottom right pane, click the **data** folder and check the penguins.csv is in there. Then read it in.
 ```{r, eval = TRUE}
 penguins <- read.csv(file = "data/penguins.csv")
 ```
+</details>
 
 <br>
 

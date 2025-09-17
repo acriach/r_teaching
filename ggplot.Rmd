@@ -22,11 +22,14 @@ Artwork by @allison_horst
 
 We will use the palmer penguin data to make graphs.
 
-If you don't have a project open already, open your saved Rproj in Rstudio by clicking **File** menu then **Open project** and look for your **.Rproj** file. Click the **Files** tab in the bottom right pane, click the **data** folder and check the penguins.csv is in there. Then read it in.
+<details>
+  <summary>**How to open a saved Rproj and read in data if not already open**</summary>
 
+Open your saved Rproj in Rstudio by clicking **File** menu then **Open project** and look for your **.Rproj** file. Click the **Files** tab in the bottom right pane, click the **data** folder and check the penguins.csv is in there. Then read it in.
 ```{r, eval = TRUE}
 penguins <- read.csv(file = "data/penguins.csv")
 ```
+</details>
 
 <br>
 
@@ -119,8 +122,8 @@ ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = flipper_length_mm)
 >
 > So far we've used the `aes` function to tell
 > the scatterplot **geom** about the **x** and **y** locations of each point.
-> Another aesthetic property we can modify is **color**. Add a `colour=` argument to the aes brackets
-> to **color** the points according to the "species" column.
+> Another aesthetic property we can modify is **colour**. Add a `colour=` argument to the aes brackets
+> to **colour** the points according to the "species" column.
 
 <details>
   <summary>**Solution to Challenge 2**</summary>
@@ -194,10 +197,9 @@ ggplot(data = penguins, mapping = aes(x = species, y = body_mass_g)) +
 > Create a ggplot graph using the `geom_violin()` which shows the difference in **bill length** among the **sexes**. Add layers for axes labels and theme styling. 
 
 <details>
-  <summary>**Solution to Challenge 3**</summary>
+  <summary>**What the Challenge 3 graph might look like**</summary>
 
-Here is one possible solution:
-```{r, eval = TRUE}
+```{r, eval = TRUE, echo = FALSE}
 ggplot(data = penguins, mapping = aes(x = sex, y = bill_length_mm)) + 
   geom_violin() +
   labs(x = "Sex",
@@ -241,16 +243,15 @@ Note the word blue is put in "speech marks".
 > include layers for axes labels and styling. 
 
 <details>
-  <summary>**Solution to Challenge 4**</summary>
+  <summary>**What the Challenge 4 graph might look like**</summary>
 
-Here is one possible solution:
-```{r, eval = TRUE}
+```{r, eval = TRUE, echo=FALSE}
 ggplot(data = penguins, mapping = aes(x = species, y = body_mass_g)) + 
   geom_violin(colour = "darkorchid")
 ```
 
 Note: adding `fill = "darkorange"` will add a colour to the inside of the violin.
-```{r, eval = TRUE}
+```{r, eval = TRUE, echo = FALSE}
 ggplot(data = penguins, mapping = aes(x = species, y = body_mass_g)) + 
   geom_violin(colour = "darkorchid", fill = "darkorange")
 ```
@@ -269,8 +270,12 @@ ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = flipper_length_mm,
   theme_classic()
 ```
 
-But to specify colours, use `scale_colour_manual`:
-```{r}
+But to specify colours you need to use `scale_colour_manual`. 
+
+> **Challenge 5**
+> Adapt your code to add a scale_colour_manual layer with the colours darkorange, purple and cyan4 to create the graph below.
+
+```{r, eval = TRUE, echo = FALSE}
 ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = flipper_length_mm, colour = species)) + 
   geom_point() +
   labs(x = "Bill Length (mm)",
@@ -286,9 +291,9 @@ ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = flipper_length_mm,
 **Tip: creating plots**
 :::
 
-When creating graphs, people adapt code from the internet by replacing the names of the data and variables in the example code with their data.  
+If searching for ggplot layers that will control specific parts of your graph, using the correct graph terminology helps. For example, tick marks, levels, error bars, axes, legends.
 
-If searching for ggplot layers that will control specific parts of your graph, using the correct graph terminology helps. For example, tick marks, levels, error bars, axes, legends. 
+If code is not working, try running it repeatedly without different layers in turn to identify which layer is the problem.
 ::::
 
 <br>
@@ -312,16 +317,16 @@ ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, gro
 
 <br>
 
-> **Challenge 5**
+> **Challenge 6**
 >
 > Make a **scatterplot** of **bill length** and **bill depth**, grouped and coloured by **species**, with **trendlines** for each species and **triangles** for points and **specify colours** (you can choose colours). Give it appropriate axes **labels** and a **classic theme**.
  
 
 <details>
-  <summary>**Solution to Challenge 5**</summary>
+  <summary>**What the Challenge 6 graph might look like**</summary>
 
 Here is one possible solution:
-```{r, eval = TRUE}
+```{r, eval = TRUE, echo = FALSE, message=FALSE}
 ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, colour = species, grouped = species)) + 
   geom_point(shape = "triangle") +
   labs(x = "Bill Length (mm)",
@@ -336,8 +341,8 @@ ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, col
 
 ## Exporting plots
 
-The `ggsave()` function allows you to export a plot created with ggplot. You can specify the dimension and resolution of your plot by adjusting the appropriate arguments (`width`, `height` and `dpi`) to create high quality graphics for publication.  
-In order to save a plot from above, we first assign it to a variable, we could call it `penguin_plot`:
+The `ggsave()` function allows you to export a plot created with ggplot so you can paste it into word. You can specify the dimension and resolution of your plot by adjusting the appropriate arguments (`width`, `height` and `dpi`) to create high quality graphics for your assessments.  
+In order to save a plot from above, we first assign it to an object, we could call it `penguin_plot`:
 
 ```{r save}
 penguin_plot <- ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, colour = species, grouped = species)) + 
@@ -349,7 +354,7 @@ penguin_plot <- ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bi
   geom_smooth(method = lm)
 ```
 
-Now we can tell `ggsave` to save that plot in our `results` folder, with the file name "billScatterplot", in `png` format and specify the width and height in cm and the resolution (dpi). Check you have a `results/` folder in your working directory by clicking the files tab in the bottom left pane.
+Now we can tell `ggsave` to save that plot in our `results` folder, with the file name "billScatterplot", in `png` format and specify the width and height in cm and the resolution (dpi). Check you have a `results` folder in your working directory by clicking the files tab in the bottom left pane.
 
 ```{r, eval=FALSE}
 ggsave(filename = "results/billScatterplot.png", plot = penguin_plot, width = 12, height = 10, dpi = 300, units = "cm")

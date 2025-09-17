@@ -15,6 +15,15 @@ Artwork by @allison_horst
 
 # Creating a new Project in R
 
+:::: {.darkorchidbox data-latex=""}
+::: {.center data-latex=""}
+**Tip: If on a uni computer sign into OneDrive**
+:::
+
+Before you do this challenge make sure you have decided where you will save your R project. If you are on a university computer saving it in the cloud on your uni onedrive will mean you can access it later. Check you are signed into your uni one drive: open the file explorer > C drive > Users > find your username > OneDrive - University of Leeds and sign in. 
+
+::::
+
 
 > **Challenge 1**
 >
@@ -22,7 +31,8 @@ Artwork by @allison_horst
 > 2. Click "New Directory".
 > 3. Click "New Project".
 > 4. Type in the name of your project, e.g. "Learning_R".
-> 5. Click the "Create Project" button
+> 5. Browse to choose where you want to save it.
+> 6. Click the "Create Project" button
 
 For future computer labs, if you want to open this same RStudio project now it has been created, click
 through your file system to get to the directory where it was saved and double

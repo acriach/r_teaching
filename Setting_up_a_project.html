@@ -337,6 +337,9 @@ div.tocify {
 <li>
   <a href="tidyr.html">tidyr</a>
 </li>
+<li>
+  <a href="Quiz.html">Quiz</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -354,8 +357,7 @@ div.tocify {
 </div>
 
 
-<p><img src="images/cracked_setwd.png" alt="A cartoon of a cracked glass cube looking frustrated with casts on its arm and leg, with bandaids on it, containing “setwd”, looks on at a metal riveted cube labeled “R Proj” holding a skateboard looking sympathetic, and a smaller cube with a helmet on labeled “here” doing a trick on a skateboard." width="1248" />
-Artwork by <span class="citation">@allison_horst</span></p>
+<p>Artwork by <span class="citation">@allison_horst</span></p>
 <p><br></p>
 <div id="creating-a-new-project-in-r" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Creating a new Project
@@ -417,8 +419,7 @@ your project). You could call it Lesson 1.</p>
 number="1.1.2">
 <h3><span class="header-section-number">1.1.2</span> Save the data in
 the data folder</h3>
-<p><img src="images/lter_penguins.png" alt="Three cartoon penguins with chinstrap, gentoo and adelie written above them." width="900" />
-Artwork by <span class="citation">@allison_horst</span></p>
+<p>Artwork by <span class="citation">@allison_horst</span></p>
 <blockquote>
 <p><strong>Challenge 2</strong> View the palmer penguins data <a
 href="https://raw.githubusercontent.com/acriach/r_teaching/main/data/penguins.csv">here</a>.</p>
@@ -465,103 +466,13 @@ Environment window.</p>
 <p>In R, datasets are called data frames (df) or sometimes tibbles.</p>
 <p>We can begin exploring our data frame right away, pulling out columns
 by specifying them using the <code>$</code> operator:</p>
-<pre class="r"><code>penguins$species</code></pre>
-<pre><code>##   [1] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##   [7] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [13] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [19] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [25] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [31] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [37] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [43] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [49] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [55] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [61] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [67] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [73] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [79] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [85] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [91] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [97] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-## [103] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-## [109] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-## [115] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-## [121] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-## [127] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-## [133] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-## [139] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-## [145] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-## [151] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [157] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [163] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [169] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [175] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [181] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [187] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [193] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [199] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [205] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [211] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [217] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [223] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [229] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [235] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [241] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [247] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [253] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [259] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [265] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [271] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [277] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [283] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [289] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [295] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [301] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [307] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [313] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [319] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [325] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [331] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [337] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [343] &quot;Chinstrap&quot; &quot;Chinstrap&quot;</code></pre>
-<pre class="r"><code>penguins$bill_length_mm</code></pre>
-<pre><code>##   [1] 39.1 39.5 40.3   NA 36.7 39.3 38.9 39.2 34.1 42.0 37.8 37.8 41.1 38.6 34.6
-##  [16] 36.6 38.7 42.5 34.4 46.0 37.8 37.7 35.9 38.2 38.8 35.3 40.6 40.5 37.9 40.5
-##  [31] 39.5 37.2 39.5 40.9 36.4 39.2 38.8 42.2 37.6 39.8 36.5 40.8 36.0 44.1 37.0
-##  [46] 39.6 41.1 37.5 36.0 42.3 39.6 40.1 35.0 42.0 34.5 41.4 39.0 40.6 36.5 37.6
-##  [61] 35.7 41.3 37.6 41.1 36.4 41.6 35.5 41.1 35.9 41.8 33.5 39.7 39.6 45.8 35.5
-##  [76] 42.8 40.9 37.2 36.2 42.1 34.6 42.9 36.7 35.1 37.3 41.3 36.3 36.9 38.3 38.9
-##  [91] 35.7 41.1 34.0 39.6 36.2 40.8 38.1 40.3 33.1 43.2 35.0 41.0 37.7 37.8 37.9
-## [106] 39.7 38.6 38.2 38.1 43.2 38.1 45.6 39.7 42.2 39.6 42.7 38.6 37.3 35.7 41.1
-## [121] 36.2 37.7 40.2 41.4 35.2 40.6 38.8 41.5 39.0 44.1 38.5 43.1 36.8 37.5 38.1
-## [136] 41.1 35.6 40.2 37.0 39.7 40.2 40.6 32.1 40.7 37.3 39.0 39.2 36.6 36.0 37.8
-## [151] 36.0 41.5 46.1 50.0 48.7 50.0 47.6 46.5 45.4 46.7 43.3 46.8 40.9 49.0 45.5
-## [166] 48.4 45.8 49.3 42.0 49.2 46.2 48.7 50.2 45.1 46.5 46.3 42.9 46.1 44.5 47.8
-## [181] 48.2 50.0 47.3 42.8 45.1 59.6 49.1 48.4 42.6 44.4 44.0 48.7 42.7 49.6 45.3
-## [196] 49.6 50.5 43.6 45.5 50.5 44.9 45.2 46.6 48.5 45.1 50.1 46.5 45.0 43.8 45.5
-## [211] 43.2 50.4 45.3 46.2 45.7 54.3 45.8 49.8 46.2 49.5 43.5 50.7 47.7 46.4 48.2
-## [226] 46.5 46.4 48.6 47.5 51.1 45.2 45.2 49.1 52.5 47.4 50.0 44.9 50.8 43.4 51.3
-## [241] 47.5 52.1 47.5 52.2 45.5 49.5 44.5 50.8 49.4 46.9 48.4 51.1 48.5 55.9 47.2
-## [256] 49.1 47.3 46.8 41.7 53.4 43.3 48.1 50.5 49.8 43.5 51.5 46.2 55.1 44.5 48.8
-## [271] 47.2   NA 46.8 50.4 45.2 49.9 46.5 50.0 51.3 45.4 52.7 45.2 46.1 51.3 46.0
-## [286] 51.3 46.6 51.7 47.0 52.0 45.9 50.5 50.3 58.0 46.4 49.2 42.4 48.5 43.2 50.6
-## [301] 46.7 52.0 50.5 49.5 46.4 52.8 40.9 54.2 42.5 51.0 49.7 47.5 47.6 52.0 46.9
-## [316] 53.5 49.0 46.2 50.9 45.5 50.9 50.8 50.1 49.0 51.5 49.8 48.1 51.4 45.7 50.7
-## [331] 42.5 52.2 45.2 49.3 50.2 45.6 51.9 46.8 45.7 55.8 43.5 49.6 50.8 50.2</code></pre>
+<pre class="r"><code>penguins$species
+penguins$bill_length_mm</code></pre>
 <p><br></p>
 <p>Passing the <code>penguins</code> data frame through the structure
 function <code>str</code> will show you the type of data for each
 variable.</p>
 <pre class="r"><code>str(penguins)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    344 obs. of  8 variables:
-##  $ species          : chr  &quot;Adelie&quot; &quot;Adelie&quot; &quot;Adelie&quot; &quot;Adelie&quot; ...
-##  $ island           : chr  &quot;Torgersen&quot; &quot;Torgersen&quot; &quot;Torgersen&quot; &quot;Torgersen&quot; ...
-##  $ bill_length_mm   : num  39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...
-##  $ bill_depth_mm    : num  18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...
-##  $ flipper_length_mm: int  181 186 195 NA 193 190 181 195 193 190 ...
-##  $ body_mass_g      : int  3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
-##  $ sex              : chr  &quot;male&quot; &quot;female&quot; &quot;female&quot; NA ...
-##  $ year             : int  2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...</code></pre>
 <p>‘str’ shows us that species is <code>chr</code> which is short for
 character. This means R will treat species as a factor (in other words,
 discrete data). Bill_length_mm is <code>num</code> which stands for
@@ -571,12 +482,8 @@ R.</p>
 <p><br></p>
 <p>We can calculate the mean of bill length.</p>
 <pre class="r"><code>mean(penguins$bill_length_mm, na.rm = TRUE)</code></pre>
-<pre><code>## [1] 43.92193</code></pre>
 <p>But we can’t use the mean function on a factor.</p>
 <pre class="r"><code>mean(penguins$species, na.rm = TRUE)</code></pre>
-<pre><code>## Warning in mean.default(penguins$species, na.rm = TRUE): argument is not
-## numeric or logical: returning NA</code></pre>
-<pre><code>## [1] NA</code></pre>
 <div class="darkorchidbox">
 <div class="center">
 <p><strong>Tip: When functions won’t work</strong></p>
@@ -962,71 +869,61 @@ data is returned by each one.</p>
 <p>Calls the information that is in the first row, first column.</p>
 <p><br></p>
 <pre class="r"><code>penguins[, 1]</code></pre>
-<pre><code>##   [1] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##   [7] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [13] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [19] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [25] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [31] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [37] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [43] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [49] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [55] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [61] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [67] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [73] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [79] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [85] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [91] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-##  [97] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-## [103] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-## [109] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-## [115] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-## [121] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-## [127] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-## [133] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-## [139] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-## [145] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
-## [151] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [157] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [163] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [169] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [175] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [181] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [187] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [193] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [199] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [205] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [211] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [217] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [223] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [229] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [235] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [241] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [247] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [253] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [259] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [265] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [271] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
-## [277] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [283] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [289] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [295] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [301] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [307] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [313] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [319] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [325] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [331] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [337] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
-## [343] &quot;Chinstrap&quot; &quot;Chinstrap&quot;</code></pre>
+<pre><code>##   [1] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##   [8] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [15] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [22] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [29] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [36] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [43] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [50] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [57] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [64] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [71] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [78] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [85] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [92] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+##  [99] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [106] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [113] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [120] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [127] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [134] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [141] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;   
+## [148] &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Adelie&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [155] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [162] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [169] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [176] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [183] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [190] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [197] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [204] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [211] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [218] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [225] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [232] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [239] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [246] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [253] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [260] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [267] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;   
+## [274] &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Gentoo&quot;    &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [281] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [288] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [295] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [302] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [309] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [316] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [323] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [330] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [337] &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot; &quot;Chinstrap&quot;
+## [344] &quot;Chinstrap&quot;</code></pre>
 <p>Also, calls the first column.</p>
 <p><br></p>
 <pre class="r"><code>penguins[1, ]</code></pre>
-<pre><code>##   species    island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-## 1  Adelie Torgersen           39.1          18.7               181        3750
-##    sex year
-## 1 male 2007</code></pre>
+<pre><code>##   species    island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g  sex year
+## 1  Adelie Torgersen           39.1          18.7               181        3750 male 2007</code></pre>
 Calls the first row.
 </details>
 <p><br></p>

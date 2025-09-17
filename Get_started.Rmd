@@ -282,22 +282,22 @@ log(x)
 <details>
   <summary>**Solution to Challenge 2**</summary>
 
-```{r ch2pt1-sol}
+```{r ch2pt1-sol, eval = TRUE}
 mass <- 40
 ```
 This will give a value of `r mass` for the object mass
 
-```{r ch2pt2-sol}
+```{r ch2pt2-sol, eval = TRUE}
 age <- 122
 ```
 This will give a value of `r age` for the object age
-```{r ch2pt3-sol}
+```{r ch2pt3-sol, eval = TRUE}
 mass <- mass * 2
 ```
 This will multiply the existing value of `r mass/2` by 2 to give a new value of
 `r mass` to the object mass.
 
-```{r ch2pt4-sol}
+```{r ch2pt4-sol, eval = TRUE}
 age <- age - 20
 ```
 This will subtract 20 from the existing value of `r age + 20 ` to give a new value of `r age` to the object age.
@@ -318,7 +318,7 @@ This will subtract 20 from the existing value of `r age + 20 ` to give a new val
   <summary>**Solution to Challenge 3**</summary>
 
 One way of answering this question in R is to use the `>` to set up the following:
-```{r ch3-sol}
+```{r ch3-sol, eval = TRUE}
 mass > age
 ```
 This should yield a boolean value of TRUE since `r mass` is greater than `r age`.

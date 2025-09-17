@@ -33,6 +33,18 @@ Artwork by @allison_horst
 
 <br>
 
+:::: {.darkorchidbox data-latex=""}
+::: {.center data-latex=""}
+
+**Why does this matter?**
+:::
+
+Trying to put messy data into statistical tests can cause problems. AI is not good at recognising what tidy format your data needs to be in for the statistical test function to work in R. 
+
+::::
+
+<br>
+
 ## Examples
 
 Study the cartoon and the tables to understand what tidy data is.
@@ -58,7 +70,7 @@ knitr::include_graphics("./images/ToothGrowth_messy.png")
 **Tip: Example data**
 :::
 
-This data is sampled from datasets (mtcars, iris, ToothGrowth) commonly used on R internet help forums. Being familiar with the column names helps you to understand where the variables should go when you adapt example code.
+This data is sampled from datasets (mtcars, iris, ToothGrowth) commonly used as examples on R internet help forums and in AI answers if you don't specify the names of datasets. Being familiar with the column names helps you to understand example code.
 ::::
 
 <br>
@@ -85,7 +97,7 @@ knitr::include_graphics("./images/penguins_tidy.png")
 ## separate()
 Since "...every messy dataset is messy in it's own way" there are many functions you might need to change data. `separate()` is just one example.
 
-To demonstrate `separate()` we will first create the messy data set in the Challenge above using the combine `c()` function. (In internet help forums you may see small example data frames (df) created in this way.)
+To demonstrate `separate()` we will first create the messy data set in the Challenge above using the combine `c()` function. (You may notice AI creating small example data frames (df) in this way.)
 
 ```{r, echo = TRUE, eval=TRUE}
 penguin_messy_df <- data.frame(
@@ -188,14 +200,16 @@ The name of the new column for the measurements could be "height"
 <br>
 
 <details>
-  <summary>**Solution to Challenge 2**</summary>
+  <summary>**Your data from doing Challenge 2 should look like this**</summary>
 
-```{r, echo=TRUE, eval = TRUE}
-pivot_longer(people_heights_wide, 
+```{r, echo=FALSE, eval = TRUE}
+result <- pivot_longer(people_heights_wide, 
   cols = c(child, adult),    
   names_to = "age", 
   values_to = "height"
 )
+
+result
 ```
 </details>
 

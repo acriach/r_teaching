@@ -13,7 +13,7 @@
 
 <title>tidyr</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -29,7 +29,7 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
@@ -145,11 +145,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -178,8 +182,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -187,16 +191,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -370,31 +367,40 @@ different ways.</p>
 <p>“Tidy” data has a layout that makes it easier to do analyses in R.
 Real data is rarely in the format you need for analysis and often needs
 to be changed.</p>
-<p><img src="images/tidydata_quote.jpg" title="Stylized text providing an overview of Tidy Data. The top reads “Tidy data is a standard way of mapping the meaning of a dataset to its structure. - Hadley Wickham.” On the left reads “In tidy data: each variable forms a column; each observation forms a row; each cell is a single measurement.” There is an example table on the lower right with columns ‘id’, ‘name’ and ‘color’ with observations for different cats, illustrating tidy data structure.”." alt="Stylized text providing an overview of Tidy Data. The top reads “Tidy data is a standard way of mapping the meaning of a dataset to its structure. - Hadley Wickham.” On the left reads “In tidy data: each variable forms a column; each observation forms a row; each cell is a single measurement.” There is an example table on the lower right with columns ‘id’, ‘name’ and ‘color’ with observations for different cats, illustrating tidy data structure.”."  />
+<p><img src="images/tidydata_quote.jpg" alt="Stylized text providing an overview of Tidy Data. The top reads “Tidy data is a standard way of mapping the meaning of a dataset to its structure. - Hadley Wickham.” On the left reads “In tidy data: each variable forms a column; each observation forms a row; each cell is a single measurement.” There is an example table on the lower right with columns ‘id’, ‘name’ and ‘color’ with observations for different cats, illustrating tidy data structure.”." width="2400" />
 Artwork by <span class="citation">@allison_horst</span></p>
+<p><br></p>
+<div class="darkorchidbox">
+<div class="center">
+<p><strong>Why does this matter?</strong></p>
+</div>
+<p>Trying to put messy data into statistical tests can cause problems.
+AI is not good at recognising what tidy format your data needs to be in
+for the statistical test function to work in R.</p>
+</div>
 <p><br></p>
 <div id="examples" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Examples</h2>
 <p>Study the cartoon and the tables to understand what tidy data is.
-<img src="images/tidydata_messy.jpg" title="There are two sets of anthropomorphized data tables. The top group of three tables are all rectangular and smiling, with a shared speech bubble reading “our columns are variables and our rows are observations!”. Text to the left of that group reads “The standard structure of tidy data means that “tidy datasets are all alike…” The lower group of four tables are all different shapes, look ragged and concerned, and have different speech bubbles reading (from left to right) “my column are values and my rows are variables”, “I have variables in columns AND in rows”, “I have multiple variables in a single column”, and “I don’t even KNOW what my deal is.” Next to the frazzled data tables is text “...but every messy dataset is messy in its own way. -Hadley Wickham.”." alt="There are two sets of anthropomorphized data tables. The top group of three tables are all rectangular and smiling, with a shared speech bubble reading “our columns are variables and our rows are observations!”. Text to the left of that group reads “The standard structure of tidy data means that “tidy datasets are all alike…” The lower group of four tables are all different shapes, look ragged and concerned, and have different speech bubbles reading (from left to right) “my column are values and my rows are variables”, “I have variables in columns AND in rows”, “I have multiple variables in a single column”, and “I don’t even KNOW what my deal is.” Next to the frazzled data tables is text “...but every messy dataset is messy in its own way. -Hadley Wickham.”."  /></p>
-<p><img src="images/mtcars_messy.png" title="The text above the first table is “mtcars tidy”. The first table has the column names car, mpg, cyl, disp and hp and 4 rows of data. The data in the first column is Mazda RX4, Mazda RX4 Wag, Datsun 710 and Hornet 4 Drive. The second table has “messy - rows are variables” and is a pivoted (transposed) version of the first table with the column names as Mazda RX4, Mazda RX4 Wag, Datsun 710 and Hornet 4 Drive." alt="The text above the first table is “mtcars tidy”. The first table has the column names car, mpg, cyl, disp and hp and 4 rows of data. The data in the first column is Mazda RX4, Mazda RX4 Wag, Datsun 710 and Hornet 4 Drive. The second table has “messy - rows are variables” and is a pivoted (transposed) version of the first table with the column names as Mazda RX4, Mazda RX4 Wag, Datsun 710 and Hornet 4 Drive."  /></p>
-<p><img src="images/iris_messy.png" title="The text above the first table is “iris tidy”. The first table has the column names Petal.Length, Petal.Width and Species and 3 rows of data. The second table has “messy - multiple variables (petal length and petal width) in single column” and the first column Petal.Dimension has alternative LEngth and Width rows with the next column with the measurements in it" alt="The text above the first table is “iris tidy”. The first table has the column names Petal.Length, Petal.Width and Species and 3 rows of data. The second table has “messy - multiple variables (petal length and petal width) in single column” and the first column Petal.Dimension has alternative LEngth and Width rows with the next column with the measurements in it"  /></p>
-<p><img src="images/ToothGrowth_messy.png" title="The text above the first table is “ToothGrowth tidy”. The first table has the column names len, supp and dose and 18 rows of data. The second table has “messy - variables in columns (supp) and rows(dose)” and the first column supp has a variable but the next three columns are named dose0.5, dose, 1.0 and dose2.0 and all contain len measurements." alt="The text above the first table is “ToothGrowth tidy”. The first table has the column names len, supp and dose and 18 rows of data. The second table has “messy - variables in columns (supp) and rows(dose)” and the first column supp has a variable but the next three columns are named dose0.5, dose, 1.0 and dose2.0 and all contain len measurements."  /></p>
+<img src="images/tidydata_messy.jpg" alt="There are two sets of anthropomorphized data tables. The top group of three tables are all rectangular and smiling, with a shared speech bubble reading “our columns are variables and our rows are observations!”. Text to the left of that group reads “The standard structure of tidy data means that “tidy datasets are all alike…” The lower group of four tables are all different shapes, look ragged and concerned, and have different speech bubbles reading (from left to right) “my column are values and my rows are variables”, “I have variables in columns AND in rows”, “I have multiple variables in a single column”, and “I don’t even KNOW what my deal is.” Next to the frazzled data tables is text “...but every messy dataset is messy in its own way. -Hadley Wickham.”." width="2400" /></p>
+<p><img src="images/mtcars_messy.png" alt="The text above the first table is “mtcars tidy”. The first table has the column names car, mpg, cyl, disp and hp and 4 rows of data. The data in the first column is Mazda RX4, Mazda RX4 Wag, Datsun 710 and Hornet 4 Drive. The second table has “messy - rows are variables” and is a pivoted (transposed) version of the first table with the column names as Mazda RX4, Mazda RX4 Wag, Datsun 710 and Hornet 4 Drive." width="301" /></p>
+<p><img src="images/iris_messy.png" alt="The text above the first table is “iris tidy”. The first table has the column names Petal.Length, Petal.Width and Species and 3 rows of data. The second table has “messy - multiple variables (petal length and petal width) in single column” and the first column Petal.Dimension has alternative LEngth and Width rows with the next column with the measurements in it" width="210" /></p>
+<p><img src="images/ToothGrowth_messy.png" alt="The text above the first table is “ToothGrowth tidy”. The first table has the column names len, supp and dose and 18 rows of data. The second table has “messy - variables in columns (supp) and rows(dose)” and the first column supp has a variable but the next three columns are named dose0.5, dose, 1.0 and dose2.0 and all contain len measurements." width="364" /></p>
 <div class="darkorchidbox">
 <div class="center">
 <p><strong>Tip: Example data</strong></p>
 </div>
 <p>This data is sampled from datasets (mtcars, iris, ToothGrowth)
-commonly used on R internet help forums. Being familiar with the column
-names helps you to understand where the variables should go when you
-adapt example code.</p>
+commonly used as examples on R internet help forums and in AI answers if
+you don’t specify the names of datasets. Being familiar with the column
+names helps you to understand example code.</p>
 </div>
 <p><br></p>
 <blockquote>
 <p><strong>Challenge 1</strong></p>
 <p>Decide if this data is tidy or messy. Explain why.</p>
 </blockquote>
-<p><img src="images/penguins_messy_only.png" title="The table has the text “messy - multiple variable (species an island) in single column” and &gt; is a table with the first column names species_island and that first column has Adelie and Biscoe in the same cell." alt="The table has the text “messy - multiple variable (species an island) in single column” and &gt; is a table with the first column names species_island and that first column has Adelie and Biscoe in the same cell."  /></p>
+<p><img src="images/penguins_messy_only.png" alt="The table has the text “messy - multiple variable (species an island) in single column” and &gt; is a table with the first column names species_island and that first column has Adelie and Biscoe in the same cell." width="254" /></p>
 <details>
 <summary>
 <strong>Solution to Challenge 1</strong>
@@ -403,7 +409,7 @@ The data is messy because there are two variables (species and island)
 in a single column. In other words, there are two observations in each
 of the cells in the first column. The corresponding tidy version is
 below.
-<img src="images/penguins_tidy.png" title="The text above the table is “penguins tidy”. It has the column names species, island, bill_length_mm and bill_depth_mm." alt="The text above the table is “penguins tidy”. It has the column names species, island, bill_length_mm and bill_depth_mm."  />
+<img src="images/penguins_tidy.png" alt="The text above the table is “penguins tidy”. It has the column names species, island, bill_length_mm and bill_depth_mm." width="254" />
 </details>
 <p><br></p>
 </div>
@@ -414,8 +420,8 @@ functions you might need to change data. <code>separate()</code> is just
 one example.</p>
 <p>To demonstrate <code>separate()</code> we will first create the messy
 data set in the Challenge above using the combine <code>c()</code>
-function. (In internet help forums you may see small example data frames
-(df) created in this way.)</p>
+function. (You may notice AI creating small example data frames (df) in
+this way.)</p>
 <pre class="r"><code>penguin_messy_df &lt;- data.frame(
   species_island = c(rep(&quot;Adelie Biscoe&quot;, 2), rep(&quot;Adelie Torgersen&quot;, 2), rep(&quot;Adelie Cream&quot;, 2)), # `rep()` is the repeat function. 
   bill_length_mm = c(35.7, 41.3, 35.9, 41.8, 37.3, 41.3),
@@ -539,13 +545,8 @@ could be “age” The name of the new column for the measurements could be
 <p><br></p>
 <details>
 <summary>
-<strong>Solution to Challenge 2</strong>
+<strong>Your data from doing Challenge 2 should look like this</strong>
 </summary>
-<pre class="r"><code>pivot_longer(people_heights_wide, 
-  cols = c(child, adult),    
-  names_to = &quot;age&quot;, 
-  values_to = &quot;height&quot;
-)</code></pre>
 <pre><code>## # A tibble: 8 × 3
 ##   person age   height
 ##    &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt;

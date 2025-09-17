@@ -13,7 +13,7 @@
 
 <title>dplyr</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -29,7 +29,7 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
@@ -145,11 +145,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -178,8 +182,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -187,16 +191,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -359,17 +356,22 @@ div.tocify {
 
 <p><br></p>
 <p><strong>Set up</strong></p>
-<p>We will use the palmer penguin data so open your saved Rproj in
-Rstudio by clicking <strong>File</strong> menu then <strong>Open
-project</strong> and look for your <strong>.Rproj</strong> file. Click
-the <strong>Files</strong> tab in the bottom right pane, click the
-<strong>data</strong> folder and check the penguins.csv is in there.
-Then read it in.</p>
+<details>
+<summary>
+<strong>How to open a saved Rproj and read in data if not already
+open</strong>
+</summary>
+<p>Open your saved Rproj in Rstudio by clicking <strong>File</strong>
+menu then <strong>Open project</strong> and look for your
+<strong>.Rproj</strong> file. Click the <strong>Files</strong> tab in
+the bottom right pane, click the <strong>data</strong> folder and check
+the penguins.csv is in there. Then read it in.</p>
 <pre class="r"><code>penguins &lt;- read.csv(file = &quot;data/penguins.csv&quot;)</code></pre>
+</details>
 <p><br></p>
 <div id="data-wrangling" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Data wrangling</h1>
-<p><img src="images/dplyr_wrangling.png" title="Cartoon of a fuzzy monster with a cowboy hat and lasso, riding another fuzzy monster labeled “dplyr”, lassoing a group of angry / unruly looking creatures labeled “data”." alt="Cartoon of a fuzzy monster with a cowboy hat and lasso, riding another fuzzy monster labeled “dplyr”, lassoing a group of angry / unruly looking creatures labeled “data”." width="956" />
+<p><img src="images/dplyr_wrangling.png" alt="Cartoon of a fuzzy monster with a cowboy hat and lasso, riding another fuzzy monster labeled “dplyr”, lassoing a group of angry / unruly looking creatures labeled “data”." width="956" />
 Artwork by <span class="citation">@allison_horst</span></p>
 <p><br></p>
 <p>Cleaning or wrangling data means many things to many researchers: we
@@ -387,14 +389,14 @@ and potentially introduce some nasty bugs.</p>
 <div id="the-dplyr-package" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> The
 <code>dplyr</code> package</h2>
-<p><img src="images/dplyr_logo.png" title="A hexagon with dplyr written in it and three colourful plyers on a space background" alt="A hexagon with dplyr written in it and three colourful plyers on a space background" width="120" /></p>
+<p><img src="images/dplyr_logo.png" alt="A hexagon with dplyr written in it and three colourful plyers on a space background" width="120" /></p>
 <p>Luckily, the <a
 href="https://cran.r-project.org/package=dplyr"><code>dplyr</code></a>
 package provides a number of very useful functions for manipulating
 dataframes in a way that will reduce the above repetition, reduce the
-probability of making errors, and probably even save you some typing. As
-an added bonus, you might even find the <code>dplyr</code> grammar
-easier to understand.</p>
+probability of making errors, and save you some typing. As an added
+bonus, you might even find the <code>dplyr</code> grammar easier to
+understand.</p>
 <p>Here we’re going to cover 5 of the most commonly used functions as
 well as using pipes (<code>%&gt;%</code>) to combine them.</p>
 <ol style="list-style-type: decimal">
@@ -412,7 +414,7 @@ tab, bottom right.</p>
 </div>
 <div id="select" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> select()</h2>
-<p><img src="images/dplyr-fig1.png" title="Text is select(data.frame, a, c). On the right are four columns of data named a, b, c and d. On the left are two columns a and c. One arrow curves from a to a and the other arrow curves c to c." alt="Text is select(data.frame, a, c). On the right are four columns of data named a, b, c and d. On the left are two columns a and c. One arrow curves from a to a and the other arrow curves c to c." width="284" /></p>
+<p><img src="images/dplyr-fig1.png" alt="Text is select(data.frame, a, c). On the right are four columns of data named a, b, c and d. On the left are two columns a and c. One arrow curves from a to a and the other arrow curves c to c." width="284" /></p>
 <p>If we wanted to analyse only a few of the variables (columns) in our
 dataframe we could use the <code>select()</code> function. This will
 keep only the variables you select.</p>
@@ -447,30 +449,20 @@ data frame is piped into the <code>select()</code> part of the code.</p>
 <p>Pipes allow you to do many actions in one command, make code easier
 to read and avoid creating multiple data objects.</p>
 <p><br></p>
-<div class="darkorchidbox">
-<div class="center">
-<p><strong>Tip: select() and filter()</strong></p>
-</div>
-<p>Remember, <kbd><code>select()</code></kbd> chooses columns and
-<kbd><code>filter()</code></kbd> chooses rows</p>
-</div>
-<p><br></p>
 <blockquote>
 <p><strong>Challenge 1</strong></p>
-<p>Write a single command (which can span multiple lines and include
-pipes) that will produce a dataframe that has the Gentoo values for
+<p>Write a single command (which spans multiple lines and include pipes)
+that will produce a dataframe that has the Gentoo values for
 <code>island</code>, <code>flipper_length_mm</code> and
 <code>year</code>, but not for other penguins. How many rows does your
 dataframe have?</p>
 </blockquote>
 <details>
 <summary>
-<strong>Solution to Challenge 1</strong>
+<strong>Check your answer to Challenge 1</strong>
 </summary>
-<pre class="r"><code>gentoo_island_flipper_yr &lt;- penguins %&gt;%
-    filter(species == &quot;Gentoo&quot;) %&gt;%
-    select(island, flipper_length_mm, year)</code></pre>
-<p>You should have 124 rows.</p>
+<p>You should have 124 rows (look in the environment tab in the top
+right window to check this).</p>
 <strong>Note:</strong> The order of operations is very important in this
 case. If we used ‘select’ first, filter would not be able to find the
 variable species since we would have removed it in the previous step
@@ -480,13 +472,13 @@ variable species since we would have removed it in the previous step
 <div id="group_by-and-summarize" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> group_by() and
 summarize()</h2>
-<p>Now, we were supposed to be reducing the error prone repetitiveness
-of what can be done with base R, but up to now we haven’t done that
-since we would have to repeat the above for each species. Using
-<code>filter()</code>, will only pass observations that meet your
-criteria (in the above: <code>species=="Adelie"</code>). Instead, we can
-use <code>group_by()</code>, which will analyse all three species.</p>
-<p><img src="images/dplyr-fig2.png" title="Text is data.frame, pipe operator, group_by(a). On the right are four columns of data named a, b, c and d. Arrows show these rows split into three so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. " alt="Text is data.frame, pipe operator, group_by(a). On the right are four columns of data named a, b, c and d. Arrows show these rows split into three so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. " width="708" /></p>
+<p>If we want to do the above for each species, we’d have to repeat the
+code but we’re trying to reduce the error prone repetitiveness of what
+can be done with base R. In other words, using <code>filter()</code>,
+will only pass observations that meet your criteria (in the above:
+<code>species=="Adelie"</code>). Instead, we can use
+<code>group_by()</code>, which will analyse all three species.</p>
+<p><img src="images/dplyr-fig2.png" alt="Text is data.frame, pipe operator, group_by(a). On the right are four columns of data named a, b, c and d. Arrows show these rows split into three so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. " width="708" /></p>
 <p><br></p>
 <div id="using-group_by-with-summarize" class="section level3"
 number="1.4.1">
@@ -497,7 +489,7 @@ something like <code>summarize()</code>. By using the
 <code>group_by()</code> function, we split our original data frame into
 multiple pieces, then we can run functions (e.g. <code>mean()</code> or
 <code>sd()</code>) within <code>summarize()</code>.</p>
-<p><img src="images/dplyr-fig3.png" title="Text is data.frame pipe operator group_by(a) pipe operator summarise(mean_b=mean(b)). On the right are four columns of data named a, b, c and d with six rows named 1,1,2,2,3 and 3 in column a. Arrows show these rows split so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. Three arrows goes from these 3 smaller dataframes to a final datafram with column a containing 1, 2 and 3 and a second column called mean_b." alt="Text is data.frame pipe operator group_by(a) pipe operator summarise(mean_b=mean(b)). On the right are four columns of data named a, b, c and d with six rows named 1,1,2,2,3 and 3 in column a. Arrows show these rows split so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. Three arrows goes from these 3 smaller dataframes to a final datafram with column a containing 1, 2 and 3 and a second column called mean_b." width="708" /></p>
+<p><img src="images/dplyr-fig3.png" alt="Text is data.frame pipe operator group_by(a) pipe operator summarise(mean_b=mean(b)). On the right are four columns of data named a, b, c and d with six rows named 1,1,2,2,3 and 3 in column a. Arrows show these rows split so 1 and 1 rows are in one dataframe, 2 and 2 rows in another and 3 and 3 rows together. Three arrows goes from these 3 smaller dataframes to a final datafram with column a containing 1, 2 and 3 and a second column called mean_b." width="708" /></p>
 <pre class="r"><code>penguins %&gt;%
     group_by(species) %&gt;%
     summarize(mean_body = mean(body_mass_g, na.rm=TRUE))</code></pre>
@@ -553,18 +545,572 @@ function in <code>summarize()</code>.</p>
 <p>For each species and sex, calculate the mean and sd of bill length
 and bill depth.</p>
 </blockquote>
+<p><br></p>
+<p>Exporting such information as a journal style table is useful as it
+can be added to Word documents for assessments.</p>
+<blockquote>
+<p><strong>Challenge 3</strong></p>
+<p>Write code that takes the table you created in Challenge 2, formats
+it using <code>gt()</code> function and exports it as a html file using
+<code>gtsave()</code>, saving it in your results folder. The table
+should look like the below.</p>
+</blockquote>
+<div id="czodrsvfow" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#czodrsvfow table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#czodrsvfow thead, #czodrsvfow tbody, #czodrsvfow tfoot, #czodrsvfow tr, #czodrsvfow td, #czodrsvfow th {
+  border-style: none;
+}
+
+#czodrsvfow p {
+  margin: 0;
+  padding: 0;
+}
+
+#czodrsvfow .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#czodrsvfow .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#czodrsvfow .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#czodrsvfow .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#czodrsvfow .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#czodrsvfow .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#czodrsvfow .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#czodrsvfow .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#czodrsvfow .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#czodrsvfow .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#czodrsvfow .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#czodrsvfow .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#czodrsvfow .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#czodrsvfow .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#czodrsvfow .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#czodrsvfow .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#czodrsvfow .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#czodrsvfow .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: none;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#czodrsvfow .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#czodrsvfow .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#czodrsvfow .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#czodrsvfow .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#czodrsvfow .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#czodrsvfow .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#czodrsvfow .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#czodrsvfow .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#czodrsvfow .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#czodrsvfow .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#czodrsvfow .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#czodrsvfow .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#czodrsvfow .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#czodrsvfow .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#czodrsvfow .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#czodrsvfow .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#czodrsvfow .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#czodrsvfow .gt_left {
+  text-align: left;
+}
+
+#czodrsvfow .gt_center {
+  text-align: center;
+}
+
+#czodrsvfow .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#czodrsvfow .gt_font_normal {
+  font-weight: normal;
+}
+
+#czodrsvfow .gt_font_bold {
+  font-weight: bold;
+}
+
+#czodrsvfow .gt_font_italic {
+  font-style: italic;
+}
+
+#czodrsvfow .gt_super {
+  font-size: 65%;
+}
+
+#czodrsvfow .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#czodrsvfow .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#czodrsvfow .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#czodrsvfow .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#czodrsvfow .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#czodrsvfow .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#czodrsvfow .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#czodrsvfow .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#czodrsvfow div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="species">Species</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="sex">Sex</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="mean_billlength">Mean Bill Length</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="sd_billlength">SD Bill Length</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="mean_billdepth">Mean Bill Depth</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="sd_billdepth">SD Bill Depth</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="species" class="gt_row gt_left">Adelie</td>
+<td headers="sex" class="gt_row gt_left">female</td>
+<td headers="mean_billlength" class="gt_row gt_right">37.25753</td>
+<td headers="sd_billlength" class="gt_row gt_right">2.028883</td>
+<td headers="mean_billdepth" class="gt_row gt_right">17.62192</td>
+<td headers="sd_billdepth" class="gt_row gt_right">0.9429927</td></tr>
+    <tr><td headers="species" class="gt_row gt_left">Adelie</td>
+<td headers="sex" class="gt_row gt_left">male</td>
+<td headers="mean_billlength" class="gt_row gt_right">40.39041</td>
+<td headers="sd_billlength" class="gt_row gt_right">2.277131</td>
+<td headers="mean_billdepth" class="gt_row gt_right">19.07260</td>
+<td headers="sd_billdepth" class="gt_row gt_right">1.0188856</td></tr>
+    <tr><td headers="species" class="gt_row gt_left">Chinstrap</td>
+<td headers="sex" class="gt_row gt_left">female</td>
+<td headers="mean_billlength" class="gt_row gt_right">46.57353</td>
+<td headers="sd_billlength" class="gt_row gt_right">3.108669</td>
+<td headers="mean_billdepth" class="gt_row gt_right">17.58824</td>
+<td headers="sd_billdepth" class="gt_row gt_right">0.7811277</td></tr>
+    <tr><td headers="species" class="gt_row gt_left">Chinstrap</td>
+<td headers="sex" class="gt_row gt_left">male</td>
+<td headers="mean_billlength" class="gt_row gt_right">51.09412</td>
+<td headers="sd_billlength" class="gt_row gt_right">1.564558</td>
+<td headers="mean_billdepth" class="gt_row gt_right">19.25294</td>
+<td headers="sd_billdepth" class="gt_row gt_right">0.7612730</td></tr>
+    <tr><td headers="species" class="gt_row gt_left">Gentoo</td>
+<td headers="sex" class="gt_row gt_left">female</td>
+<td headers="mean_billlength" class="gt_row gt_right">45.56379</td>
+<td headers="sd_billlength" class="gt_row gt_right">2.051247</td>
+<td headers="mean_billdepth" class="gt_row gt_right">14.23793</td>
+<td headers="sd_billdepth" class="gt_row gt_right">0.5402493</td></tr>
+    <tr><td headers="species" class="gt_row gt_left">Gentoo</td>
+<td headers="sex" class="gt_row gt_left">male</td>
+<td headers="mean_billlength" class="gt_row gt_right">49.47377</td>
+<td headers="sd_billlength" class="gt_row gt_right">2.720594</td>
+<td headers="mean_billdepth" class="gt_row gt_right">15.71803</td>
+<td headers="sd_billdepth" class="gt_row gt_right">0.7410596</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+<p><br></p>
 <details>
 <summary>
-<strong>Solution to Challenge 2</strong>
+<strong>Solution to Challenge 2 and 3</strong>
 </summary>
-<pre class="r"><code>penguins %&gt;%
-    group_by(species, sex) %&gt;%
-    filter(!is.na(sex)) %&gt;%
-    summarize(mean_billlength = mean(bill_length_mm),
-              sd_billlength = sd(bill_length_mm),
-              mean_billdepth = mean(bill_depth_mm),
-              sd_billdepth = sd(bill_depth_mm))</code></pre>
+<p>Create a summary table</p>
+<pre class="r"><code>penguinSummary &lt;- penguins %&gt;%
+  group_by(species, sex) %&gt;%
+  filter(!is.na(sex)) %&gt;%
+  summarize(
+    mean_billlength = mean(bill_length_mm),
+    sd_billlength = sd(bill_length_mm),
+    mean_billdepth = mean(bill_depth_mm),
+    sd_billdepth = sd(bill_depth_mm),
+    .groups = &quot;drop&quot;  
+  )
+
+formatted_table &lt;- penguinSummary %&gt;%
+  gt() %&gt;%
+  cols_label(
+    species = &quot;Species&quot;,
+    sex = &quot;Sex&quot;,
+    mean_billlength = &quot;Mean Bill Length&quot;,
+    sd_billlength = &quot;SD Bill Length&quot;,
+    mean_billdepth = &quot;Mean Bill Depth&quot;,
+    sd_billdepth = &quot;SD Bill Depth&quot;
+  ) %&gt;%
+  tab_options(column_labels.border.top.color = &quot;black&quot;,
+  column_labels.border.bottom.color = &quot;black&quot;,
+  table_body.border.bottom.style = &quot;none&quot;,
+  table.border.bottom.color = &quot;black&quot;,
+  table_body.hlines.style = &quot;none&quot;)</code></pre>
+<p><br></p>
+<p>Format the table</p>
+<pre class="r"><code>formatted_table &lt;- penguinSummary %&gt;%
+  gt() %&gt;%
+  cols_label(
+    species = &quot;Species&quot;,
+    sex = &quot;Sex&quot;,
+    mean_billlength = &quot;Mean Bill Length&quot;,
+    sd_billlength = &quot;SD Bill Length&quot;,
+    mean_billdepth = &quot;Mean Bill Depth&quot;,
+    sd_billdepth = &quot;SD Bill Depth&quot;
+  ) %&gt;%
+  tab_options(column_labels.border.top.color = &quot;black&quot;,
+  column_labels.border.bottom.color = &quot;black&quot;,
+  table_body.border.bottom.style = &quot;none&quot;,
+  table.border.bottom.color = &quot;black&quot;,
+  table_body.hlines.style = &quot;none&quot;)</code></pre>
+<p><br></p>
+<p>Save the table</p>
+<pre class="r"><code>gtsave(formatted_table, &quot;results/penguin_summary_table.html&quot;)</code></pre>
 </details>
+<p><br></p>
 <p><br></p>
 </div>
 </div>
@@ -600,7 +1146,7 @@ class="math inline">\(se = sd/\sqrt n\)</span></p>
 </div>
 <div id="mutate" class="section level2" number="1.6">
 <h2><span class="header-section-number">1.6</span> mutate()</h2>
-<p><img src="images/dplyr_mutate.png" title="Cartoon of cute fuzzy monsters dressed up as different X-men characters, working together to add a new column to an existing data frame. Stylized title text reads “dplyr::mutate - add columns, keep existing." alt="Cartoon of cute fuzzy monsters dressed up as different X-men characters, working together to add a new column to an existing data frame. Stylized title text reads “dplyr::mutate - add columns, keep existing." width="2240" />
+<p><img src="images/dplyr_mutate.png" alt="Cartoon of cute fuzzy monsters dressed up as different X-men characters, working together to add a new column to an existing data frame. Stylized title text reads “dplyr::mutate - add columns, keep existing." width="2240" />
 Artwork by <span class="citation">@allison_horst</span></p>
 <p><br></p>
 <p>mutate() creates new variables (columns) from existing variables.</p>
@@ -612,8 +1158,9 @@ number="1.6.1">
 <h3><span class="header-section-number">1.6.1</span> Connect mutate with
 case_when</h3>
 <p>We can combine <code>mutate()</code> with <code>case_when()</code> to
-filter data in the moment of creating a new variable. (Note: case_when
-is an alternative to the older <code>ifelse()</code> function.)</p>
+filter data in the moment of creating a new variable. (Note:
+<code>case_when()</code> is an alternative to the older
+<code>ifelse()</code> function.)</p>
 <p>We can make a new column of data that categorises each Gentoo penguin
 as either large or small and all other penguins as “not Gentoo”. To do
 this, we use information in the species and body mass columns.</p>
@@ -627,7 +1174,7 @@ this, we use information in the species and body mass columns.</p>
         )</code></pre>
 <p>Size is our name for the new column. You can read <code>~</code> as
 “then write”. The last line of code can be read as “if none of the
-conditions are TRUE then write is not Gentoo”.</p>
+conditions are TRUE then write not Gentoo”.</p>
 <p><br></p>
 <blockquote>
 <p><strong>Advanced Challenge</strong></p>
@@ -660,8 +1207,43 @@ islands.</p>
 <p><br></p>
 </div>
 </div>
-<div id="other-great-resources" class="section level2" number="1.7">
-<h2><span class="header-section-number">1.7</span> Other great
+<div id="handling-missing-values" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Handling missing
+values</h2>
+<p>If there are blank cells in the file you read into R, it will fill
+them in with NA.</p>
+<p>We have seen that some functions use the NA remove argument to deal
+with NA values, as below.</p>
+<pre class="r"><code>mean(penguins[penguins$species == &quot;Adelie&quot;, &quot;body_mass_g&quot;], na.rm = TRUE)</code></pre>
+<p>The filter function used <code>!is.na</code> read as “not is NA”.</p>
+<pre class="r"><code>penguins %&gt;%
+    group_by(species, sex) %&gt;%
+    filter(!is.na(sex))</code></pre>
+<p><br></p>
+<p>An alternative is using <code>na.omit()</code></p>
+<pre class="r"><code>clean_data &lt;- na.omit(penguins)</code></pre>
+<div class="darkorchidbox">
+<div class="center">
+<p><strong>Caution!</strong></p>
+</div>
+<p>Be aware that<code>na.omit()</code> removes the entire row of data
+even if there is an NA value in a variable you are not using.</p>
+</div>
+<p><br></p>
+<p>If missing values are coded as an extreme value such as 999, you must
+change them to NA.</p>
+<pre class="r"><code>ExampleData[ExampleData == 999] &lt;- NA</code></pre>
+<div class="darkorchidbox">
+<div class="center">
+<p><strong>Tip: missing values</strong></p>
+</div>
+<p>Be careful using 0. Zero should mean the measurement was 0 units
+oppose to missing data.</p>
+</div>
+<p><br></p>
+</div>
+<div id="other-great-resources" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> Other great
 resources</h2>
 <ul>
 <li><a href="http://r4ds.had.co.nz/">R for Data Science</a></li>

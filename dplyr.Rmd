@@ -62,7 +62,7 @@ knitr::include_graphics("./images/dplyr_logo.png")
 Luckily, the [`dplyr`](https://cran.r-project.org/package=dplyr)
 package provides a number of very useful functions for manipulating dataframes
 in a way that will reduce the above repetition, reduce the probability of making
-errors, and probably even save you some typing. As an added bonus, you might
+errors, and save you some typing. As an added bonus, you might
 even find the `dplyr` grammar easier to understand.
 
 Here we're going to cover 5 of the most commonly used functions as well as using
@@ -130,35 +130,25 @@ symbol `%>%` to the `filter()` function. We don't need to name which data object
 
 Pipes allow you to do many actions in one command, make code easier to read and avoid creating multiple data objects.
 
-<br>
-
-:::: {.darkorchidbox data-latex=""}
-::: {.center data-latex=""}
-**Tip: select() and filter()**
-:::
-
-Remember, <kbd>`select()`</kbd> chooses columns and <kbd>`filter()`</kbd> chooses rows 
-
-::::
 
 <br>
 
 > **Challenge 1**
 >
-> Write a single command (which can span multiple lines and include pipes) that
+> Write a single command (which spans multiple lines and include pipes) that
 > will produce a dataframe that has the Gentoo values for `island`, `flipper_length_mm`
 > and `year`, but not for other penguins.  How many rows does your dataframe
 > have?
 
 <details>
-  <summary>**Solution to Challenge 1**</summary>
+  <summary>**Check your answer to Challenge 1**</summary>
 
-```{r, eval = TRUE}
+```{r, eval = TRUE, echo =FALSE}
 gentoo_island_flipper_yr <- penguins %>%
     filter(species == "Gentoo") %>%
     select(island, flipper_length_mm, year)
 ```
-You should have 124 rows.  
+You should have 124 rows (look in the environment tab in the top right window to check this).  
 
 **Note:** The order of operations is very important in this
 case. If we used 'select' first, filter would not be able to find the variable
@@ -169,9 +159,8 @@ species since we would have removed it in the previous step
 
 ## group_by() and summarize()
 
-Now, we were supposed to be reducing the error prone repetitiveness of what can
-be done with base R, but up to now we haven't done that since we would have to
-repeat the above for each species. Using `filter()`, will only pass
+If we want to do the above for each species, we'd have to repeat the code but we're trying to reduce the error prone repetitiveness of what can
+be done with base R. In other words, using `filter()`, will only pass
 observations that meet your criteria (in the above: `species=="Adelie"`). Instead, we
 can use `group_by()`, which will analyse all three species.
 
@@ -251,19 +240,116 @@ penguins %>%
 >
 > For each species and sex, calculate the mean and sd of bill length and bill depth.
 
-<details>
-  <summary>**Solution to Challenge 2**</summary>
+<br>
 
-```{r, message=FALSE}
-penguins %>%
-    group_by(species, sex) %>%
-    filter(!is.na(sex)) %>%
-    summarize(mean_billlength = mean(bill_length_mm),
-              sd_billlength = sd(bill_length_mm),
-              mean_billdepth = mean(bill_depth_mm),
-              sd_billdepth = sd(bill_depth_mm))
+Exporting such information as a journal style table is useful as it can be added to Word documents for assessments. 
+
+> **Challenge 3**
+>
+> Write code that takes the table you created in Challenge 2, formats it using `gt()` function and exports it as a html file using `gtsave()`, saving it in your results folder. The table should look like the below.
+
+```{r, message=FALSE, echo = FALSE, eval = TRUE}
+library(gt)
+
+penguinSummary <- penguins %>%
+  group_by(species, sex) %>%
+  filter(!is.na(sex)) %>%
+  summarize(
+    mean_billlength = mean(bill_length_mm),
+    sd_billlength = sd(bill_length_mm),
+    mean_billdepth = mean(bill_depth_mm),
+    sd_billdepth = sd(bill_depth_mm),
+    .groups = "drop"
+  )
+
+formatted_table <- penguinSummary %>%
+  gt() %>%
+  cols_label(
+    species = "Species",
+    sex = "Sex",
+    mean_billlength = "Mean Bill Length",
+    sd_billlength = "SD Bill Length",
+    mean_billdepth = "Mean Bill Depth",
+    sd_billdepth = "SD Bill Depth"
+  ) %>%
+  tab_options(
+    column_labels.border.top.color = "black",
+    column_labels.border.bottom.color = "black",
+    table_body.border.bottom.style = "none",
+    table.border.bottom.color = "black",
+    table_body.hlines.style = "none"
+  )
+
+formatted_table 
+
+```
+
+<br>
+
+<details>
+  <summary>**Solution to Challenge 2 and 3**</summary>
+
+Create a summary table
+```{r, message=FALSE, echo = TRUE, eval = FALSE}
+penguinSummary <- penguins %>%
+  group_by(species, sex) %>%
+  filter(!is.na(sex)) %>%
+  summarize(
+    mean_billlength = mean(bill_length_mm),
+    sd_billlength = sd(bill_length_mm),
+    mean_billdepth = mean(bill_depth_mm),
+    sd_billdepth = sd(bill_depth_mm),
+    .groups = "drop"  
+  )
+
+formatted_table <- penguinSummary %>%
+  gt() %>%
+  cols_label(
+    species = "Species",
+    sex = "Sex",
+    mean_billlength = "Mean Bill Length",
+    sd_billlength = "SD Bill Length",
+    mean_billdepth = "Mean Bill Depth",
+    sd_billdepth = "SD Bill Depth"
+  ) %>%
+  tab_options(column_labels.border.top.color = "black",
+  column_labels.border.bottom.color = "black",
+  table_body.border.bottom.style = "none",
+  table.border.bottom.color = "black",
+  table_body.hlines.style = "none")
 ```  
+
+<br>
+
+Format the table
+```{r, echo = TRUE, eval = FALSE}
+formatted_table <- penguinSummary %>%
+  gt() %>%
+  cols_label(
+    species = "Species",
+    sex = "Sex",
+    mean_billlength = "Mean Bill Length",
+    sd_billlength = "SD Bill Length",
+    mean_billdepth = "Mean Bill Depth",
+    sd_billdepth = "SD Bill Depth"
+  ) %>%
+  tab_options(column_labels.border.top.color = "black",
+  column_labels.border.bottom.color = "black",
+  table_body.border.bottom.style = "none",
+  table.border.bottom.color = "black",
+  table_body.hlines.style = "none")
+```
+
+<br>
+
+Save the table
+```{r, echo = TRUE, eval = FALSE}
+gtsave(formatted_table, "results/penguin_summary_table.html")
+```
+
 </details>
+
+<br>
 
 <br>
 
@@ -330,7 +416,7 @@ penguins_body_kg <- penguins %>%
 ### Connect mutate with case_when
 
 We can combine
-`mutate()` with `case_when()` to filter data in the moment of creating a new variable. (Note: case_when is an alternative to the older `ifelse()` function.)
+`mutate()` with `case_when()` to filter data in the moment of creating a new variable. (Note: `case_when()` is an alternative to the older `ifelse()` function.)
 
 ```{r, echo=FALSE, fig.alt="Cartoon showing a table with creature type (kraken, dragon, or cyclops) and age (baby, teen, or adult). The three creatures listed are adding a new column named “danger”, which contains the word “extreme!” if the type is “kraken”, or “high” for any other type. Stylized text reads “dplyr::case_when() - IF ELSE...but you love it? An example of code is shown: mutate(danger = case_when(type == “kraken” ~ “extreme!”, TRUE ~ “high”)."}
 knitr::include_graphics("./images/dplyr_case_when.png")
@@ -348,7 +434,7 @@ penguin_gentoo_bodysize <- penguins %>%
                     )
         )
 ```
-Size is our name for the new column. You can read `~` as "then write". The last line of code can be read as "if none of the conditions are TRUE then write is not Gentoo".
+Size is our name for the new column. You can read `~` as "then write". The last line of code can be read as "if none of the conditions are TRUE then write not Gentoo".
 
 <br>
 
@@ -374,6 +460,60 @@ penguins %>%
     
 ```
 </details>
+
+<br>
+
+## Handling missing values
+
+If there are blank cells in the file you read into R, it will fill them in with NA.
+
+We have seen that some functions use the NA remove argument to deal with NA values, as below.
+```{r}
+mean(penguins[penguins$species == "Adelie", "body_mass_g"], na.rm = TRUE)
+```
+
+The filter function used `!is.na` read as "not is NA".
+```{r}
+penguins %>%
+    group_by(species, sex) %>%
+    filter(!is.na(sex))
+```
+
+<br>
+
+An alternative is using `na.omit()`
+```{r}
+clean_data <- na.omit(penguins)
+```
+
+:::: {.darkorchidbox data-latex=""}
+::: {.center data-latex=""}
+**Caution!**
+:::
+
+Be aware that`na.omit()` removes the entire row of data even if there is an NA value in a variable you are not using.
+
+::::
+
+
+
+<br>
+
+If missing values are coded as an extreme value such as 999, you must change them to NA. 
+```{r}
+ExampleData[ExampleData == 999] <- NA
+```
+
+:::: {.darkorchidbox data-latex=""}
+::: {.center data-latex=""}
+**Tip: missing values**
+:::
+
+Be careful using 0. Zero should mean the measurement was 0 units oppose to missing data.
+
+::::
+
+
 
 <br>
 

@@ -285,6 +285,14 @@ formatted_table
 ```
 
 <br>
+<details>
+  <summary>**Hint**</summary>
+If `gt()` doesn't work, check you have the necessary package installed.
+
+</details>
+
+<br>
+  
 
 <details>
   <summary>**Solution to Challenge 2 and 3**</summary>

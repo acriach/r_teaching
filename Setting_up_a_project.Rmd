@@ -225,7 +225,7 @@ One of the most daunting aspects of R is the large number of functions available
 
 Gen AI can give you the specific help you need when your code won't work or when you are trying to do something new in R. It is recommended that you use copilot which the university provides for all staff and students. The data you enter into this version of copilot is not shared and therefore more secure.
 
-If you want to use GenAI go to https://uoldigital.net/copilot and use your university username and password to sign in.
+If you want to use GenAI go to https://copilot.cloud.microsoft/chat/ and use your university username and password to sign in.
 
 <br>
 
